@@ -1,0 +1,11 @@
+<% if user_signed_in? %>
+  <% if current_user.likes.find_by(article_id: @article.id) %>
+    <%= link_to article_like_path(@article.id, current_user.likes.ids), method: :DELETE, remote: true do %>
+      <div class="iine__button">❤️<%= @article.likes.count %></div>
+    <% end %>
+  <% else %>
+    <%= link_to article_likes_path(@article.id), method: :POST, remote: true do %>
+      <div class="iine__button">♡<%= @article.likes.count %></div>
+    <% end %>
+  <% end %>
+<% end %>

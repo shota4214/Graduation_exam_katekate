@@ -3,9 +3,11 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
-  has_many :articles
+  has_many :articles, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorite_articles, through: :favorites, source: :article
+  has_many :likes, dependent: :destroy
+  has_many :like_articles, through: :likes, source: :article
   enum sex: {unanswered: 0, male: 1, female: 2}
   enum prefectures: {
     "---":0,
@@ -30,6 +32,10 @@ class User < ApplicationRecord
     else
       user_age.floor(-1)
     end
+  end
+
+  def liked_by?(article_id)
+    likes.where(article_id: article_id).exists?
   end
 
 end

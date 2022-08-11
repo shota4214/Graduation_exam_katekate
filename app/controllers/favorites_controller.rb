@@ -1,4 +1,5 @@
 class FavoritesController < ApplicationController
+  before_action :authenticate_user!, only: %i[create destroy index]
 
   def create
     favorite = current_user.favorites.create(article_id: params[:article_id])
