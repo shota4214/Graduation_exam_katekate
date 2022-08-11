@@ -7,7 +7,7 @@
   <%= f.hidden_field :title %>
   <%= f.hidden_field :content %>
 
-  <p>記事種類：<%= @article.type %></p>
+  <p>記事種類：<%= @article.type_i18n %></p>
   <p>写真：<%= image_tag(@article.image.url) if @article.image && @article.image.url %></p>
   <p>タイトル:<%= @article.title %></p>
   <p>本文:<%= @article.content %></p>

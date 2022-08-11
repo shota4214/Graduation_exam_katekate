@@ -13,7 +13,7 @@
 
   <div class="article_type">
     <%= f.label :type %>
-    <%= f.select :type, [["記事", 0],["質問", 1]] %>
+    <%= f.select :type, Article.types_i18n.invert %>
   </div>
   <div class="article_image">
     <%= f.label :image %>
