@@ -8,6 +8,10 @@ class User < ApplicationRecord
   has_many :favorite_articles, through: :favorites, source: :article
   has_many :likes, dependent: :destroy
   has_many :like_articles, through: :likes, source: :article
+  has_many :active_relationships, class_name: "Relationship", foreign_key: :following_id
+  has_many :followings, through: :active_relationships, source: :follower
+  has_many :passive_relationships, class_name: "Relationship", foreign_key: :follower_id
+  has_many :followers, through: :passive_relationships, source: :following
   enum sex: {unanswered: 0, male: 1, female: 2}
   enum prefectures: {
     "---":0,
@@ -34,8 +38,20 @@ class User < ApplicationRecord
     end
   end
 
-  def liked_by?(article_id)
-    likes.where(article_id: article_id).exists?
+  # def liked_by?(article_id)
+  #   likes.where(article_id: article_id).exists?
+  # end
+
+  def following?(other_user)
+    active_relationships.find_by(following_id: other_user.id)
+  end
+
+  def follow!(other_user)
+    active_relationships.create!(following_id: other_user.id)
+  end
+
+  def unfollow!(other_user)
+    active_relationships.find_by(following_id: other_user.id).destroy
   end
 
 end

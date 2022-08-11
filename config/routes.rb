@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   root 'articles#index'
   devise_for :users
-  resources :users, only: [:show]
+  resources :users, only: [:show, :index]
   resources :articles do
     resources :comments
     resources :likes, only: [:create, :destroy]
@@ -11,4 +11,5 @@ Rails.application.routes.draw do
     end
   end
   resources :favorites, only: [:create, :destroy, :index]
+  resources :relationships, only: [:create, :destroy]
 end

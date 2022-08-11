@@ -5,7 +5,7 @@
 <% else %>
   <%= image_tag (asset_path'no_image.png') %>
 <% end %>
-<h3><%= @user.name %></h3>
+<h3><%= @user.name %><%= render 'follow_form', user: @user %></h3>
 <p><%= @user.prefectures %></p>
 <p><%= @user_age %>代</p>
 <p><%= @user.sex_i18n %></p>
@@ -18,24 +18,27 @@
 <p>YouTube<%= @user.youtube_url %></p>
 <p>Website<%= @user.website_url %></p>
 
-<%= link_to "プロフィール編集", edit_user_registration_path(@user) %> |
-<%= link_to "お気に入り一覧", favorites_path(@user) %>
+<% if @user.id == current_user.id %>
+  <%= link_to "プロフィール編集", edit_user_registration_path(@user) %> |
+  <%= link_to "お気に入り一覧", favorites_path(@user) %> |
+  <%= link_to 'フォロー・フォロワー', users_path %>
 
-<table>
-  <tr>
-    <th>記事種類</th>
-    <th>タイトル</th>
-    <th>内容</th>
-  </tr>
+  <table>
+    <tr>
+      <th>記事種類</th>
+      <th>タイトル</th>
+      <th>内容</th>
+    </tr>
 
-<% @articles.each do |article| %>
-  <tr>
-    <td><%= article.type_i18n %></td>
-    <td><%= article.title %></td>
-    <td><%= article.content %></td>
-    <td><%= link_to '詳細', article_path(article.id) %></td>
-    <td><%= link_to "編集", edit_article_path(article.id) %></td>
-    <td><%= link_to '削除', article_path(article.id), method: :delete, data: { confirm: "本当に削除しても良いですか？" } %></td>
-  </tr>
+  <% @articles.each do |article| %>
+    <tr>
+      <td><%= article.type_i18n %></td>
+      <td><%= article.title %></td>
+      <td><%= article.content %></td>
+      <td><%= link_to '詳細', article_path(article.id) %></td>
+      <td><%= link_to "編集", edit_article_path(article.id) %></td>
+      <td><%= link_to '削除', article_path(article.id), method: :delete, data: { confirm: "本当に削除しても良いですか？" } %></td>
+    </tr>
+  <% end %>
 <% end %>
 </table>
