@@ -1,19 +1,20 @@
 <h1>記事詳細画面</h1>
 
 <div class="like-link" id="like-link-<%= @article.id %>">
-  <%= render partial: 'likes/like', locals: {article: @article} %>
+  <%= render partial: 'likes/like', locals: { article: @article } %>
 </div>
 
 <% if user_signed_in? %>
   <% unless @article.user_id == current_user.id %>
     <% if @favorite.present? %>
       <%= link_to 'お気に入り解除', favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger' %>
+      <span class="favorite_count"><%= @article.favorites.count %></span>
     <% else %>
       <%= link_to 'お気に入り', favorites_path(article_id: @article.id), method: :post, class: 'btn btn-primary' %>
+      <span class="favorite_count"><%= @article.favorites.count %></span>
     <% end %>
   <% end %>
 <% end %>
-<span class="favorite_count"><%= @article.favorites.count %></span>
 
 <p>記事種類： <%= @article.type %><p>
 <p>

@@ -205,3 +205,13 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
+  enums:
+    article:
+      type:
+        article: 記事
+        question: 質問
+    user:
+      sex:
+        unanswered: 未選択
+        male: 男性
+        female: 女性

@@ -8,4 +8,5 @@ class Article < ApplicationRecord
   has_many :favorite_users, through: :favorites, source: :user
   has_many :likes, dependent: :destroy
   has_many :like_users, through: :likes,source: :user
+  enum type: {article: 0, question: 1}
 end
