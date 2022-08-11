@@ -17,10 +17,13 @@
 <% end %>
 
 <p>記事種類： <%= @article.type_i18n %><p>
-<p>
-  <strong>Image:</strong>
-  <%= image_tag @article.image.url %>
-</p>
+<p><strong>Image:</strong>
+  <%= image_tag @article.image.url %></p>
 <p>タイトル: <%= @article.title %></p>
 <p>内容: <%= @article.content %></p>
-<%= link_to 'ブログ一覧画面に戻る', articles_path %>
+
+<p>コメント</p>
+<div id="comments_area">
+  <%= render partial: 'comments/index', locals: { comments: @comments, article: @article } %>
+</div>
+<%= render partial: 'comments/form', locals: { comment: @comment, article: @article } %>
