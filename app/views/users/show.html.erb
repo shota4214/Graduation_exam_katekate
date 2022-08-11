@@ -5,7 +5,7 @@
 <% else %>
   <%= image_tag (asset_path'no_image.png') %>
 <% end %>
-<h3><%= @user.name %><%= render 'follow_form', user: @user %></h3>
+<h3><%= @user.name %></h3>
 <p><%= @user.prefectures %></p>
 <p><%= @user_age %>代</p>
 <p><%= @user.sex_i18n %></p>
@@ -40,5 +40,7 @@
       <td><%= link_to '削除', article_path(article.id), method: :delete, data: { confirm: "本当に削除しても良いですか？" } %></td>
     </tr>
   <% end %>
+  <% else %>
+    <%= render 'follow_form', user: @user %>
 <% end %>
 </table>

@@ -8,10 +8,10 @@ class User < ApplicationRecord
   has_many :favorite_articles, through: :favorites, source: :article
   has_many :likes, dependent: :destroy
   has_many :like_articles, through: :likes, source: :article
-  has_many :active_relationships, class_name: "Relationship", foreign_key: :following_id
-  has_many :followings, through: :active_relationships, source: :follower
-  has_many :passive_relationships, class_name: "Relationship", foreign_key: :follower_id
-  has_many :followers, through: :passive_relationships, source: :following
+  has_many :active_relationships, foreign_key: :follower_id, class_name: "Relationship", dependent: :destroy
+  has_many :followings, through: :active_relationships, source: :following
+  has_many :passive_relationships, foreign_key: :following_id, class_name: "Relationship", dependent: :destroy
+  has_many :followers, through: :passive_relationships, source: :follower
   enum sex: {unanswered: 0, male: 1, female: 2}
   enum prefectures: {
     "---":0,
