@@ -16,13 +16,23 @@
   <% end %>
 <% end %>
 
+<% if @article.draft? %>
+  <h2><%= "この記事は下書きのため未公開です" %></h2>
+<% end %>
 <p>記事種類： <%= @article.type_i18n %><p>
-<p><strong>Image:</strong>
-  <%= image_tag @article.image.url %></p>
+  <strong>画像:</strong>
+<% if @article.image? %>
+  <%= image_tag @article.image.url %>
+<% else %>
+  <%= "画像の添付はありません" %>
+<% end %>
 <p>タイトル: <%= @article.title %></p>
 <p>内容: <%= @article.content %></p>
+<% if @article.user_id == current_user.id %>
+  <%= link_to "編集", edit_article_path(@article.id) %>
+<% end %>
 
-<p>コメント</p>
+<p>投稿コメント一覧</p>
 <div id="comments_area">
   <%= render partial: 'comments/index', locals: { comments: @comments, article: @article } %>
 </div>

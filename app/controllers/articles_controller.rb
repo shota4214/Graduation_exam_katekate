@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!, only: %i[new edit update destroy]
   
   def index
-    @articles = Article.all
+    @articles = Article.where(draft: :false).order("created_at DESC")
   end
 
   def new
@@ -15,10 +15,18 @@ class ArticlesController < ApplicationController
     if params[:back]
       render :new
     else
-      if @article.save
-        redirect_to articles_path, notice: "記事を作成しました"
+      if params[:draft]
+        if @article.update(draft: true)
+          redirect_to user_path(current_user), notice: "下書き保存しました"
+        else
+          render :new
+        end
       else
-      render :new
+        if @article.save
+          redirect_to articles_path, notice: "記事を作成しました"
+        else
+        render :new
+        end
       end
     end
   end
@@ -35,10 +43,20 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    if @article.update(article_params)
-      redirect_to articles_path, notice: "記事を編集しました"
+    if params[:draft]
+      @article.update(draft: true)
+      if @article.update(article_params)
+        redirect_to articles_path, notice: "記事を編集しました"
+      else
+        render :edit
+      end
     else
-      render :edit
+      @article.update(draft: false)
+      if @article.update(article_params)
+        redirect_to articles_path, notice: "記事を編集しました"
+      else
+        render :edit
+      end
     end
   end
 
@@ -48,14 +66,14 @@ class ArticlesController < ApplicationController
   end
 
   def confirm
-    @article = current_user.articles.build(article_params)
-    render :new if @article.invalid?
+      @article = current_user.articles.build(article_params)
+      render :new if @article.invalid?
   end
 
   private
 
   def article_params
-    params.require(:article).permit(:title, :content, :image, :image_cache, :type)
+    params.require(:article).permit(:title, :content, :image, :image_cache, :type, :draft)
   end
 
   def set_article

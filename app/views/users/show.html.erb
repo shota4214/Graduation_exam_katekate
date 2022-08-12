@@ -28,6 +28,7 @@
       <th>記事種類</th>
       <th>タイトル</th>
       <th>内容</th>
+      <th>状態</th>
     </tr>
 
   <% @articles.each do |article| %>
@@ -35,6 +36,7 @@
       <td><%= article.type_i18n %></td>
       <td><%= article.title %></td>
       <td><%= article.content %></td>
+      <td><%= "下書き" if article.draft? %></td>
       <td><%= link_to '詳細', article_path(article.id) %></td>
       <td><%= link_to "編集", edit_article_path(article.id) %></td>
       <td><%= link_to '削除', article_path(article.id), method: :delete, data: { confirm: "本当に削除しても良いですか？" } %></td>
