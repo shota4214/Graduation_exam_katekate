@@ -1,0 +1,63 @@
+<h1>ランキング</h1>
+<h2>イイね数ランキング</h2>
+<table>
+  <tr>
+    <th>総合順位</th>
+    <th>❤️</th>
+    <th>記事種類</th>
+    <th>投稿者</th>
+    <th>タイトル</th>
+  </tr>
+  <% @article_like_ranks.each.with_index(1) do |article, i| %>
+    <tr>
+      <td>第<%= i %>位</td>
+      <td><%= article.likes.count %>
+      <td><%= article.type_i18n %></td>
+      <td><%= link_to article.user.name, user_path(article.user_id) %></td>
+      <td><%= article.title %></td>
+      <td><%= link_to '詳細', article_path(article.id) %></td>
+    </tr>
+    <% break if i == 10 %>
+  <% end %>
+</table>
+
+<h2>お気に入り数ランキング</h2>
+<table>
+  <tr>
+    <th>順位</th>
+    <th>お気に入り</th>
+    <th>記事種類</th>
+    <th>投稿者</th>
+    <th>タイトル</th>
+  </tr>
+
+  <% @article_favorite_ranks.each.with_index(1) do |article, i| %>
+    <tr>
+      <td>第<%= i %>位</td>
+      <td><%= article.favorites.count %>
+      <td><%= article.type_i18n %></td>
+      <td><%= link_to article.user.name, user_path(article.user_id) %></td>
+      <td><%= article.title %></td>
+      <td><%= link_to '詳細', article_path(article.id) %></td>
+    </tr>
+    <% break if i == 10 %>
+  <% end %>
+</table>
+
+<h2>投稿数ランキング</h2>
+<table>
+  <tr>
+    <th>順位</th>
+    <th>投稿数</th>
+    <th>投稿者</th>
+  </tr>
+
+  <% @user_article_ranks.each.with_index(1) do |user, i| %>
+    <tr>
+      <td>第<%= i %>位</td>
+      <td><%= user.articles.count %>
+      <td><%= link_to user.name, user_path(user.id) %></td>
+    </tr>
+    <% break if i == 10 %>
+  <% end %>
+</table>

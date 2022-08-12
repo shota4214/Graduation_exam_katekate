@@ -70,6 +70,12 @@ class ArticlesController < ApplicationController
       render :new if @article.invalid?
   end
 
+  def rank
+    @article_like_ranks = Article.find(Like.group(:article_id).order('count(article_id) desc').pluck(:article_id))
+    @article_favorite_ranks = Article.find(Favorite.group(:article_id).order('count(article_id) desc').pluck(:article_id))
+    @user_article_ranks = User.where(id: Article.group(:user_id).order('count(user_id) desc').pluck(:user_id))
+  end
+
   private
 
   def article_params
