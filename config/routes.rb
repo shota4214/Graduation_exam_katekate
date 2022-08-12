@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :destroy]
     collection do
       post :confirm
+      get :rank
     end
   end
   resources :favorites, only: [:create, :destroy, :index]
