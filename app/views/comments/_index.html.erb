@@ -1,12 +1,16 @@
-<ul>
-  <% comments.each do |comment| %>
-    <% if comment.id.present? %>
-      <li>
-        <div class="comment-content" id ="this_comment_<%= comment.id %>"></div>
-        <p><%= comment.content %></p>
-        <%= link_to "編集", edit_article_comment_path(article, comment), remote: true %> |
-        <%= link_to "削除", article_comment_path(comment.article_id, comment.id), method: :delete, remote: true, data: { confirm: "本当に削除しますか?" } %>
-      </li>
+<table>
+  <tbody>
+    <% comments.each do |comment| %>
+      <% if comment.id.present? %>
+        <tr>
+          <div class="comment-content" id ="this_comment_<%= comment.id %>"></div>
+          <td><%= comment.content %></td>
+          <td>
+          <%= link_to "編集", edit_article_comment_path(article, comment), remote: true %> |
+          <%= link_to "削除", article_comment_path(comment.article_id, comment.id), method: :delete, remote: true, data: { confirm: "本当に削除しますか?" } %>
+          </td>
+        </tr>
+      <% end %>
     <% end %>
-  <% end %>
-</ul>
+  </tbody>
+</table>

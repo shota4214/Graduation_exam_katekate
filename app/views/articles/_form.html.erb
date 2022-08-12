@@ -30,6 +30,7 @@
     <%= f.text_field :content %>
   </div>
 
-  <%= f.submit %>
+  <%= f.submit '記事投稿' %>
+  <%= f.submit '下書き保存', name: 'draft' %>
 <% end %>
 <%= link_to 'ブログ一覧画面に戻る', articles_path %>

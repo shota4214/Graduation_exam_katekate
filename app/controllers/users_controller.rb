@@ -9,6 +9,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @user_age = @user.age
-    @articles = @user.articles.all
+    @articles = @user.articles.all.order("created_at DESC")
   end
 end
