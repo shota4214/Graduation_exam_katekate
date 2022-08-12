@@ -1,0 +1,28 @@
+<table>
+  <tr>
+    <th>名前</th>
+  </tr>
+
+  <p>フォロー一覧</p><br/>
+  <% @following_users.each do |user| %>
+  <tr>
+    <td><%= user.name %></td>
+    <td><%= render 'follow_form', user: user %></td>
+  </tr>
+  <% end %>
+</table>
+  
+
+<table>
+  <tr>
+    <th>名前</th>
+  </tr>
+
+  <p>フォロワー一覧</p><br/>
+  <% @follower_users.each do |user| %>
+  <tr>
+    <td><%= user.name %></td>
+    <td><%= render 'follow_form', user: user %></td>
+  </tr>
+  <% end %>
+</table>
