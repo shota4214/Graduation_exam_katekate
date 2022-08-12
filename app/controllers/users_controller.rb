@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  def follow
+  def follow_index
     @user = User.find(params[:id])
     @following_users = @user.followings
     @follower_users = @user.followers

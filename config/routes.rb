@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users, only: [:show, :index] do
     member do
-      get :follow
+      get :follow_index
     end
   end
   resources :articles do
