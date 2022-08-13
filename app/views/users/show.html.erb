@@ -11,12 +11,52 @@
 <p><%= @user.sex_i18n %></p>
 <p>自己紹介<%= @user.introduction %></p>
 
-<p>Twitter<%= @user.twitter_url %></p>
-<p>Instagram<%= @user.instagram_url %></p>
-<p>Tiktok<%= @user.tiktok_url %></p>
-<p>Facebook<%= @user.facebook_url %></p>
-<p>YouTube<%= @user.youtube_url %></p>
-<p>Website<%= @user.website_url %></p>
+<div class="sns-link">
+  <ul class="profile-links">
+    <% if @user.twitter_url.present? %>
+      <li class="profile-link">
+        <%= link_to @user.twitter_url, target: :_blank do %>
+          <i class="fab fa-twitter fa-2x"></i>
+        <% end %>
+      </li>
+    <% end %>
+    <% if @user.instagram_url.present? %>
+      <li class="profile-link">
+        <%= link_to @user.instagram_url, target: :_blank do %>
+          <i class="fab fa-instagram fa-2x"></i>
+        <% end %>
+      </li>
+    <% end %>
+    <% if @user.tiktok_url.present? %>
+      <li class="profile-link">
+        <%= link_to @user.tiktok_url, target: :_blank do %>
+          <i class="fab fa-tiktok fa-2x"></i>
+        <% end %>
+      </li>
+    <% end %>
+    <% if @user.facebook_url.present? %>
+      <li class="profile-link">
+        <%= link_to @user.facebook_url, target: :_blank do %>
+          <i class="fab fa-facebook fa-2x"></i>
+        <% end %>
+      </li>
+    <% end %>
+    <% if @user.youtube_url.present? %>
+      <li class="profile-link">
+        <%= link_to @user.youtube_url, target: :_blank do %>
+          <i class="fab fa-youtube fa-2x"></i>
+        <% end %>
+      </li>
+    <% end %>
+    <% if @user.website_url.present? %>
+      <li class="profile-link">
+        <%= link_to @user.website_url, target: :_blank do %>
+          <i class="fa-regular fa-window-maximize fa-2x"></i>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>
 
 <p>総like数<%= @like_count_all %></p>
 <p>総お気に入り数<%= @favorite_count_all %></p>
