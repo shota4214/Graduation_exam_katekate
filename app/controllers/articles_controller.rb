@@ -36,6 +36,7 @@ class ArticlesController < ApplicationController
       @favorite = current_user.favorites.find_by(article_id: @article.id)
       @comments = @article.comments
       @comment = @article.comments.build
+      impressionist(@article, nil, unique: [:ip_address])
     end
   end
 
