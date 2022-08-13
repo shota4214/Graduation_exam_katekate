@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
   before_action :set_article, only: %i[create edit update]
   def create
-    @comment = @article.comments.build(comment_params)
+    @comment = current_user.comments.build(comment_params)
+    @comment.article_id = @article.id
     respond_to do |format|
       if @comment.save
         format.js { render :index }
