@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!, only: %i[new edit update destroy]
   
   def index
-    @articles = Article.where(draft: :false).order("created_at DESC")
+    @articles = Article.where(draft: :false).order("created_at DESC").page(params[:page]).per(20)
   end
 
   def new
@@ -11,6 +11,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
+    # binding.pry
     @article = current_user.articles.build(article_params)
     if params[:back]
       render :new
