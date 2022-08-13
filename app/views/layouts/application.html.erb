@@ -15,6 +15,7 @@
       <%= link_to "トップページ", articles_path %>
       <%= link_to "マイページ", user_path(current_user.id) %>
       <%= link_to "ランキング", rank_articles_path %>
+      <%= link_to "メッセージ", users_path %>
       <%= link_to '記事新規投稿', new_article_path %>
     <% else %>
       <%= link_to "新規登録", new_user_registration_path %>
