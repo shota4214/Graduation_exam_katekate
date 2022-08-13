@@ -11,6 +11,11 @@
   <p>写真：<%= image_tag(@article.image.url) if @article.image && @article.image.url %></p>
   <p>タイトル:<%= @article.title %></p>
   <p>本文:<%= @article.content %></p>
-  <%= f.submit  "登録する" %>
+
+  <% if params[:draft] %>
+    <%= f.submit "下書き保存する", name: "draft" %>
+  <% else %>
+    <%= f.submit "登録する" %>
+  <% end %>
   <%= f.submit "戻る", name: "back" %>
 <% end %>

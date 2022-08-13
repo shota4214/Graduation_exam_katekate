@@ -8,7 +8,7 @@
     <th>タイトル</th>
   </tr>
 
-<% @articles.first(20).each do |article| %>
+<% @articles.first(100).each do |article| %>
   <tr>
     <td><%= article.type_i18n %></td>
     <td><%= link_to article.user.name, user_path(article.user_id) %></td>
@@ -18,3 +18,4 @@
   </tr>
 <% end %>
 </table>
+<%= paginate @articles %>
