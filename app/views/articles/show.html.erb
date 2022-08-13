@@ -1,5 +1,7 @@
 <h1>記事詳細画面</h1>
 
+<p>PV:<%= @article.impressions_count %></p>
+
 <div class="like-link" id="like-link-<%= @article.id %>">
   <%= render partial: 'likes/like', locals: { article: @article } %>
 </div>
