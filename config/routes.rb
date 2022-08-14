@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     collection do
       post :confirm
       get :rank
+      get :search
     end
   end
   resources :favorites, only: [:create, :destroy, :index]
