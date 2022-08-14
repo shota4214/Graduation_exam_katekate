@@ -1,9 +1,11 @@
 class MessagesController < ApplicationController
+  before_action :authenticate_user!
   before_action do
     @conversation = Conversation.find(params[:conversation_id])
   end
 
   def index
+    @users = User.all
     @messages = @conversation.messages
     if @messages.length > 10
       @over_ten = true

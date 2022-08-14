@@ -2,13 +2,14 @@ class UsersController < ApplicationController
 before_action :authenticate_user!, only: %i[index follow_index]
 
   def index
-    @users = User.all
+    @users = current_user.followings && current_user.followers if user_signed_in?
   end
 
   def follow_index
     @user = User.find(params[:id])
     @following_users = @user.followings
     @follower_users = @user.followers
+    @users = current_user.followings && current_user.followers if user_signed_in?
   end
 
   def show

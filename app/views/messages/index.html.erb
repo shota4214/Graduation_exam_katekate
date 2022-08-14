@@ -1,3 +1,5 @@
+<h2><%= @users.find(@conversation.sender_id).name %>さんと<%= @users.find(@conversation.recipient_id).name %>さんのメッセージ</h2>
+
 <% if @over_ten %>
   <%= link_to '以前のメッセージ', '?m=all' %>
 <% end %>
@@ -19,6 +21,7 @@
           </div>
         </div>
       </div>
+      <br>
     <% end %>
   <% end %>
 </div>
