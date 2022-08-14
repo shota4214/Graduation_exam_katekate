@@ -30,12 +30,15 @@
 <% end %>
 <p>タイトル: <%= @article.title %></p>
 <p>内容: <%= @article.content %></p>
-<% if @article.user_id == current_user.id %>
-  <%= link_to "編集", edit_article_path(@article.id) %>
-<% end %>
 
-<p>投稿コメント一覧</p>
-<div id="comments_area">
-  <%= render partial: 'comments/index', locals: { comments: @comments, article: @article } %>
-</div>
-<%= render partial: 'comments/form', locals: { comment: @comment, article: @article } %>
+<% if user_signed_in? %>
+  <% if @article.user_id == current_user.id %>
+    <%= link_to "編集", edit_article_path(@article.id) %>
+  <% end %>
+
+  <p>投稿コメント一覧</p>
+  <div id="comments_area">
+    <%= render partial: 'comments/index', locals: { comments: @comments, article: @article } %>
+  </div>
+  <%= render partial: 'comments/form', locals: { comment: @comment, article: @article } %>
+<% end %>

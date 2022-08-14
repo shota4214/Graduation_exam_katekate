@@ -62,32 +62,34 @@
 <p>総お気に入り数<%= @favorite_count_all %></p>
 <p>総PV数<%= @impression_count_all %></p>
 
-<% if @user.id == current_user.id %>
-  <%= link_to "プロフィール編集", edit_user_registration_path(@user) %> |
-  <%= link_to "お気に入り一覧", favorites_path(@user) %> |
-  <%= link_to 'フォロー・フォロワー', follow_index_user_path(@user) %>
+<% if user_signed_in?%>
+  <% if @user.id == current_user.id %>
+    <%= link_to "プロフィール編集", edit_user_registration_path(@user) %> |
+    <%= link_to "お気に入り一覧", favorites_path(@user) %> |
+    <%= link_to 'フォロー・フォロワー', follow_index_user_path(@user) %>
 
-  <table>
-    <tr>
-      <th>記事種類</th>
-      <th>タイトル</th>
-      <th>内容</th>
-      <th>状態</th>
-    </tr>
+    <table>
+      <tr>
+        <th>記事種類</th>
+        <th>タイトル</th>
+        <th>内容</th>
+        <th>状態</th>
+      </tr>
 
-  <% @articles.each do |article| %>
-    <tr>
-      <td><%= article.type_i18n %></td>
-      <td><%= article.title %></td>
-      <td><%= article.content %></td>
-      <td><%= "下書き" if article.draft? %></td>
-      <td><%= link_to '詳細', article_path(article.id) %></td>
-      <td><%= link_to "編集", edit_article_path(article.id) %></td>
-      <td><%= link_to '削除', article_path(article.id), method: :delete, data: { confirm: "本当に削除しても良いですか？" } %></td>
-    </tr>
+    <% @articles.each do |article| %>
+      <tr>
+        <td><%= article.type_i18n %></td>
+        <td><%= article.title %></td>
+        <td><%= article.content %></td>
+        <td><%= "下書き" if article.draft? %></td>
+        <td><%= link_to '詳細', article_path(article.id) %></td>
+        <td><%= link_to "編集", edit_article_path(article.id) %></td>
+        <td><%= link_to '削除', article_path(article.id), method: :delete, data: { confirm: "本当に削除しても良いですか？" } %></td>
+      </tr>
+    <% end %>
+    <% else %>
+      <%= render 'follow_form', user: @user %>
   <% end %>
-  <% else %>
-    <%= render 'follow_form', user: @user %>
+  </table>
+  <%= paginate @articles %>
 <% end %>
-</table>
-<%= paginate @articles %>
