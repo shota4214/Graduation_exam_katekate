@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_article, only: %i[create edit update]
+
   def create
     @comment = current_user.comments.build(comment_params)
     @comment.article_id = @article.id
@@ -7,7 +8,7 @@ class CommentsController < ApplicationController
       if @comment.save
         format.js { render :index }
       else
-        format.html { redirect_to article_path(@article), notice: '投稿できませんでした'}
+        format.html { redirect_to article_path(@article), notice: '投稿できませんでした' }
       end
     end
   end
@@ -41,7 +42,7 @@ class CommentsController < ApplicationController
       format.js { render :index }
     end
   end
-  
+
   private
 
   def comment_params

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-before_action :authenticate_user!, only: %i[index follow_index]
+  before_action :authenticate_user!, only: %i[index follow_index]
 
   def index
     @users = current_user.followings && current_user.followers if user_signed_in?
