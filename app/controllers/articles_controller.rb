@@ -1,9 +1,9 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: %i[show edit update destroy]
   before_action :authenticate_user!, only: %i[new edit update destroy]
-  
+
   def index
-    @articles = Article.where(draft: :false).order("created_at DESC").page(params[:page]).per(20)
+    @articles = Article.where(draft: false).order("created_at DESC").page(params[:page]).per(20)
   end
 
   def new
@@ -11,24 +11,19 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    # binding.pry
     @article = current_user.articles.build(article_params)
     if params[:back]
       render :new
-    else
-      if params[:draft]
-        if @article.update(draft: true)
-          redirect_to user_path(current_user), notice: "下書き保存しました"
-        else
-          render :new
-        end
+    elsif params[:draft]
+      if @article.update(draft: true)
+        redirect_to user_path(current_user), notice: "下書き保存しました"
       else
-        if @article.save
-          redirect_to articles_path, notice: "記事を作成しました"
-        else
         render :new
-        end
       end
+    elsif @article.save
+      redirect_to articles_path, notice: "記事を作成しました"
+    else
+    render :new
     end
   end
 
@@ -68,8 +63,8 @@ class ArticlesController < ApplicationController
   end
 
   def confirm
-      @article = current_user.articles.build(article_params)
-      render :new if @article.invalid?
+    @article = current_user.articles.build(article_params)
+    render :new if @article.invalid?
   end
 
   def rank
