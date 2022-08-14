@@ -1,0 +1,20 @@
+<h2>DM可能ユーザー一覧</h2>
+<table>
+  <tr>
+    <th>名前</th>
+    <th>メッセージ</th>
+    <th>フォロー</th>
+  </tr>
+
+<% @users.each do |user| %>
+  <% if user.id != current_user.id %>
+    <tr>
+      <div class="item">
+        <td><%= link_to user.name, user %></td>
+        <td><%= link_to 'メッセージ', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post %></td>
+        <td><%= render 'follow_form', user: user %></td> 
+      </div>
+    </tr>
+  <% end %>
+<% end %>
+</table>

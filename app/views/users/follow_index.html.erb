@@ -1,12 +1,13 @@
 <table>
   <tr>
     <th>名前</th>
+    <th>フォロー</th>
   </tr>
 
-  <p>フォロー一覧</p><br/>
+  <h2>フォロー一覧</h2>
   <% @following_users.each do |user| %>
   <tr>
-    <td><%= user.name %></td>
+    <td><%= link_to user.name, user %></td>
     <td><%= render 'follow_form', user: user %></td>
   </tr>
   <% end %>
@@ -16,12 +17,13 @@
 <table>
   <tr>
     <th>名前</th>
+    <th>フォロー</th>
   </tr>
 
-  <p>フォロワー一覧</p><br/>
+  <h2>フォロワー一覧</h2>
   <% @follower_users.each do |user| %>
   <tr>
-    <td><%= user.name %></td>
+    <td><%= link_to user.name, user %></td>
     <td><%= render 'follow_form', user: user %></td>
   </tr>
   <% end %>
