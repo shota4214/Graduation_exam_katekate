@@ -1,0 +1,26 @@
+<h2>ユーザー情報編集〜SNS情報〜 </h2>
+
+<%= form_with(model: @user, local: true, url: user_path(@user), method: :patch, html: { class: 'first-main_box' }) do |f| %>
+
+  <div class="field">
+    <%= f.label :password %> <i>(変更しない場合は未入力で良いです)</i><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= @minimum_password_length %> characters minimum</em>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <%# <div class="field"> %>
+    <%# <%= f.label :current_password %> <i>(変更する場合は現在のパスワードを入力してください)</i><br /> %>
+    <%# <%= f.password_field :current_password, autocomplete: "current-password" %> %>
+  <%# </div> %>
+    <div class="actions">
+    <%= f.submit "更新" %>
+  </div>
+<% end %>

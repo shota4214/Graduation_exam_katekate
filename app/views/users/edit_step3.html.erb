@@ -1,0 +1,38 @@
+<h2>ユーザー情報編集〜SNS情報〜 </h2>
+
+<%= form_with(model: @user, local: true, url: edit_step4_user_path, method: :post, html: { class: 'first-main_box' }) do |f| %>
+
+  <div class="field">
+    <%= f.label :Twitter %><br />
+    <%= f.text_field :twitter_url %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Instagram %><br />
+    <%= f.text_field :instagram_url %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Tiktok %><br />
+    <%= f.text_field :tiktok_url %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Facebook %><br />
+    <%= f.text_field :facebook_url %>
+  </div>
+
+  <div class="field">
+    <%= f.label :YouTube %><br />
+    <%= f.text_field :youtube_url %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Website %><br />
+    <%= f.text_field :website_url %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "next" %>
+  </div>
+<% end %>
