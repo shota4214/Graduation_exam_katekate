@@ -14,7 +14,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(user_id)
-    # @user = User.find(params[:id])
     @user_age = @user.age
     @articles = @user.articles.all.order("created_at DESC").page(params[:page]).per(5)
     user_articles = @user.articles
@@ -59,13 +58,6 @@ class UsersController < ApplicationController
     session[:website_url] = user_params[:website_url]
     @user = User.find(user_id)
   end
-
-  # def edit_done
-  #   session[:password] = user_params[:password]
-  #   session[:password_confirmation] = user_params[:password_confirmation]
-  #   # session[:current_password] = user_params[:current_password]
-  #   @user = User.find(user_id)
-  # end
 
   def update
     @user = User.find(user_id)
