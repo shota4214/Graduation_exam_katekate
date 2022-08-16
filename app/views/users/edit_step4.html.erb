@@ -1,0 +1,23 @@
+<h2>ユーザー情報編集〜パスワード入力〜 </h2>
+
+<%= form_with(model: @user, local: true, url: user_path(@user), method: :put, html: { class: 'first-main_box' }) do |f| %>
+
+  <div class="field">
+    <%= f.label :password %> <i>(パスワードを入力して更新してください)</i><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= @minimum_password_length %> characters minimum</em>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><i>(パスワードをもう一度入力してください)<br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+    <div class="actions">
+    <%= f.submit "更新" %>
+    <%= f.submit "戻る", name: "back" %>
+  </div>
+<% end %>

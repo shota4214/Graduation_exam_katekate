@@ -1,0 +1,21 @@
+<h2>ユーザー情報編集〜自己紹介〜 </h2>
+
+<%= form_with(model: @user, local: true, url: edit_step3_user_path, method: :post, html: { class: 'first-main_box' }) do |f| %>
+
+  <% if @user.image? %>
+  <div class="field">
+    <%= f.label :image %>確認<br />
+    <%= image_tag(@user.image.url) if @user.image && @user.image.url %>
+    <%= f.hidden_field :image_cache %>
+  </div>
+  <% end %>
+  
+  <div class="field">
+    <%= f.label :introduction %><br />
+    <%= f.text_area :introduction, size: "50x5" %>
+  </div>
+    <div class="actions">
+    <%= f.submit "次へ" %> |
+    <%= f.submit "戻る", name: "back" %>
+  </div>
+<% end %>
