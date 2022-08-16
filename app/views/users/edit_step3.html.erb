@@ -31,8 +31,9 @@
     <%= f.label :Website %><br />
     <%= f.text_field :website_url %>
   </div>
-  
+
   <div class="actions">
-    <%= f.submit "next" %>
+    <%= f.submit "次へ" %> |
+    <%= f.submit "戻る", name: "back" %>
   </div>
 <% end %>
