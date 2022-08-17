@@ -21,6 +21,7 @@ gem 'impressionist'
 gem 'kaminari'
 gem 'ransack'
 gem 'rails_admin', '~> 3.0'
+gem 'cancancan'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
