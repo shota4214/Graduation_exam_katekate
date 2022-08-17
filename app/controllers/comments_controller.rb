@@ -4,10 +4,11 @@ class CommentsController < ApplicationController
   def create
     @comment = current_user.comments.build(comment_params)
     @comment.article_id = @article.id
+    @article_user = User.find(@comment.article.user.id)
     respond_to do |format|
       if @comment.save
         unless @comment.article.user.id == current_user.id
-          ContactMailer.comment_mail(@comment.article.user).deliver
+          ContactMailer.comment_mail(@article_user, current_user).deliver
         end
         format.js { render :index }
       else

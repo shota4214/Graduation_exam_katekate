@@ -1,7 +1,8 @@
 class ContactMailer < ApplicationMailer
-  def comment_mail(comment)
-    @comment = comment
-    mail to: @comment.email, subject: "katekate コメント通知メール"
+  def comment_mail(article_user, comment_user)
+    @article_user = article_user
+    @comment_user = comment_user
+    mail to: @article_user.email, subject: "katekate コメント通知メール"
   end
 
   def message_mail(recipient_user, sender_user)
