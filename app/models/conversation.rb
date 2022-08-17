@@ -14,4 +14,12 @@ class Conversation < ApplicationRecord
       User.find(sender_id)
     end
   end
+
+  def message_recipient_id(current_user)
+    if self.recipient_id == current_user.id
+      self.sender_id
+    else
+      self.recipient_id
+    end
+  end
 end

@@ -2,7 +2,6 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
-  before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
   # def new
@@ -10,9 +9,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+    ContactMailer.send_when_sign_up(params[:user][:email], params[:user][:name]).deliver
+  end
 
   # GET /resource/edit
   # def edit
@@ -20,48 +20,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  def update
+  # def update
     # super
-    @user = User.find(user_id)
-    session[:password] = user_params[:password]
-    session[:password_confirmation] = user_params[:password_confirmation]
-    session[:current_password] = user_params[:current_password]
-    @user.update(image: session[:image], image_cache: session[:image_cache], name: session[:name], email: session[:email], birthday: session[:birthday], sex: session[:sex], prefectures: session[:prefectures], introduction: session[:introduction], password: session[:password], password_confirmation: session[:password_confirmation], current_password: session[:current_password], twitter_url: session[:twitter_url], instagram_url: session[:instagram_url], tiktok_url: session[:tiktok_url], facebook_url: session[:facebook_url], youtube_url: session[:youtube_url], website_url: session[:website_url])
-    redirect_to articles_path
-    # current_password: session[:current_password],
-  end
-
-  def edit_step1
-    @user = User.find(user_id)
-  end
-
-  def edit_step2
-    session[:image] = user_params[:image]
-    session[:image_cache] = user_params[:image_cache]
-    session[:name] = user_params[:name]
-    session[:email] = user_params[:email]
-    session[:birthday] = user_params[:birthday]
-    session[:sex] = user_params[:sex]
-    session[:prefectures] = user_params[:prefectures]
-    @user = User.find(user_id)
-  end
-
-  def edit_step3
-    session[:image] = user_params[:image]
-    session[:image_cache] = user_params[:image_cache]
-    session[:introduction] = user_params[:introduction]
-    @user = User.find(user_id)
-  end
-
-  def edit_step4
-    session[:twitter_url] = user_params[:twitter_url]
-    session[:instagram_url] = user_params[:instagram_url]
-    session[:tiktok_url] = user_params[:tiktok_url]
-    session[:facebook_url] = user_params[:facebook_url]
-    session[:youtube_url] = user_params[:youtube_url]
-    session[:website_url] = user_params[:website_url]
-    @user = User.find(user_id)
-  end
+  # end
 
   # def edit_done
   #   session[:password] = user_params[:password]
