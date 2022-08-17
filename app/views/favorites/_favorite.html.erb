@@ -1,0 +1,13 @@
+<% if user_signed_in? %>
+  <% unless @article.user_id == current_user.id %>
+    <% if current_user.favorites.find_by(article_id: @article.id) %>
+      <%= link_to favorite_path(@article.id, current_user.favorites.find_by(article_id: @article.id)), method: :delete, remote: true do %>
+      <i class="fa-solid fa-star fa-lg"></i><%= @article.favorites.count %>
+      <% end %>
+    <% else %>
+      <%= link_to favorites_path(article_id: @article.id), method: :post, remote: true do %>
+      <i class="fa-regular fa-star fa-lg"></i><%= @article.favorites.count %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
