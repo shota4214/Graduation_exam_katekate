@@ -10,4 +10,9 @@ class ContactMailer < ApplicationMailer
     @sender_user = sender_user
     mail to: @recipient_user.email, subject: "katekate メッセージ通知メール"
   end
+
+  def send_when_sign_up(email, name)
+    @name = name
+    mail to: email, subject: 'katekate 新規登録メール'
+  end
 end
