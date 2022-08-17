@@ -6,6 +6,9 @@ class CommentsController < ApplicationController
     @comment.article_id = @article.id
     respond_to do |format|
       if @comment.save
+        unless @comment.article.user.id == current_user.id
+          ContactMailer.comment_mail(@comment.article.user).deliver
+        end
         format.js { render :index }
       else
         format.html { redirect_to article_path(@article), notice: '投稿できませんでした' }

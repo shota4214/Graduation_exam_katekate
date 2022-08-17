@@ -25,6 +25,8 @@ class MessagesController < ApplicationController
   def create
     @message = @conversation.messages.build(message_params)
     if @message.save
+      binding.pry
+      ContactMailer.message_mail(@conversation.recipient_id).deliver
       redirect_to conversation_messages_path(@conversation)
     else
       render 'index'
