@@ -2,6 +2,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :ensure_normal_user, only: %i[destroy]
+  before_action :ensure_admin_user, only: %i[destroy]
   # before_action :configure_sign_up_params, only: [:create]
 
   # GET /resource/sign_up
@@ -61,6 +62,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def ensure_normal_user
     if resource.email == 'guest@guest.com'
       redirect_to root_path, alert: 'ゲストユーザーは削除できません'
+    end
+  end
+
+  def ensure_admin_user
+    if resource.email == 'admin_guest@guest.com'
+      redirect_to root_path, alert: 'ゲスト管理者は削除できません'
     end
   end
 
