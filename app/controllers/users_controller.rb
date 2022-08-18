@@ -30,24 +30,23 @@ class UsersController < ApplicationController
   end
 
   def edit_step2
-    render :edit_step1 and return if params[:back]
-    session[:image] = params[:user][:image]
-    session[:name] = user_params[:name]
-    session[:email] = user_params[:email]
-    session[:birthday] = Date.new(params[:user]["birthday(1i)"].to_i, params[:user]["birthday(2i)"].to_i, params[:user]["birthday(3i)"].to_i)
-    session[:sex] = user_params[:sex]
-    session[:prefectures] = user_params[:prefectures]
-    @user.image = params[:user][:image]
+    unless params[:back]
+      session[:image] = user_params[:image]
+      session[:name] = user_params[:name]
+      session[:email] = user_params[:email]
+      session[:birthday] = Date.new(params[:user]["birthday(1i)"].to_i, params[:user]["birthday(2i)"].to_i, params[:user]["birthday(3i)"].to_i)
+      session[:sex] = user_params[:sex]
+      session[:prefectures] = user_params[:prefectures]
+      @user.image = user_params[:image]
+    end
   end
 
   def edit_step3
-    render :edit_step1 and return if params[:back]
-    session[:image_cache] = params[:user][:image_cache]
+    session[:image_cache] = user_params[:image_cache]
     session[:introduction] = user_params[:introduction]
   end
 
   def edit_step4
-    render :edit_step2 and return if params[:back]
     session[:twitter_url] = user_params[:twitter_url]
     session[:instagram_url] = user_params[:instagram_url]
     session[:tiktok_url] = user_params[:tiktok_url]
@@ -57,10 +56,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    render :edit_step3 and return if params[:back]
     session[:password] = user_params[:password]
     session[:password_confirmation] = user_params[:password_confirmation]
-    @user.image.retrieve_from_cache! session[:image_cache]
+    @user.image.retrieve_from_cache! session[:image_cache] unless session[:image_cache].nil?
     if @user.update!(image: session[:image_cache], name: session[:name], email: session[:email], birthday: session[:birthday], sex: session[:sex], prefectures: session[:prefectures], introduction: session[:introduction], password: session[:password], password_confirmation: session[:password_confirmation], twitter_url: session[:twitter_url], instagram_url: session[:instagram_url], tiktok_url: session[:tiktok_url], facebook_url: session[:facebook_url], youtube_url: session[:youtube_url], website_url: session[:website_url])
       sign_in(@user, bypass: true) if current_user.id == @user.id
       redirect_to articles_path, notice: 'ユーザー情報を更新しました'

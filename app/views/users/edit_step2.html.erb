@@ -13,9 +13,19 @@
   <div class="field">
     <%= f.label :introduction %><br />
     <%= f.text_area :introduction, size: "50x5" %>
+    <%= f.hidden_field :introduction %>
   </div>
     <div class="actions">
     <%= f.submit "次へ" %> |
-    <%= f.submit "戻る", name: "back" %>
   </div>
+<% end %>
+
+<%= form_with(model: @user, local: true, url: edit_step1_user_path, method: :get) do |f| %>
+  <%= f.hidden_field :image_cache %>
+  <%= f.hidden_field :name %>
+  <%= f.hidden_field :email %>
+  <%= f.hidden_field :birthday %>
+  <%= f.hidden_field :sex %>
+  <%= f.hidden_field :prefectures %>
+  <%= f.submit "戻る", name: "back" %>
 <% end %>

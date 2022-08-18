@@ -18,6 +18,15 @@
 
     <div class="actions">
     <%= f.submit "更新" %>
-    <%= f.submit "戻る", name: "back" %>
   </div>
+<% end %>
+
+<%= form_with(model: @user, local: true, url: edit_step3_user_path, method: :post) do |f| %>
+  <%= f.hidden_field :twitter_url %>
+  <%= f.hidden_field :instagram_url %>
+  <%= f.hidden_field :tiktok_url %>
+  <%= f.hidden_field :facebook_url %>
+  <%= f.hidden_field :youtube_url %>
+  <%= f.hidden_field :website_url %>
+  <%= f.submit "戻る", name: "back" %>
 <% end %>
