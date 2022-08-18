@@ -23,11 +23,11 @@
   </div>
   <div class="article_title">
     <%= f.label :title %>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, placeholder: 'タイトルを入力' %>
   </div>
   <div class="article_content">
     <%= f.label :content %>
-    <%= f.text_field :content %>
+    <%= f.text_area :content, size: '30x5', placeholder: '記事の内容を入力' %>
   </div>
 
   <%= f.submit '記事投稿' %>
