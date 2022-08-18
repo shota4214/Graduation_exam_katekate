@@ -6,11 +6,13 @@
           <i class="fa-solid fa-heart fa-stack-2x"></i>
           <i class="fa-solid fa-check fa-stack-2x"></i>
         </span>
-        <%= @article.likes.count %>
+          <i class="fa-solid fa-l"></i><i class="fa-solid fa-i"></i><i class="fa-solid fa-k"></i><i class="fa-solid fa-e"></i>
+          <%= @article.likes.count %>
       <% end %>
     <% else %>
       <%= link_to article_likes_path(@article.id), method: :POST, remote: true do %>
-        <i class="fa-regular fa-heart fa-2x"></i>イイね！<%= @article.likes.count %>
+        <i class="fa-regular fa-heart fa-2x"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-i"></i><i class="fa-solid fa-k"></i><i class="fa-solid fa-e"></i>
+          <%= @article.likes.count %>
       <% end %>
     <% end %>
   <% end %>
