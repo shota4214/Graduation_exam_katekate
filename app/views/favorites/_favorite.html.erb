@@ -2,11 +2,15 @@
   <% unless @article.user_id == current_user.id %>
     <% if current_user.favorites.find_by(article_id: @article.id) %>
       <%= link_to favorite_path(@article.id, current_user.favorites.find_by(article_id: @article.id)), method: :delete, remote: true do %>
-      <i class="fa-solid fa-star fa-lg"></i><%= @article.favorites.count %>
+        <span class="fa-stack">
+          <i class="fa-solid fa-star fa-stack-2x"></i>
+          <i class="fa-solid fa-check fa-stack-2x"></i>
+        </span>
+      <%= @article.favorites.count %>
       <% end %>
     <% else %>
       <%= link_to favorites_path(article_id: @article.id), method: :post, remote: true do %>
-      <i class="fa-regular fa-star fa-lg"></i><%= @article.favorites.count %>
+      <i class="fa-regular fa-star fa-2x"></i>お気に入り<%= @article.favorites.count %>
       <% end %>
     <% end %>
   <% end %>
