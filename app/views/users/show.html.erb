@@ -58,13 +58,22 @@
   </ul>
 </div>
 
-<p>総like数<%= @like_count_all %></p>
-<p>総お気に入り数<%= @favorite_count_all %></p>
-<p>総PV数<%= @impression_count_all %></p>
+<p>
+  <i class="fa-solid fa-a"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-heart fa-lg"></i>
+  <%= @like_count_all %>
+</p>
+<p>
+  <i class="fa-solid fa-a"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-star fa-lg"></i>
+  <%= @impression_count_all %>
+</p>
+<p>
+  <i class="fa-solid fa-a"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-eye fa-lg"></i>
+  <%= @impression_count_all %>
+</p>
 
 <% if user_signed_in?%>
   <% if @user.id == current_user.id %>
-    <%= link_to "編集", edit_user_registration_path(@user) %>
+    <%#= link_to "編集", edit_user_registration_path(@user) %>
     <%= link_to "プロフィール編集", edit_step1_user_path(@user) %> |
     <%= link_to "お気に入り一覧", favorites_path(@user) %> |
     <%= link_to 'フォロー・フォロワー', follow_index_user_path(@user) %>

@@ -13,7 +13,7 @@
   <tr>
     <td><%= favorite.type %></td>
     <td><%= favorite.user.name %></td>
-    <td><%= image_tag favorite.image.url %>
+    <td><%= image_tag(favorite.image.url) if favorite.image && favorite.image.url %></td>
     <td><%= favorite.title %></td>
     <td><%= favorite.content %></td>
     <td><%= link_to '詳細', article_path(favorite.id) %></td>
