@@ -51,4 +51,18 @@ class User < ApplicationRecord
     active_relationships.find_by(following_id: other_user.id).destroy
   end
 
+  def self.guest
+    find_or_create_by!(email: 'guest@guest.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "ゲスト"
+    end
+  end
+
+  def self.admin_guest
+    find_or_create_by!(email: 'admin_guest@guest.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "ゲスト管理者"
+      user.admin = true
+    end
+  end
 end
