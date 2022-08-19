@@ -20,6 +20,7 @@
     <%= f.submit "更新" %>
   </div>
 <% end %>
+<%#= link_to "戻るjava", "javascript:history.back();" %>
 
 <%= form_with(model: @user, local: true, url: edit_step3_user_path, method: :post) do |f| %>
   <%= f.hidden_field :twitter_url %>
