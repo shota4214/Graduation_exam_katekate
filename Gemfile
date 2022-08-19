@@ -22,11 +22,13 @@ gem 'kaminari'
 gem 'ransack'
 gem 'rails_admin', '~> 3.0'
 gem 'cancancan'
+gem "bulma-rails"
+gem 'fog-aws'
+gem 'dotenv-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-rails'
-  gem 'dotenv-rails'
 end
 
 group :development do

@@ -19,6 +19,7 @@
     <%= f.submit "次へ" %>
   </div>
 <% end %>
+<%#= link_to "戻るjava", "javascript:history.back();" %>
 
 <%= form_with(model: @user, local: true, url: edit_step1_user_path, method: :get) do |f| %>
   <%= f.hidden_field :image_cache %>
