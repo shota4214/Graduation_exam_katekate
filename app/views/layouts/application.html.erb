@@ -11,6 +11,7 @@
   </head>
 
   <body>
+  <%# ページ最上部 %>
     <nav class="navbar has-background-danger is-light">
       <div class="navbar-brand">
         <a class="navbar-item">
@@ -24,7 +25,17 @@
             <%= f.submit "検索", class: "button is-info is-small" %>
           <% end %>
           <% if user_signed_in? %>
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+            <% if current_user.image? %>
+              <%= link_to user_path(current_user.id) do %>
+                <%= image_tag current_user.image_url, size: '15%', class: "header-user-image"%>
+              <% end %>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+            <% else %>
+              <%= link_to user_path(current_user.id) do %>
+                <%= image_tag (asset_path'no_image.png'), size: '15%', class: "header-user-image"%>
+              <% end %>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+            <% end %>
           <% else %>
             <%= link_to "ログイン", new_user_session_path %>
             <%= link_to "新規登録", new_user_registration_path %>
@@ -33,30 +44,17 @@
       </div>
     </nav>
 
+    <%# ヒーローバナー部分 %>
+    <div class="hero is-info is-bold">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="hero-title">何か写真入れたい</h1>
+          <h2 class="hero-subtitle">@</h2>
+        </div>
+      </div>
+    </div>
 
-            <%= search_form_for @search, url: search_articles_path do |f| %>
-              <%= f.search_field :title_or_content_or_user_name_cont, placeholder: 'キーワードを入力' %>
-              <%= f.submit "検索", class: "button is-info is-small" %>
-            <% end %>
-
-
-    <% if user_signed_in? %>
-      <% if current_user.admin? %>
-        <%= link_to "管理者画面", rails_admin_path %>
-      <% end %>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-      <%= link_to "トップページ", articles_path %>
-      <%= link_to "マイページ", user_path(current_user.id) %>
-      <%= link_to "ランキング", rank_articles_path %>
-      <%= link_to "メッセージ", users_path %>
-      <%= link_to '記事新規投稿', new_article_path %>
-    <% else %>
-      <%= link_to "新規登録", new_user_registration_path %>
-      <%= link_to "ログイン", new_user_session_path %>
-      <%= link_to "トップページ", articles_path %>
-      <%= link_to "ランキング", rank_articles_path %>
-    <% end %>
-
+    <%# ヘッダー部分 %>
     <% if notice %>
       <p class="alert alert-notice"><%= notice %></p>
     <% end %>
@@ -64,8 +62,115 @@
       <p class="alert alert-error"><%= alert %></p>
     <% end %>
 
-    <%= yield %>
+    <%# ヘッダータブ部 %>
+    <section class="level">
+      <div class="level-left"></div>
+      <div class="level-right">
+        <div class="level-item tabs">
+          <ul>
+            <li class="is-active">
+            <% if user_signed_in? %>
+              <% if current_user.admin? %>
+                <%= link_to "管理者画面", rails_admin_path %></li>
+              <% end %>
+              <li><%= link_to "トップページ", articles_path %></li>
+              <li><%= link_to "マイページ", user_path(current_user.id) %></li>
+              <li><%= link_to "ランキング", rank_articles_path %></li>
+              <li><%= link_to "メッセージ", users_path %></li>
+              <li><%= link_to '記事新規投稿', new_article_path %></li>
+            <% else %>
+              <li><%= link_to "トップページ", articles_path %></li>
+              <li><%= link_to "ランキング", rank_articles_path %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <div class="level-right">
+        <div class="level-item">
+          <%# <a class="button is-greylight">フォロー</a> %>
+        </div>
+      </div>
+    </section>
 
+    <%# メインコンテンツ左側 %>
+    <main class="columns">
+      <div class="submenu column is-3">
+      <%# 1 %>
+        <aside class="box">
+        katekate〜家庭の過程〜
+        katekateは親や子供が抱える問題や知識を他者と共有しユーザー同士で繋がることができるアプリです。
+        あなたの悩みは誰かの悩みでもあり、あなたの経験が誰かの希望になります。
+        </aside>
+        <aside class="box menu">
+          <p class="menu-label">
+              おすすめの一言
+          </p>
+          <ul class="menu-list">
+              <li><a href="#">株式会社カサ<small>@casainc</small></a></li>
+              <li><a href="#">レア製作所<small>@rea-product</small></a></li>
+              <li><a href="#">オフィス・アル<small>@office-al</small></a></li>
+            </ul>
+            <p class="menu-label">
+                キーワード
+            </p>
+            <ul class="menu-list">
+              <li><a href="#">システム開発</a></li>
+              <li><a class="is-active" href="#">技術教育</a>
+                  <ul>
+                    <li><a href="#">一社研修</a></li>
+                    <li><a href="#">定期開催コース</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">ソフトウェアテスティング</a></li>
+            </ul>
+        </aside>
+
+      </div>
+      <%# <div class="column is-8"> %>
+      <%# <article class="box media">
+        <figure class="media-left">
+            <p class="image is-64x64">
+              <img src="">
+            </p>
+        </figure>
+        <div class="media-content">
+            <div class="content">
+              <p><strong>CASAREAL</strong><br>
+                  内容、内容、内容、内容、内容、内容、内容、内容、内容、内容、内容、内容、内容<br>
+                  <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
+                </p>
+            </div>
+            <article class="media">
+                <figure class="media-left">
+                  <p class="image is-48x48">
+                      <img src="">
+                  </p>
+                </figure>
+                <div class="media-content">
+                  <div class="content">
+                    <p><strong>Sean Brown</strong><br>
+                        コメントコメントコメントコメントコメントコメントコメントコメントコメントコメント<br>
+                        <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
+                    </p>
+                  </div>
+                  <article class="media">
+                      リプライリプライリプライリプライリプライリプライリプライリプライリプライリプライ。
+                  </article>
+                  <article class="media">
+                      リプライリプライリプライリプライリプライリプライリプライリプライリプライリプライ。
+                  </article>
+                </div>
+            </article>
+        </div>
+      </article> %>
+      <div class="column is-8">
+        <%# <article class="box media"> %>
+          <%= yield %>
+        <%# </article> %>
+      </div>
+    </main>
+
+    <%# フッター %>
     <footer class="footer">
       <div class="content has-text-centered">
           <a class="navbar-item">
