@@ -13,7 +13,6 @@
   <div class="field">
     <%= f.label :introduction %><br />
     <%= f.text_area :introduction, size: "30x5", placeholder: '自己紹介を記入してください' %>
-    <%= f.hidden_field :introduction %>
   </div>
     <div class="actions">
     <%= f.submit "次へ" %>
@@ -22,11 +21,5 @@
 <%#= link_to "戻るjava", "javascript:history.back();" %>
 
 <%= form_with(model: @user, local: true, url: edit_step1_user_path, method: :get) do |f| %>
-  <%= f.hidden_field :image_cache %>
-  <%= f.hidden_field :name %>
-  <%= f.hidden_field :email %>
-  <%= f.hidden_field :birthday %>
-  <%= f.hidden_field :sex %>
-  <%= f.hidden_field :prefectures %>
   <%= f.submit "戻る", name: "back" %>
 <% end %>

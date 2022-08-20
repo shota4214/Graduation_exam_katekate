@@ -1,9 +1,9 @@
-<strong class="has-text-black has-background-warning is-size-3">最新記事・質問一覧</strong>
+<strong class="has-background-warning is-size-3">最新記事・質問一覧</strong>
 
 <% @articles.first(100).each do |article| %>
 <article class="box media">
   <figure class="media-left">
-    <p class="image is-10x10">
+    <p class="image is-50x50">
       <% if article.image? %>
         <%= link_to article_path(article.id) do %><%= image_tag article.image.url %><% end %><br>
       <% else %>

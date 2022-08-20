@@ -12,31 +12,26 @@
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: '名前を入力' %>
-    <%= f.hidden_field :name %>
   </div>
 
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'katekate@email.com' %>
-    <%= f.hidden_field :email %>
   </div>
 
     <div class="field">
     <%= f.label :birthday %><br />
     <%= f.date_select :birthday, use_month_numbers: true, start_year: 1930, end_year: (Time.now.year), default: Date.new(2000, 1 , 1), autofocus: true, autocomplete: "birthday" %>
-    <%= f.hidden_field :birthday %>
   </div>
 
   <div class="field">
     <%= f.label :sex %><br />
     <%= f.select :sex, [["未選択", "unanswered"], ["男性", "male"], ["女性", "female"]], autofocus: true %>
-    <%= f.hidden_field :sex %>
   </div>
 
   <div class="field">
     <%= f.label :prefectures %><br />
     <%= f.select :prefectures, User.prefectures.keys, {}, autofocus: true %>
-    <%= f.hidden_field :prefectures %>
   </div>
 
     <div class="actions">
