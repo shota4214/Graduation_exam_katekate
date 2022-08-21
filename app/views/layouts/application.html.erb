@@ -12,7 +12,7 @@
 
   <body>
   <%# ページ最上部 %>
-    <nav class="navbar has-background-danger is-light">
+    <nav class="navbar is-light" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item">
           <%= image_tag (asset_path'katekate.png') %>
@@ -95,7 +95,6 @@
     <%# メインコンテンツ左側 %>
     <main class="columns">
       <div class="submenu column is-3">
-      <%# 1 %>
         <aside class="box">
         katekate〜家庭の過程〜
         katekateは親や子供が抱える問題や知識を他者と共有しユーザー同士で繋がることができるアプリです。
@@ -106,6 +105,31 @@
               おすすめの一言
           </p>
           <ul class="menu-list">
+
+          <%= search_form_for @search, url: search_articles_path do |f| %>
+            <%= f.search_field :title_or_content_or_user_name_cont, placeholder: 'キーワードを入力' %>
+            <%= f.submit "検索", class: "button is-small is-info" %>
+          <% end %>
+          <% if user_signed_in? %>
+            <% if current_user.image? %>
+              ログインユーザー<%= link_to user_path(current_user.id) do %><%= current_user.name %><% end %>
+              <%= link_to user_path(current_user.id) do %>
+                <%= image_tag current_user.image_url, size: '50x50%', class: "header-user-image"%>
+              <% end %>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+            <% else %>
+              ログインユーザー<%= link_to user_path(current_user.id) do %><%= current_user.name %><% end %>
+              <%= link_to user_path(current_user.id) do %>
+                <%= image_tag (asset_path'no_image.png'), size: '50x50', class: "header-user-image"%>
+              <% end %>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+            <% end %>
+          <% else %>
+            <%= link_to "ログイン", new_user_session_path %>
+            <%= link_to "新規登録", new_user_registration_path %>
+          <% end %>
+
+
               <li><a href="#">株式会社カサ<small>@casainc</small></a></li>
               <li><a href="#">レア製作所<small>@rea-product</small></a></li>
               <li><a href="#">オフィス・アル<small>@office-al</small></a></li>
@@ -126,47 +150,9 @@
         </aside>
 
       </div>
-      <%# <div class="column is-8"> %>
-      <%# <article class="box media">
-        <figure class="media-left">
-            <p class="image is-64x64">
-              <img src="">
-            </p>
-        </figure>
-        <div class="media-content">
-            <div class="content">
-              <p><strong>CASAREAL</strong><br>
-                  内容、内容、内容、内容、内容、内容、内容、内容、内容、内容、内容、内容、内容<br>
-                  <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
-                </p>
-            </div>
-            <article class="media">
-                <figure class="media-left">
-                  <p class="image is-48x48">
-                      <img src="">
-                  </p>
-                </figure>
-                <div class="media-content">
-                  <div class="content">
-                    <p><strong>Sean Brown</strong><br>
-                        コメントコメントコメントコメントコメントコメントコメントコメントコメントコメント<br>
-                        <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
-                    </p>
-                  </div>
-                  <article class="media">
-                      リプライリプライリプライリプライリプライリプライリプライリプライリプライリプライ。
-                  </article>
-                  <article class="media">
-                      リプライリプライリプライリプライリプライリプライリプライリプライリプライリプライ。
-                  </article>
-                </div>
-            </article>
-        </div>
-      </article> %>
+
       <div class="column is-8">
-        <%# <article class="box media"> %>
           <%= yield %>
-        <%# </article> %>
       </div>
     </main>
 
