@@ -30,15 +30,13 @@ class UsersController < ApplicationController
   end
 
   def edit_step2
-    unless params[:back]
-      session[:image] = user_params[:image]
-      session[:name] = user_params[:name]
-      session[:email] = user_params[:email]
-      session[:birthday] = Date.new(params[:user]["birthday(1i)"].to_i, params[:user]["birthday(2i)"].to_i, params[:user]["birthday(3i)"].to_i)
-      session[:sex] = user_params[:sex]
-      session[:prefectures] = user_params[:prefectures]
-      @user.image = user_params[:image]
-    end
+    session[:image] = user_params[:image]
+    session[:name] = user_params[:name]
+    session[:email] = user_params[:email]
+    session[:birthday] = Date.new(params[:user]["birthday(1i)"].to_i, params[:user]["birthday(2i)"].to_i, params[:user]["birthday(3i)"].to_i)
+    session[:sex] = user_params[:sex]
+    session[:prefectures] = user_params[:prefectures]
+    @user.image = user_params[:image]
   end
 
   def edit_step3

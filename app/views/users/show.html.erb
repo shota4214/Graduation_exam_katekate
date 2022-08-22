@@ -76,15 +76,32 @@
     <%#= link_to "編集", edit_user_registration_path(@user) %>
     <%= link_to "プロフィール編集", edit_step1_user_path(@user) %> |
     <%= link_to "お気に入り一覧", favorites_path(@user) %> |
-    <%= link_to 'フォロー・フォロワー', follow_index_user_path(@user) %>
+    <%= link_to 'フォロー・フォロワー', follow_index_user_path(@user) %><br>
 
-    <table>
-      <tr>
-        <th>記事種類</th>
-        <th>タイトル</th>
-        <th>内容</th>
-        <th>状態</th>
-      </tr>
+<br>
+<strong class="is-size-4">投稿記事一覧</strong>
+<% @articles.each do |article| %>
+<article class="box media">
+  <figure class="media-left">
+    <p class="image is-50x50">
+      <% if article.image? %>
+        <%= link_to article_path(article.id) do %><%= image_tag article.image.url %><% end %><br>
+      <% else %>
+        <%= link_to article_path(article.id) do %><%= image_tag (asset_path"no_image.png") %><% end %><br>
+      <% end %>
+    </p>
+  </figure>
+  <div class="media-content">
+    <div class="content">
+      <h4><%= article.type_i18n %>【<%= link_to article_path(article.id) do %><%= article.title %><% end %>】</h4><br>
+      <h6>投稿者：<%= link_to article.user.name, user_path(article.user_id) %></h6>
+        <%= link_to article_path(article.id) do %><%= article.content %><% end %><br>
+        <small><a><i class="fa-solid fa-eye"></i><%= article.impressions_count %></a> ・ <a><i class="fa-solid fa-heart"></i><%= article.likes.count %></a> ・ <a><i class="fa-solid fa-star"></i><%= article.favorites.count %></a></small>
+      </p>
+    </div>
+  </div>
+</article>
+    <% end %>
 
     <% @articles.each do |article| %>
       <tr>
