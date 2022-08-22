@@ -11,35 +11,77 @@
 
   <body>
   <%# ページ最上部 %>
-    <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+      <%# <nav class="navbar is-link is-fixed" role="navigation">
       <div class="navbar-brand">
-        <a class="navbar-item">
-          <%= image_tag (asset_path'katekate.png') %>
+        <a class="navbar-item is-expanded is-block has-text-centered">
+          <i class="fa fa-home"></i>
+          <p class="is-size-7">HOME</p>
+        </a>
+        <a class="navbar-item is-expanded is-block has-text-centered">
+          <i class="fa fa-search"></i>
+          <p class="is-size-7">Search</p>
+        </a>
+        <a class="navbar-item is-expanded is-block has-text-centered">
+          <i class="fa fa-user"></i>
+          <p class="is-size-7">Account</p>
         </a>
       </div>
-      <div class="navbar-end">
-        <div class="navbar-item">
+    </nav> %>
+
+    <nav class="navbar is-link is-fixed-top" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <%= image_tag (asset_path'katekate.png') %>
+        </a>
+        <a class="navbar-item is-expanded is-block has-text-centered">
           <%= search_form_for @search, url: search_articles_path do |f| %>
             <%= f.search_field :title_or_content_or_user_name_cont, placeholder: 'キーワードを入力' %>
-            <%= f.submit "検索", class: "button is-info is-small" %>
+            <%= f.submit "検索", class: "button is-warning is-small" %>
           <% end %>
-          <% if user_signed_in? %>
-            <% if current_user.image? %>
-              <%= link_to user_path(current_user.id) do %>
-                <%= image_tag current_user.image_url, size: '15%', class: "header-user-image"%>
-              <% end %>
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-            <% else %>
-              <%= link_to user_path(current_user.id) do %>
-                <%= image_tag (asset_path'no_image.png'), size: '15%', class: "header-user-image"%>
-              <% end %>
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-            <% end %>
+        </a>
+        <% if user_signed_in? %>
+          <% if current_user.image? %>
+            <%= link_to user_path(current_user.id), class: "navbar-item is-expanded is-block has-text-centered" do %>
+            <%= image_tag current_user.image_url %><p class="is-size-7">ユーザーページ</p><% end %>
           <% else %>
-            <%= link_to "ログイン", new_user_session_path %>
-            <%= link_to "新規登録", new_user_registration_path %>
+            <%= link_to user_path(current_user.id), class: "navbar-item is-expanded is-block has-text-centered" do %>
+            <%= image_tag (asset_path'no_image.png') %><p class="is-size-7">ユーザーページ</p><% end %>
           <% end %>
-        </div>
+        <% end %>
+
+        <% if user_signed_in? %>
+          <%= link_to "メッセージ", users_path %>
+          <%= link_to rank_articles_path, class: "navbar-item is-expanded is-block has-text-centered" do %>
+          <i class="fa fa-crown fa-lg"></i><p class="is-size-7">ランキング</p><% end %>
+          <%= link_to destroy_user_session_path, method: :delete, class: "navbar-item is-expanded is-block has-text-centered" do %>
+          <i class="fa fa-user fa-lg"></i><p class="is-size-7">ログアウト</p><% end %>
+        <% else %>
+          <%= link_to new_user_session_path, class: "navbar-item is-expanded is-block has-text-centered" do %>
+          <i class="fa fa-user fa-lg"></i><p class="is-size-7">ログイン</p><% end %>
+          <%= link_to new_user_registration_path, class: "navbar-item is-expanded is-block has-text-centered" do %>
+          <i class="fa fa-user-pen fa-lg"></i><p class="is-size-7">新規登録</p><% end %>
+        <% end %>
+      </div>
+    </nav>
+        <%# ボトムナビゲーションバー %>
+    <nav class="navbar is-link is-fixed-bottom" role="navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item is-expanded is-block has-text-centered">
+          <i class="fa fa-home"></i>
+          <p class="is-size-7">HOME</p>
+        </a>
+        <a class="navbar-item is-expanded is-block has-text-centered">
+          <i class="fa fa-search"></i>
+          <p class="is-size-7">Search</p>
+        </a>
+        <a class="navbar-item is-expanded is-block has-text-centered">
+          <i class="fa fa-user"></i>
+          <p class="is-size-7">Account</p>
+        </a>
+        <a class="navbar-item is-expanded is-block has-text-centered">
+          <i class="fa fa-user"></i>
+          <p class="is-size-7">Account</p>
+        </a>
       </div>
     </nav>
 
@@ -101,55 +143,27 @@
         </aside>
         <aside class="box menu">
           <p class="menu-label">
-              おすすめの一言
+              おすすめサイト
           </p>
           <ul class="menu-list">
-
-          <%= search_form_for @search, url: search_articles_path do |f| %>
-            <%= f.search_field :title_or_content_or_user_name_cont, placeholder: 'キーワードを入力' %>
-            <%= f.submit "検索", class: "button is-small is-info" %>
-          <% end %>
-          <% if user_signed_in? %>
-            <% if current_user.image? %>
-              ログインユーザー<%= link_to user_path(current_user.id) do %><%= current_user.name %><% end %>
-              <%= link_to user_path(current_user.id) do %>
-                <%= image_tag current_user.image_url, size: '50x50%', class: "header-user-image"%>
-              <% end %>
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-            <% else %>
-              ログインユーザー<%= link_to user_path(current_user.id) do %><%= current_user.name %><% end %>
-              <%= link_to user_path(current_user.id) do %>
-                <%= image_tag (asset_path'no_image.png'), size: '50x50', class: "header-user-image"%>
-              <% end %>
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-            <% end %>
-          <% else %>
-            <%= link_to "ログイン", new_user_session_path %>
-            <%= link_to "新規登録", new_user_registration_path %>
-          <% end %>
-
-
-              <li><a href="#">株式会社カサ<small>@casainc</small></a></li>
-              <li><a href="#">レア製作所<small>@rea-product</small></a></li>
-              <li><a href="#">オフィス・アル<small>@office-al</small></a></li>
+              <li><a href="https://onl.bz/3wAUbyp">DIVE INTO CODE</a></li>
+              <li><a href="https://www.mhlw.go.jp/kokoro/parent/cons/text1.html">こころもメンテしよう<small>厚生労働省</small></a></li>
+              <li><a href="https://www.savechildren.or.jp/oyakonomikata/anata-no-mikata/soudan/">おやこのミカタ<small>Save the children</small></a></li>
             </ul>
             <p class="menu-label">
-                キーワード
+                開発者紹介
             </p>
             <ul class="menu-list">
-              <li><a href="#">システム開発</a></li>
-              <li><a class="is-active" href="#">技術教育</a>
+              <li><a>Shota Suzuki</a>
                   <ul>
-                    <li><a href="#">一社研修</a></li>
-                    <li><a href="#">定期開催コース</a></li>
+                    <li><a href="https://twitter.com/seshiruff4214"><i class="fab fa-twitter fa-lg"></i> Twitter</a></li>
+                    <li><a href="https://github.com/shota4214"><i class="fab fa-github fa-lg"></i> GitHub</a></li>
+                    <li><a href="https://qiita.com/seshiruff4214"><i class="fa fa-q fa-lg"></i> Qiita</a></li>
                     </ul>
                 </li>
-                <li><a href="#">ソフトウェアテスティング</a></li>
             </ul>
         </aside>
-
       </div>
-
       <div class="column is-8">
           <%= yield %>
       </div>
