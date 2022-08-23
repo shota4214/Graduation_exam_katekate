@@ -7,6 +7,7 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css">
   </head>
 
   <body>
@@ -42,17 +43,16 @@
         <% if user_signed_in? %>
           <% if current_user.image? %>
             <%= link_to user_path(current_user.id), class: "navbar-item is-expanded is-block has-text-centered" do %>
-            <%= image_tag current_user.image_url %><p class="is-size-7">ユーザーページ</p><% end %>
+            <%= image_tag current_user.image_url %><p class="is-size-7">マイページ</p><% end %>
           <% else %>
             <%= link_to user_path(current_user.id), class: "navbar-item is-expanded is-block has-text-centered" do %>
-            <%= image_tag (asset_path'no_image.png') %><p class="is-size-7">ユーザーページ</p><% end %>
+            <%= image_tag (asset_path'no_image.png') %><p class="is-size-7">マイページ</p><% end %>
           <% end %>
         <% end %>
 
         <% if user_signed_in? %>
-          <%= link_to "メッセージ", users_path %>
-          <%= link_to rank_articles_path, class: "navbar-item is-expanded is-block has-text-centered" do %>
-          <i class="fa fa-crown fa-lg"></i><p class="is-size-7">ランキング</p><% end %>
+          <%= link_to users_path, class: "navbar-item is-expanded is-block has-text-centered" do %>
+          <i class="fa fa-envelope fa-lg"></i><p class="is-size-7">メッセージ</p><% end %>
           <%= link_to destroy_user_session_path, method: :delete, class: "navbar-item is-expanded is-block has-text-centered" do %>
           <i class="fa fa-user fa-lg"></i><p class="is-size-7">ログアウト</p><% end %>
         <% else %>
@@ -64,7 +64,7 @@
       </div>
     </nav>
         <%# ボトムナビゲーションバー %>
-    <nav class="navbar is-link is-fixed-bottom" role="navigation">
+    <%# <nav class="navbar is-link is-fixed-bottom" role="navigation">
       <div class="navbar-brand">
         <a class="navbar-item is-expanded is-block has-text-centered">
           <i class="fa fa-home"></i>
@@ -83,7 +83,7 @@
           <p class="is-size-7">Account</p>
         </a>
       </div>
-    </nav>
+    </nav> %>
 
     <%# ヒーローバナー部分 %>
     <div class="hero is-info is-bold">
@@ -115,9 +115,7 @@
                 <%= link_to "管理者画面", rails_admin_path %></li>
               <% end %>
               <li><%= link_to "トップページ", articles_path %></li>
-              <li><%= link_to "マイページ", user_path(current_user.id) %></li>
               <li><%= link_to "ランキング", rank_articles_path %></li>
-              <li><%= link_to "メッセージ", users_path %></li>
               <li><%= link_to '記事新規投稿', new_article_path %></li>
             <% else %>
               <li><%= link_to "トップページ", articles_path %></li>
