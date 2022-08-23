@@ -77,8 +77,16 @@
       </div>
       <br>
       <div class="level">
-      <p><i class="fa-solid fa-handshake"></i>フォロー<%= @following_users.count %>人</p>
-      <p><i class="fa-solid fa-handshake"></i>フォロワー<%= @follower_users.count %>人</p>
+        <p><i class="fa-solid fa-handshake"></i>フォロー<%= @following_users.count %>人</p>
+        <p><i class="fa-solid fa-handshake"></i>フォロワー<%= @follower_users.count %>人</p>
+      </div>
+      <br>
+      <div class="level">
+        <% if user_signed_in? %>
+          <% unless @user.id == current_user.id %>
+            <p><%= render 'follow_form', user: @user %></p>
+          <% end %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -143,8 +151,6 @@
       </footer>
     </div><br>
     <% end %>
-    <% else %>
-      <%= render 'follow_form', user: @user %>
   <% end %>
   <%= paginate @articles %>
 <% end %>

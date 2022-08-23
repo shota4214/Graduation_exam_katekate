@@ -107,14 +107,14 @@
             <li class="is-active">
             <% if user_signed_in? %>
               <% if current_user.admin? %>
-                <%= link_to "管理者画面", rails_admin_path %></li>
+                <%= link_to rails_admin_path do %><i class="fa-solid fa-key fa-lg"></i>管理者ページ</li><% end %>
               <% end %>
-              <li><%= link_to "トップページ", articles_path %></li>
-              <li><%= link_to "ランキング", rank_articles_path %></li>
-              <li><%= link_to '記事新規投稿', new_article_path %></li>
+              <li><%= link_to articles_path do %><i class="fa-solid fa-house"></i>トップページ</li><% end %>
+              <li><%= link_to rank_articles_path do %><i class="fa-solid fa-crown fa-lg"></i>ランキング</li><% end %>
+              <li><%= link_to new_article_path do %><i class="fa-solid fa-square-pen fa-lg"></i>記事投稿</li><% end %>
             <% else %>
-              <li><%= link_to "トップページ", articles_path %></li>
-              <li><%= link_to "ランキング", rank_articles_path %></li>
+              <li><%= link_to articles_path do %><i class="fa-solid fa-house"></i>トップページ</li><% end %>
+              <li><%= link_to rank_articles_path do %><i class="fa-solid fa-crown fa-lg"></i>ランキング</li><% end %>
             <% end %>
           </ul>
         </div>
