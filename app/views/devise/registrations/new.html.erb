@@ -8,48 +8,34 @@
           <form action="" class="box">
             <div class="field">
               <label for="" class="label"><%= f.label :name %></label>
-              <div class="control has-icons-left">
                 <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: '名前を入力' %>
-              </div>
             </div>
             <div class="field">
               <label for="" class="label"><%= f.label :email %></label>
-              <div class="control has-icons-left">
                 <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'katekate@email.com' %>
-              </div>
             </div>
             <div class="field">
               <label for="" class="label"><%= f.label :birthday %></label>
-              <div class="control has-icons-left">
                 <%= f.date_select :birthday, use_month_numbers: true, start_year: 1930, end_year: (Time.now.year), default: Date.new(2000, 1 , 1), autofocus: true, autocomplete: "birthday" %>
-              </div>
             </div>
             <div class="field">
               <label for="" class="label"><%= f.label :sex %></label>
-              <div class="control has-icons-left">
                 <%= f.select :sex, [["未選択", "unanswered"], ["男性", "male"], ["女性", "female"]], autofocus: true %>
-              </div>
             </div>
             <div class="field">
               <label for="" class="label"><%= f.label :prefectures %></label>
-              <div class="control has-icons-left">
                 <%= f.select :prefectures, User.prefectures.keys, {}, autofocus: true %>
-              </div>
             </div>
             <div class="field">
               <label for="" class="label"><%= f.label :password %>
               <% if @minimum_password_length %>
               <em>(<%= @minimum_password_length %> 文字以上)</em>
               <% end %></label>
-              <div class="control has-icons-left">
                 <%= f.password_field :password, autocomplete: "current-password", placeholder: 'パスワードを入力' %>
-              </div>
             </div>
             <div class="field">
               <label for="" class="label"><%= f.label :password_confirmation %></label>
-              <div class="control has-icons-left">
                 <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'パスワードを再入力' %>
-              </div>
             </div>
             <div class="field">
               <%= f.submit "登録", class: "button is-primary" %>

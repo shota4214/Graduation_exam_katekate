@@ -7,15 +7,11 @@
           <form action="" class="box">
             <div class="field">
               <label for="" class="label"><%= f.label :email %></label>
-              <div class="control has-icons-left">
                 <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'katekate@email.com' %>
-              </div>
             </div>
             <div class="field">
               <label for="" class="label"><%= f.label :password %></label>
-              <div class="control has-icons-left">
                 <%= f.password_field :password, autocomplete: "current-password", placeholder: 'パスワードを入力' %>
-              </div>
             </div>
             <div class="field">
               <label for="" class="checkbox">
