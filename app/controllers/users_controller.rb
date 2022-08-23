@@ -1,24 +1,21 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: %i[index follow_index update edit_step1 edit_step2 edit_step3 edit_step4]
   before_action :user_find, only: %i[show follow_index edit_step1 edit_step2 edit_step3 edit_step4 update]
+  before_action :following_follower_users, only: %i[follow_index show]
 
   def index
     @users = current_user.followings && current_user.followers if user_signed_in?
   end
 
   def follow_index
-    @following_users = @user.followings
-    @follower_users = @user.followers
     @users = current_user.followings && current_user.followers if user_signed_in?
   end
 
   def show
     @user_age = @user.age
-    @articles = @user.articles.all.order("created_at DESC").page(params[:page]).per(5)
+    @articles = @user.articles.all.order("created_at DESC").page(params[:page]).per(3)
     user_articles = @user.articles
-    @like_count_all = 0
-    @favorite_count_all = 0
-    @impression_count_all = 0
+    all_count_set
     user_articles.each do |article|
       @like_count_all += article.likes.count
       @favorite_count_all += article.favorites.count
@@ -73,5 +70,16 @@ class UsersController < ApplicationController
 
   def user_find
     @user = User.find(params[:id])
+  end
+
+  def following_follower_users
+    @following_users = @user.followings
+    @follower_users = @user.followers
+  end
+
+  def all_count_set
+    @like_count_all = 0
+    @favorite_count_all = 0
+    @impression_count_all = 0
   end
 end

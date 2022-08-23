@@ -29,7 +29,7 @@
       </div>
     </nav> %>
 
-    <nav class="navbar is-link is-fixed-top" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item" href="/">
           <%= image_tag (asset_path'katekate.png') %>
@@ -37,7 +37,7 @@
         <a class="navbar-item is-expanded is-block has-text-centered">
           <%= search_form_for @search, url: search_articles_path do |f| %>
             <%= f.search_field :title_or_content_or_user_name_cont, placeholder: 'キーワードを入力' %>
-            <%= f.submit "検索", class: "button is-warning is-small" %>
+            <%= f.submit "検索", class: "button is-info is-small" %>
           <% end %>
         </a>
         <% if user_signed_in? %>
@@ -86,13 +86,8 @@
     </nav> %>
 
     <%# ヒーローバナー部分 %>
-    <div class="hero is-info is-bold">
-      <div class="hero-body">
-        <div class="container">
-          <h1 class="hero-title">何か写真入れたい</h1>
-          <h2 class="hero-subtitle">@</h2>
-        </div>
-      </div>
+    <div class="hero is-medium has-background">
+      <%= image_tag(asset_path"top.png") %>
     </div>
 
     <%# ヘッダー部分 %>
