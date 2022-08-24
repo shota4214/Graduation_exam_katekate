@@ -1,20 +1,22 @@
-<h2>DM可能ユーザー一覧</h2>
-<table>
-  <tr>
-    <th>名前</th>
-    <th>メッセージ</th>
-    <th>フォロー</th>
-  </tr>
-
-<% @users.each do |user| %>
-  <% if user.id != current_user.id %>
-    <tr>
-      <div class="item">
-        <td><%= link_to user.name, user %></td>
-        <td><%= link_to 'メッセージ', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post %></td>
-        <td><%= render 'follow_form', user: user %></td> 
-      </div>
+<p class=" has-text-centered has-background-success is-size-3">メッセージ可能者名一覧</p>
+<br>
+<div class="container">
+  <table class="table is-bordered is-striped">
+    <tr class="th is-selected">
+      <th></th>
+      <th>ユーザー名</th>
+      <th>DMリンク</th>
+      <th>フォロー</th>
     </tr>
-  <% end %>
-<% end %>
-</table>
+    <% @users.each do |user| %>
+      <% if user.id != current_user.id %>
+        <tr>
+          <td width="5%"><i class="fa-solid fa-handshake"></i></td>
+          <td><%= link_to user.name, user %></td>
+          <td><%= link_to conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post do %><button class="button is-outlined is-info"><i class="fa fa-envelope"></i>メッセージ</button><% end %></td>
+          <td><%= render 'follow_form', user: user %></td>
+        </tr>
+      <% end %>
+    <% end %>    
+  </table>
+</div>

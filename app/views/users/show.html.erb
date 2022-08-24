@@ -22,12 +22,20 @@
                 <i class="fab fa-twitter fa-2x"></i>
               <% end %>
             </a>
+          <% else %>
+            <a class="profile-link">
+                <i style="color:gray" class="fab fa-twitter fa-2x"></i>
+            </a>
           <% end %>
           <% if @user.instagram_url.present? %>
             <a class="profile-link">
               <%= link_to @user.instagram_url, target: :_blank do %>
                 <i class="fab fa-instagram fa-2x"></i>
               <% end %>
+            </a>
+          <% else %>
+            <a class="profile-link">
+              <i style="color:gray" class="fab fa-instagram fa-2x"></i>
             </a>
           <% end %>
           <% if @user.tiktok_url.present? %>
@@ -36,12 +44,20 @@
                 <i class="fab fa-tiktok fa-2x"></i>
               <% end %>
             </a>
+          <% else %>
+            <a class="profile-link">
+              <i style="color:gray" class="fab fa-tiktok fa-2x"></i>
+            </a>
           <% end %>
           <% if @user.facebook_url.present? %>
             <a class="profile-link">
               <%= link_to @user.facebook_url, target: :_blank do %>
                 <i class="fab fa-facebook fa-2x"></i>
               <% end %>
+            </a>
+          <% else %>
+            <a class="profile-link">
+              <i style="color:gray" class="fab fa-facebook fa-2x"></i>
             </a>
           <% end %>
           <% if @user.youtube_url.present? %>
@@ -50,12 +66,20 @@
                 <i class="fab fa-youtube fa-2x"></i>
               <% end %>
             </a>
+          <% else %>
+            <a class="profile-link">
+              <i style="color:gray" class="fab fa-youtube fa-2x"></i>
+            </a>
           <% end %>
           <% if @user.website_url.present? %>
             <a class="profile-link">
               <%= link_to @user.website_url, target: :_blank do %>
                 <i class="fa-regular fa-window-maximize fa-2x"></i>
               <% end %>
+            </a>
+          <% else %>
+            <a class="profile-link">
+              <i style="color:gray" class="fa-regular fa-window-maximize fa-2x"></i>
             </a>
           <% end %>
         </div>
@@ -101,6 +125,7 @@
 </div>
 <br>
 
+  <%# リンクボタン %>
 <% if user_signed_in?%>
   <% if @user.id == current_user.id %>
     <div class="field is-grouped">
@@ -118,9 +143,9 @@
       </p>
     </div>
 
+    <%# 投稿記事一覧 %>
     <br>
     <p class=" has-text-centered is-size-3">投稿記事一覧</p>
-    <%# card使用 %>
     <% @articles.each do |article| %>
     <div class="card">
       <div class="card-content">

@@ -29,3 +29,5 @@ ja:
         facebook_url: Facebook
         youtube_url: YouTube
         website_url: Website
+      comment:
+        content: コメント入力欄

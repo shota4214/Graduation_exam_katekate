@@ -1,39 +1,74 @@
-<h1>記事詳細画面</h1>
-
-<P>
-  <i class="fa-solid fa-eye fa-lg"></i><i class="fa-solid fa-p"></i><i class="fa-solid fa-v"></i>
-  <%= @article.impressions_count %>
-</p>
-
-<div class="like-link" id="like-link-<%= @article.id %>">
-  <%= render partial: 'likes/like', locals: { article: @article } %>
-</div>
-
-<div class="favorite-link" id="favorite-link-<%= @article.id %>">
-  <%= render partial: 'favorites/favorite', locals: { article: @article } %>
-</div>
-
-<% if @article.draft? %>
-  <h2><%= "この記事は下書きのため未公開です" %></h2>
-<% end %>
-<p>記事種類： <%= @article.type_i18n %><p>
-  <strong>画像:</strong>
-<% if @article.image? %>
-  <%= image_tag @article.image.url %>
-<% else %>
-  <%= "画像の添付はありません" %>
-<% end %>
-<p>タイトル: <%= @article.title %></p>
-<p>内容: <%= @article.content %></p>
-
-<% if user_signed_in? %>
-  <% if @article.user_id == current_user.id %>
-    <%= link_to "編集", edit_article_path(@article.id) %>
-  <% end %>
-
-  <p>投稿コメント一覧</p>
-  <div id="comments_area">
-    <%= render partial: 'comments/index', locals: { comments: @comments, article: @article } %>
+<p class=" has-text-centered has-background-success is-size-3">記事・質問詳細ページ</p>
+<br>
+<div class="columns">
+  <div class="column is-narrow">
+    <div class="box" style="width: 200px;">
+      <% if @article.user.image? %>
+        <%= image_tag @article.user.image.url %>
+      <% else %>
+        <%= image_tag (asset_path'no_image.png') %>
+      <% end %>
+      <p class="title is-5"><%= @article.user.name %></p>
+      <P>
+        <i class="fa-solid fa-eye fa-lg"></i><i class="fa-solid fa-p"></i><i class="fa-solid fa-v"></i>
+        <%= @article.impressions_count %>
+      </p><br>
+      <div class="like-link" id="like-link-<%= @article.id %>">
+        <%= render partial: 'likes/like', locals: { article: @article } %>
+      </div><br>
+      <div class="favorite-link" id="favorite-link-<%= @article.id %>">
+        <%= render partial: 'favorites/favorite', locals: { article: @article } %>
+      </div>
+    </div>
   </div>
-  <%= render partial: 'comments/form', locals: { comment: @comment, article: @article } %>
-<% end %>
+  <div class="column">
+    <div class="box">
+      <div class="level">
+        <% if @article.draft? %>
+          <h2 class="text-red has-text-weight-bold is-size-5"><%= "この記事は下書きのため未公開です" %></h2>
+        <% end %>
+      </div>
+      <div class="level">
+        <p class="has-text-weight-bold is-size-5">記事種類【<%= @article.type_i18n %>】<p>
+      </div>
+      <div class="level">
+        <p class="has-text-weight-bold is-size-5">タイトル【<%= @article.title %>】</p>
+      </div>
+      <div class="level-item">
+        <% if @article.image? %>
+          <%= image_tag @article.image.url %>
+        <% else %>
+          <%= image_tag asset_path("no_image.png") %>
+        <% end %>
+      </div>
+      <div class="level-item">
+        <% if user_signed_in? %>
+          <% if @article.user_id == current_user.id %>
+            <%= link_to edit_article_path(@article.id) do %><button class="button is-warning"><i class="fa-solid fa-pen-to-square fa-lg"></i>記事を編集</button><% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-content">
+    <div class="content">
+      <p class="title is-size-5">投稿内容</p>
+      <p><%= @article.content %></p>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-content">
+    <div class="content">
+      <% if user_signed_in? %>
+        <p>《コメント一覧》</p>
+        <div id="comments_area">
+          <%= render partial: 'comments/index', locals: { comments: @comments, article: @article } %>
+        </div>
+        <%= render partial: 'comments/form', locals: { comment: @comment, article: @article } %>
+      <% end %>
+    </div>
+  </div>
+</div>

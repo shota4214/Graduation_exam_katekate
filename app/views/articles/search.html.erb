@@ -1,21 +1,26 @@
-<h1>検索記事一覧</h1>
-
-<table>
-  <tr>
-    <th>記事種類</th>
-    <th>投稿者</th>
-    <th>PV数</th>
-    <th>タイトル</th>
-  </tr>
-
+<p class=" has-text-centered has-background-success is-size-3">【検索記事一覧】</p>
+<br>
 <% @search_articles.first(100).each do |article| %>
-  <tr>
-    <td><%= article.type_i18n %></td>
-    <td><%= link_to article.user.name, user_path(article.user_id) %></td>
-    <td><%= article.impressions_count %></td>
-    <td><%= article.title %></td>
-    <td><%= link_to '詳細', article_path(article.id) %></td>
-  </tr>
-<% end %>
-</table>
+<article class="box media">
+  <figure class="media-left">
+    <p class="image is-50x50">
+      <% if article.image? %>
+        <%= link_to article_path(article.id) do %><%= image_tag article.image.url %><% end %><br>
+      <% else %>
+        <%= link_to article_path(article.id) do %><%= image_tag (asset_path"no_image.png") %><% end %><br>
+      <% end %>
+    </p>
+  </figure>
+  <div class="media-content">
+    <div class="content">
+      <h4><%= article.type_i18n %>【<%= link_to article_path(article.id) do %><%= article.title %><% end %>】</h4><br>
+      <h6>投稿者：<%= link_to article.user.name, user_path(article.user_id) %></h6>
+        <%= link_to article_path(article.id) do %><%= article.content %><% end %><br>
+        <small><a><i class="fa-solid fa-eye"></i><%= article.impressions_count %></a> ・ <a><i class="fa-solid fa-heart"></i><%= article.likes.count %></a> ・ <a><i class="fa-solid fa-star"></i><%= article.favorites.count %></a></small>
+      </p>
+    </div>
+  </div>
+</article>
+    <% end %>
+
 <%= paginate @search_articles %>
