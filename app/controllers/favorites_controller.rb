@@ -12,6 +12,6 @@ class FavoritesController < ApplicationController
   end
 
   def index
-    @favorites = current_user.favorite_articles.order(created_at: :desc)
+    @favorites = current_user.favorite_articles.order(created_at: :desc).page(params[:page]).per(10)
   end
 end

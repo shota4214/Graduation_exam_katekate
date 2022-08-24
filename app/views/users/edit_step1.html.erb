@@ -1,43 +1,43 @@
-<h2>ユーザー情報編集〜基本情報〜 </h2>
-
 <%= form_with(model: @user, local: true, url: edit_step2_user_path, method: :post, html: { class: 'first-main_box' }) do |f| %>
-
-  <div class="field">
-    <%= f.label :image %><br />
-    <%= image_tag(@user.image.url) if @user.image && @user.image.url %>
-    <%= f.file_field :image %>
-    <%= f.hidden_field :image_cache %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: '名前を入力' %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'katekate@email.com' %>
-  </div>
-
-    <div class="field">
-    <%= f.label :birthday %><br />
-    <%= f.date_select :birthday, use_month_numbers: true, start_year: 1930, end_year: (Time.now.year), default: Date.new(2000, 1 , 1), autofocus: true, autocomplete: "birthday" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :sex %><br />
-    <%= f.select :sex, [["未選択", "unanswered"], ["男性", "male"], ["女性", "female"]], autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :prefectures %><br />
-    <%= f.select :prefectures, User.prefectures.keys, {}, autofocus: true %>
-  </div>
-
-    <div class="actions">
-    <%= f.submit "次へ" %>
-  </div>
-
-<% end %>
-
-<%= link_to "戻る", user_path(@user) %>
+<p class=" has-text-centered has-background-success is-size-3">ユーザー情報編集〜基本情報〜</p>
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-5-tablet is-5-desktop">
+          <form action="" class="box">
+            <div class="field">
+              <label for="" class="label"><%= f.label :image %></label>
+                <%= image_tag(@user.image.url) if @user.image && @user.image.url %>
+                <%= f.file_field :image %>
+                <%= f.hidden_field :image_cache %>
+            </div>
+            <div class="field">
+              <label for="" class="label"><%= f.label :name %></label>
+                <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: '名前を入力' %>
+            </div>
+            <div class="field">
+              <label for="" class="label"><%= f.label :email %></label>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'katekate@email.com' %>
+            </div>
+            <div class="field">
+              <label for="" class="label"><%= f.label :birthday %></label>
+                <%= f.date_select :birthday, use_month_numbers: true, start_year: 1930, end_year: (Time.now.year), default: Date.new(2000, 1 , 1), autofocus: true, autocomplete: "birthday" %>
+            </div>
+            <div class="field">
+              <label for="" class="label"><%= f.label :sex %></label>
+                <%= f.select :sex, [["未選択", "unanswered"], ["男性", "male"], ["女性", "female"]], autofocus: true %>
+            </div>
+            <div class="field">
+              <label for="" class="label"><%= f.label :prefectures %></label>
+                <%= f.select :prefectures, User.prefectures.keys, {}, autofocus: true %>
+            </div>
+            <div class="field">
+              <%= f.submit "次へ", class: "button is-primary" %>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<br>
+  <%= link_to user_path(@user) do %><button class="button is-outline">戻る</button><% end %>

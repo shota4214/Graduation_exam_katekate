@@ -1,25 +1,32 @@
-<h2>ユーザー情報編集〜自己紹介〜 </h2>
-
 <%= form_with(model: @user, local: true, url: edit_step3_user_path, method: :post, html: { class: 'first-main_box' }) do |f| %>
-
-  <% if @user.image? %>
-  <div class="field">
-    <%= f.label :image %>確認<br />
-    <%= image_tag(@user.image.url) if @user.image && @user.image.url %>
-    <%= f.hidden_field :image_cache %>
-  </div>
+<p class=" has-text-centered has-background-success is-size-3">ユーザー情報編集〜自己紹介〜</p>
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-10-mobile is-8-desktop">
+          <form action="" class="box">
+            <% if @user.image? %>
+            <div class="field">
+              <%= f.label :image %>画像確認<br />
+              <%= image_tag(@user.image.url) if @user.image && @user.image.url %>
+              <%= f.hidden_field :image_cache %>
+            </div>
+            <% end %>
+            <div class="field is-info">
+              <%= f.label :introduction %><br />
+              <%= f.text_area :introduction, placeholder: '自己紹介を記入してください', class: "textarea is-info" %>
+            </div>
+            <div class="actions">
+              <%= f.submit "次へ", class: "button is-primary" %>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   <% end %>
-  
-  <div class="field">
-    <%= f.label :introduction %><br />
-    <%= f.text_area :introduction, size: "30x5", placeholder: '自己紹介を記入してください' %>
-  </div>
-    <div class="actions">
-    <%= f.submit "次へ" %>
-  </div>
-<% end %>
+<br>
 <%#= link_to "戻るjava", "javascript:history.back();" %>
 
 <%= form_with(model: @user, local: true, url: edit_step1_user_path, method: :get) do |f| %>
-  <%= f.submit "戻る", name: "back" %>
+  <%= f.submit "戻る", name: "back", class: "button is-outline" %>
 <% end %>
