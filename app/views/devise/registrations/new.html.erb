@@ -14,6 +14,8 @@
               <label for="" class="label"><%= f.label :email %></label>
                 <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'katekate@email.com' %>
             </div>
+<%
+=begin%>
             <div class="field">
               <label for="" class="label"><%= f.label :birthday %></label>
                 <%= f.date_select :birthday, use_month_numbers: true, start_year: 1930, end_year: (Time.now.year), default: Date.new(2000, 1 , 1), autofocus: true, autocomplete: "birthday" %>
@@ -26,6 +28,8 @@
               <label for="" class="label"><%= f.label :prefectures %></label>
                 <%= f.select :prefectures, User.prefectures.keys, {}, autofocus: true %>
             </div>
+<%
+=end%>
             <div class="field">
               <label for="" class="label"><%= f.label :password %>
               <% if @minimum_password_length %>
