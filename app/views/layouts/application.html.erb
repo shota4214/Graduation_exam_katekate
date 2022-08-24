@@ -111,7 +111,7 @@
               <% end %>
               <li><%= link_to articles_path do %><i class="fa-solid fa-house"></i>トップページ</li><% end %>
               <li><%= link_to rank_articles_path do %><i class="fa-solid fa-crown fa-lg"></i>ランキング</li><% end %>
-              <li><%= link_to new_article_path do %><i class="fa-solid fa-square-pen fa-lg"></i>記事投稿</li><% end %>
+              <li><%= link_to new_article_path, class: "article-new" do %><i class="fa-solid fa-square-pen fa-lg"></i>記事投稿</li><% end %>
             <% else %>
               <li><%= link_to articles_path do %><i class="fa-solid fa-house"></i>トップページ</li><% end %>
               <li><%= link_to rank_articles_path do %><i class="fa-solid fa-crown fa-lg"></i>ランキング</li><% end %>

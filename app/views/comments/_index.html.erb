@@ -8,8 +8,8 @@
           <td><%= comment.content %></td>
           <% if comment.user == current_user %>
           <td>
-          <%= link_to "編集", edit_article_comment_path(article, comment), remote: true %> |
-          <%= link_to "削除", article_comment_path(comment.article_id, comment.id), method: :delete, remote: true, data: { confirm: "本当に削除しますか?" } %>
+          <%= link_to edit_article_comment_path(article, comment), remote: true do %><button class="button is-small is-warning">編集</button><% end %> |
+          <%= link_to article_comment_path(comment.article_id, comment.id), method: :delete, remote: true, data: { confirm: "本当に削除しますか?" } do %><button class="button is-small is-danger">削除</button><% end %>
           </td>
           <% end %>
         </tr>

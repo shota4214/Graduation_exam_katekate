@@ -1,21 +1,46 @@
-<h3>以下の内容で、投稿します</h3>
-
 <%= form_with(model: @article, local: true, url: articles_path ) do |f| %>
-  <%= f.hidden_field :type %>
-  <%= f.hidden_field :image %>
-  <%= f.hidden_field :image_cache %>
-  <%= f.hidden_field :title %>
-  <%= f.hidden_field :content %>
-
-  <p>記事種類：<%= @article.type_i18n %></p>
-  <p>写真：<%= image_tag(@article.image.url) if @article.image && @article.image.url %></p>
-  <p>タイトル:<%= @article.title %></p>
-  <p>本文:<%= @article.content %></p>
-
-  <% if params[:draft] %>
-    <%= f.submit "下書き保存する", name: "draft" %>
-  <% else %>
-    <%= f.submit "登録する" %>
-  <% end %>
-  <%= f.submit "戻る", name: "back" %>
+  <p class=" has-text-centered has-background-success is-size-3">以下の内容で、投稿します</p>
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-5-tablet is-8-desktop">
+          <form action="" class="box">
+            <div class="field">
+              <label for="" class="label"><%= f.label :type %></label>
+              <p class="is-size-5 has-text-centered"><%= @article.type_i18n %></p>
+              <%= f.hidden_field :type %>
+            </div>
+            <div class="field">
+              <label for="" class="label"><%= f.label :image %></label>
+              <% if @article.image? %>
+                <div class="level-item"><%= image_tag(@article.image.url) if @article.image && @article.image.url %></div>
+              <% else %>
+                <p class="is-size-5 has-text-centered">※画像の添付はありません</p>
+              <% end %>
+                <%= f.hidden_field :image_cache %>
+            </div>
+            <div class="field">
+              <label for="" class="label"><%= f.label :title %></label>
+                <p class="is-size-5 has-text-centered"><%= @article.title %></p>
+                <%= f.hidden_field :title %>
+            </div>
+            <div class="field">
+              <label for="" class="label"><%= f.label :content %></label>
+                <p class="is-size-5 has-text-centered"><%= @article.content %></p>
+                <%= f.hidden_field :content %>
+            </div>
+            <div class="field">
+              <% if params[:draft] %>
+                <%= f.submit "下書き保存", name: "draft", class: "button is-danger" %>
+              <% else %>
+                <%= f.submit "投稿する", class: "button is-primary" %>
+              <% end %>
+              <br>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <%= f.submit "戻る", name: "back", class: "button is-outline" %>
+  </div>
 <% end %>
