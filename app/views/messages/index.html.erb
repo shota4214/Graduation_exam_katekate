@@ -1,7 +1,7 @@
-<h2><%= @users.find(@conversation.sender_id).name %>さんと<%= @users.find(@conversation.recipient_id).name %>さんのメッセージ</h2>
-
+<p class=" has-text-centered has-background-success is-size-4"><%= @users.find(@conversation.sender_id).name %>さんと<%= @users.find(@conversation.recipient_id).name %>さんのメッセージ</p>
+<br>
 <% if @over_ten %>
-  <%= link_to '以前のメッセージ', '?m=all' %>
+  <%= link_to '?m=all' do %><button class="button is-light">以前のメッセージを表示</button><% end %>
 <% end %>
 
 <div class="ui segment">
@@ -15,7 +15,7 @@
               <i class="right triangle icon"></i>
               <%= message.body %> /
               <% if message.user == current_user %>
-                <%= message.read ? '既読' : '未読' %>
+                <small><%= message.read ? '既読' : '未読' %></small>
               <% end %>
             </div>
           </div>
@@ -26,12 +26,18 @@
   <% end %>
 </div>
 
-<%= form_with(model: [@conversation, @message]) do |f| %>
-  <div class="field">
-    <%= f.text_area :body, class: "form-control" %>
+<div class="card">
+  <div class="card-content">
+    <div class="content">
+      <%= form_with(model: [@conversation, @message]) do |f| %>
+        <div class="field">
+          <%= f.text_area :body, class: "form-control textarea is-info", placeholder: "メッセージを入力" %>
+        </div>
+          <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
+        <div>
+          <%= f.submit "メッセージを送る", class: "button is-info" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-    <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
-  <div>
-    <%= f.submit "メッセージを送る" %>
-  </div>
-<% end %>
+</div>
