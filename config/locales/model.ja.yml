@@ -8,7 +8,7 @@ ja:
         title: タイトル
         content: 内容
         image: 画像
-        type: 種類
+        type: 記事or質問
         draft: 下書き
       user:
         name: 名前
@@ -29,3 +29,5 @@ ja:
         facebook_url: Facebook
         youtube_url: YouTube
         website_url: Website
+      comment:
+        content: コメント入力欄

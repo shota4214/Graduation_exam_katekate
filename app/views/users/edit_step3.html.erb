@@ -1,43 +1,44 @@
-<h2>ユーザー情報編集〜SNS情報〜 </h2>
-
 <%= form_with(model: @user, local: true, url: edit_step4_user_path, method: :post, html: { class: 'first-main_box' }) do |f| %>
-
-  <div class="field">
-    <%= f.label :Twitter %><br />
-    <%= f.text_field :twitter_url, placeholder: 'https://twitter.com/~' %>
-  </div>
-
-  <div class="field">
-    <%= f.label :Instagram %><br />
-    <%= f.text_field :instagram_url, placeholder: 'https://instagram.com/~' %>
-  </div>
-
-  <div class="field">
-    <%= f.label :Tiktok %><br />
-    <%= f.text_field :tiktok_url, placeholder: 'https://tiktok.com/~' %>
-  </div>
-
-  <div class="field">
-    <%= f.label :Facebook %><br />
-    <%= f.text_field :facebook_url, placeholder: 'https://facebook.com/~' %>
-  </div>
-
-  <div class="field">
-    <%= f.label :YouTube %><br />
-    <%= f.text_field :youtube_url, placeholder: 'https://youtube.com/~' %>
-  </div>
-
-  <div class="field">
-    <%= f.label :Website %><br />
-    <%= f.text_field :website_url, placeholder: 'https://website.com/~' %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "次へ" %>
-  </div>
-<% end %>
+<p class=" has-text-centered has-background-success is-size-3">ユーザー情報編集〜SNS情報〜</p>
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-5-tablet is-5-desktop">
+          <form action="" class="box">
+            <div class="field">
+              <label for="" class="label"><%= f.label :Twitter %></label>
+                <%= f.text_field :twitter_url, placeholder: 'https://twitter.com/~', class: "input is-primary" %>
+            </div>
+            <div class="field">
+              <label for="" class="label"><%= f.label :Instagram %></label>
+                <%= f.text_field :instagram_url, placeholder: 'https://instagram.com/~', class: "input is-success" %>
+            </div>
+            <div class="field">
+              <label for="" class="label"><%= f.label :Tiktok %></label>
+                <%= f.text_field :tiktok_url, placeholder: 'https://tiktok.com/~', class: "input is-info" %>
+            </div>
+            <div class="field">
+              <label for="" class="label"><%= f.label :Facebook %></label>
+                <%= f.text_field :facebook_url, placeholder: 'https://facebook.com/~', class: "input is-link" %>
+            </div>
+            <div class="field">
+              <label for="" class="label"><%= f.label :YouTube %></label>
+                <%= f.text_field :youtube_url, placeholder: 'https://youtube.com/~', class: "input is-danger" %>
+            </div>
+            <div class="field">
+              <label for="" class="label"><%= f.label :Website %></label>
+                <%= f.text_field :website_url, placeholder: 'https://website.com/~', class: "input is-warning" %>
+            </div>
+            <div class="field">
+              <%= f.submit "次へ", class: "button is-primary" %>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<br>
 <%#= link_to "戻るjava", "javascript:history.back();" %>
-
 <%= form_with(model: @user, local: true, url: edit_step2_user_path, method: :post) do |f| %>
-  <%= f.submit "戻る", name: "back" %>
+  <%= f.submit "戻る", name: "back", class: "button is-outline" %>
 <% end %>

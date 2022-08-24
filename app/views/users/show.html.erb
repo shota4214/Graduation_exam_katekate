@@ -1,122 +1,181 @@
-<h1><%= @user.name %>のページ</h1>
+<p class=" has-text-centered has-background-success is-size-3"><%= @user.name %>のページ</p>
 
-<% if @user.image? %>
-  <%= image_tag @user.image.url %>
-<% else %>
-  <%= image_tag (asset_path'no_image.png') %>
-<% end %>
-<h3><%= @user.name %></h3>
-<p><%= @user.prefectures %></p>
-<p><%= @user_age %>代</p>
-<p><%= @user.sex_i18n %></p>
-<p>自己紹介<%= @user.introduction %></p>
-
-<div class="sns-link">
-  <ul class="profile-links">
-    <% if @user.twitter_url.present? %>
-      <li class="profile-link">
-        <%= link_to @user.twitter_url, target: :_blank do %>
-          <i class="fab fa-twitter fa-2x"></i>
-        <% end %>
-      </li>
-    <% end %>
-    <% if @user.instagram_url.present? %>
-      <li class="profile-link">
-        <%= link_to @user.instagram_url, target: :_blank do %>
-          <i class="fab fa-instagram fa-2x"></i>
-        <% end %>
-      </li>
-    <% end %>
-    <% if @user.tiktok_url.present? %>
-      <li class="profile-link">
-        <%= link_to @user.tiktok_url, target: :_blank do %>
-          <i class="fab fa-tiktok fa-2x"></i>
-        <% end %>
-      </li>
-    <% end %>
-    <% if @user.facebook_url.present? %>
-      <li class="profile-link">
-        <%= link_to @user.facebook_url, target: :_blank do %>
-          <i class="fab fa-facebook fa-2x"></i>
-        <% end %>
-      </li>
-    <% end %>
-    <% if @user.youtube_url.present? %>
-      <li class="profile-link">
-        <%= link_to @user.youtube_url, target: :_blank do %>
-          <i class="fab fa-youtube fa-2x"></i>
-        <% end %>
-      </li>
-    <% end %>
-    <% if @user.website_url.present? %>
-      <li class="profile-link">
-        <%= link_to @user.website_url, target: :_blank do %>
-          <i class="fa-regular fa-window-maximize fa-2x"></i>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-</div>
-
-<p>
-  <i class="fa-solid fa-a"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-heart fa-lg"></i>
-  <%= @like_count_all %>
-</p>
-<p>
-  <i class="fa-solid fa-a"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-star fa-lg"></i>
-  <%= @impression_count_all %>
-</p>
-<p>
-  <i class="fa-solid fa-a"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-eye fa-lg"></i>
-  <%= @impression_count_all %>
-</p>
-
-<% if user_signed_in?%>
-  <% if @user.id == current_user.id %>
-    <%#= link_to "編集", edit_user_registration_path(@user) %>
-    <%= link_to "プロフィール編集", edit_step1_user_path(@user) %> |
-    <%= link_to "お気に入り一覧", favorites_path(@user) %> |
-    <%= link_to 'フォロー・フォロワー', follow_index_user_path(@user) %><br>
-
-<br>
-<strong class="is-size-4">投稿記事一覧</strong>
-<% @articles.each do |article| %>
-<article class="box media">
-  <figure class="media-left">
-    <p class="image is-50x50">
-      <% if article.image? %>
-        <%= link_to article_path(article.id) do %><%= image_tag article.image.url %><% end %><br>
+<div class="columns">
+  <div class="column is-narrow">
+    <div class="box" style="width: 200px;">
+      <% if @user.image? %>
+        <%= image_tag @user.image.url %>
       <% else %>
-        <%= link_to article_path(article.id) do %><%= image_tag (asset_path"no_image.png") %><% end %><br>
+        <%= image_tag (asset_path'no_image.png') %>
       <% end %>
-    </p>
-  </figure>
-  <div class="media-content">
-    <div class="content">
-      <h4><%= article.type_i18n %>【<%= link_to article_path(article.id) do %><%= article.title %><% end %>】</h4><br>
-      <h6>投稿者：<%= link_to article.user.name, user_path(article.user_id) %></h6>
-        <%= link_to article_path(article.id) do %><%= article.content %><% end %><br>
-        <small><a><i class="fa-solid fa-eye"></i><%= article.impressions_count %></a> ・ <a><i class="fa-solid fa-heart"></i><%= article.likes.count %></a> ・ <a><i class="fa-solid fa-star"></i><%= article.favorites.count %></a></small>
-      </p>
+      <p class="title is-5"><%= @user.name %></p>
+      <p class="subtitle is-10"><%= @user.sex_i18n %>|<%= @user_age %>代|<%= @user.prefectures %></p>
     </div>
   </div>
-</article>
-    <% end %>
+  <div class="column">
+    <div class="box">
+      <div class="sns-link">
+        <div class="profile-links level">
+          <% if @user.twitter_url.present? %>
+            <a class="profile-link">
+              <%= link_to @user.twitter_url, target: :_blank do %>
+                <i class="fab fa-twitter fa-2x"></i>
+              <% end %>
+            </a>
+          <% else %>
+            <a class="profile-link">
+                <i style="color:gray" class="fab fa-twitter fa-2x"></i>
+            </a>
+          <% end %>
+          <% if @user.instagram_url.present? %>
+            <a class="profile-link">
+              <%= link_to @user.instagram_url, target: :_blank do %>
+                <i class="fab fa-instagram fa-2x"></i>
+              <% end %>
+            </a>
+          <% else %>
+            <a class="profile-link">
+              <i style="color:gray" class="fab fa-instagram fa-2x"></i>
+            </a>
+          <% end %>
+          <% if @user.tiktok_url.present? %>
+            <a class="profile-link">
+              <%= link_to @user.tiktok_url, target: :_blank do %>
+                <i class="fab fa-tiktok fa-2x"></i>
+              <% end %>
+            </a>
+          <% else %>
+            <a class="profile-link">
+              <i style="color:gray" class="fab fa-tiktok fa-2x"></i>
+            </a>
+          <% end %>
+          <% if @user.facebook_url.present? %>
+            <a class="profile-link">
+              <%= link_to @user.facebook_url, target: :_blank do %>
+                <i class="fab fa-facebook fa-2x"></i>
+              <% end %>
+            </a>
+          <% else %>
+            <a class="profile-link">
+              <i style="color:gray" class="fab fa-facebook fa-2x"></i>
+            </a>
+          <% end %>
+          <% if @user.youtube_url.present? %>
+            <a class="profile-link">
+              <%= link_to @user.youtube_url, target: :_blank do %>
+                <i class="fab fa-youtube fa-2x"></i>
+              <% end %>
+            </a>
+          <% else %>
+            <a class="profile-link">
+              <i style="color:gray" class="fab fa-youtube fa-2x"></i>
+            </a>
+          <% end %>
+          <% if @user.website_url.present? %>
+            <a class="profile-link">
+              <%= link_to @user.website_url, target: :_blank do %>
+                <i class="fa-regular fa-window-maximize fa-2x"></i>
+              <% end %>
+            </a>
+          <% else %>
+            <a class="profile-link">
+              <i style="color:gray" class="fa-regular fa-window-maximize fa-2x"></i>
+            </a>
+          <% end %>
+        </div>
+      </div>
+      <br>
+      <div class="level">
+        <p>
+          <i class="fa-solid fa-a"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-heart fa-lg"></i>
+          <%= @like_count_all %>
+        </p>
+        <p>
+          <i class="fa-solid fa-a"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-star fa-lg"></i>
+          <%= @impression_count_all %>
+        </p>
+        <p>
+          <i class="fa-solid fa-a"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-eye fa-lg"></i>
+          <%= @impression_count_all %>
+        </p>
+      </div>
+      <br>
+      <div class="level">
+        <p><i class="fa-solid fa-handshake"></i>フォロー<%= @following_users.count %>人</p>
+        <p><i class="fa-solid fa-handshake"></i>フォロワー<%= @follower_users.count %>人</p>
+      </div>
+      <br>
+      <div class="level">
+        <% if user_signed_in? %>
+          <% unless @user.id == current_user.id %>
+            <p><%= render 'follow_form', user: @user %></p>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-content">
+    <div class="content">
+    自己紹介
+    <p><%= @user.introduction %></p>
+    </div>
+  </div>
+</div>
+<br>
 
+  <%# リンクボタン %>
+<% if user_signed_in?%>
+  <% if @user.id == current_user.id %>
+    <div class="field is-grouped">
+      <%# <p class="control"> deviseを使った編集へのパス%>
+        <%# <%= link_to edit_user_registration_path(@user) do %><%#<button class="button is-link">deviseプロフ編集</button><% end %>
+      <%# </p> %>
+      <p class="control">
+        <%= link_to edit_step1_user_path(@user) do %><button class="button is-success">プロフィール編集</button><% end %>
+      </p>
+      <p class="control">
+        <%= link_to favorites_path(@user) do %><button class="button is-warning">お気に入り記事</button><% end %>
+      </p>
+      <p class="control">
+        <%= link_to follow_index_user_path(@user) do %><button class="button is-info">フォロー・フォロワー</button><% end %>
+      </p>
+    </div>
+
+    <%# 投稿記事一覧 %>
+    <br>
+    <p class=" has-text-centered is-size-3">投稿記事一覧</p>
     <% @articles.each do |article| %>
-      <tr>
-        <td><%= article.type_i18n %></td>
-        <td><%= article.title %></td>
-        <td><%= article.content %></td>
-        <td><%= "下書き" if article.draft? %></td>
-        <td><%= link_to '詳細', article_path(article.id) %></td>
-        <td><%= link_to "編集", edit_article_path(article.id) %></td>
-        <td><%= link_to '削除', article_path(article.id), method: :delete, data: { confirm: "本当に削除しても良いですか？" } %></td>
-      </tr>
+    <div class="card">
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48">
+              <% if article.image? %>
+                <%= link_to article_path(article.id) do %><%= image_tag article.image.url %><% end %><br>
+              <% else %>
+                <%= link_to article_path(article.id) do %><%= image_tag (asset_path"no_image.png") %><% end %><br>
+              <% end %>
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-4"><%= article.type_i18n %>【<%= article.title %>】<%= "《下書き保存中》" if article.draft? %></p>
+          </div>
+        </div>
+        <div class="content">
+          <p><%= article.content %></p>
+          <br>
+          <small><a><i class="fa-solid fa-eye"></i><%= article.impressions_count %></a> ・ <a><i class="fa-solid fa-heart"></i><%= article.likes.count %></a> ・ <a><i class="fa-solid fa-star"></i><%= article.favorites.count %></a></small>
+        </div>
+      </div>
+      <footer class="card-footer">
+        <%= link_to article_path(article.id), class: "card-footer-item" do %><i class="fa-solid fa-book-open-reader fa-lg"></i>詳細<% end %>
+        <%= link_to edit_article_path(article.id),class: "card-footer-item" do %><i class="fa-solid fa-pen-to-square fa-lg"></i>編集</a><% end %>
+        <%= link_to article_path(article.id), method: :delete, data: { confirm: "本当に削除しても良いですか？" }, class: "card-footer-item" do %><i class="fa-solid fa-trash-can fa-lg"></i>削除</a><% end %>
+      </footer>
+    </div><br>
     <% end %>
-    <% else %>
-      <%= render 'follow_form', user: @user %>
   <% end %>
-  </table>
   <%= paginate @articles %>
 <% end %>

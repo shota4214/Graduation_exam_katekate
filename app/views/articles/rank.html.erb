@@ -1,63 +1,66 @@
-<h1>ランキング</h1>
-<h2><i class="fa-solid fa-heart fa-lg"></i>数ランキング</h2>
-<table>
-  <tr>
-    <th>総合順位</th>
-    <th><i class="fa-solid fa-heart fa-lg"></i></th>
-    <th>記事種類</th>
-    <th>投稿者</th>
-    <th>タイトル</th>
-  </tr>
-  <% @article_like_ranks.each.with_index(1) do |article, i| %>
-    <tr>
-      <td>第<%= i %>位</td>
-      <td><%= article.likes.count %>
-      <td><%= article.type_i18n %></td>
-      <td><%= link_to article.user.name, user_path(article.user_id) %></td>
-      <td><%= article.title %></td>
-      <td><%= link_to '詳細', article_path(article.id) %></td>
+<p class=" has-text-centered has-background-success is-size-3"><i class="fa-solid fa-crown"></i>ランキング</p>
+<br>
+<div class="is-size-4"><i class="fa-solid fa-heart fa-lg"></i>数ランキング</div>
+<div class="container">
+  <table class="table is-bordered is-striped">
+    <tr class="th is-selected">
+      <th>総合順位</th>
+      <th><i class="fa-solid fa-heart fa-lg"></i></th>
+      <th>種類</th>
+      <th>投稿者</th>
+      <th>タイトル</th>
     </tr>
-    <% break if i == 10 %>
-  <% end %>
-</table>
-
-<h2><i class="fa-solid fa-star fa-lg"></i>数ランキング</h2>
-<table>
-  <tr>
-    <th>順位</th>
-    <th><i class="fa-solid fa-star fa-lg"></i></th>
-    <th>記事種類</th>
-    <th>投稿者</th>
-    <th>タイトル</th>
-  </tr>
-
-  <% @article_favorite_ranks.each.with_index(1) do |article, i| %>
-    <tr>
-      <td>第<%= i %>位</td>
-      <td><%= article.favorites.count %>
-      <td><%= article.type_i18n %></td>
-      <td><%= link_to article.user.name, user_path(article.user_id) %></td>
-      <td><%= article.title %></td>
-      <td><%= link_to '詳細', article_path(article.id) %></td>
+    <% @article_like_ranks.each.with_index(1) do |article, i| %>
+      <tr>
+        <td>第<%= i %>位</td>
+        <td><%= article.likes.count %>
+        <td><%= article.type_i18n %></td>
+        <td><%= link_to article.user.name, user_path(article.user_id) %></td>
+        <td><%= link_to article.title, article_path(article.id) %></td>
+      </tr>
+      <% break if i == 10 %>
+    <% end %>    
+  </table>
+</div>
+<br>
+<div class="is-size-4"><i class="fa-solid fa-star fa-lg"></i>数ランキング</div>
+<div class="container">
+  <table class="table is-bordered is-striped">
+    <tr class="th is-selected">
+      <th>順位</th>
+      <th><i class="fa-solid fa-star fa-lg"></i></th>
+      <th>記事種類</th>
+      <th>投稿者</th>
+      <th>タイトル</th>
     </tr>
-    <% break if i == 10 %>
-  <% end %>
-</table>
-
-<h2>投稿数ランキング</h2>
-<table>
-  <tr>
-    <th>順位</th>
-    <th>投稿数</th>
-    <th>投稿者</th>
-  </tr>
-
-  <% @user_article_ranks.each.with_index(1) do |user, i| %>
-    <tr>
-      <td>第<%= i %>位</td>
-      <td><%= user.articles.count %>
-      <td><%= link_to user.name, user_path(user.id) %></td>
+    <% @article_favorite_ranks.each.with_index(1) do |article, i| %>
+      <tr>
+        <td>第<%= i %>位</td>
+        <td><%= article.favorites.count %>
+        <td><%= article.type_i18n %></td>
+        <td><%= link_to article.user.name, user_path(article.user_id) %></td>
+        <td><%= link_to article.title, article_path(article.id) %></td>
+      </tr>
+      <% break if i == 10 %>
+    <% end %>
+  </table>
+</div>
+<br>
+<div class="is-size-4"><i class="fa-solid fa-square-pen fa-lg"></i>記事投稿数ランキング</div>
+<div class="container">
+  <table class="table is-bordered is-striped">
+    <tr class="th is-selected">
+      <th>順位</th>
+      <th>投稿数</th>
+      <th>投稿者</th>
     </tr>
-    <% break if i == 10 %>
-  <% end %>
-</table>
+    <% @user_article_ranks.each.with_index(1) do |user, i| %>
+      <tr>
+        <td>第<%= i %>位</td>
+        <td><%= user.articles.count %>
+        <td><%= link_to user.name, user_path(user.id) %></td>
+      </tr>
+      <% break if i == 10 %>
+    <% end %>
+  </table>
+</div>

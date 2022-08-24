@@ -1,27 +1,33 @@
-<h2>ユーザー情報編集〜パスワード入力〜 </h2>
-
 <%= form_with(model: @user, local: true, url: user_path(@user), method: :put, html: { class: 'first-main_box' }) do |f| %>
-
-  <div class="field">
-    <%= f.label :password %> <br><i>(パスワードを入力して更新してください)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password", placeholder: 'パスワードを入力' %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br><i>(パスワードをもう一度入力してください)<br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'パスワードを再入力' %>
-  </div>
-
-    <div class="actions">
-    <%= f.submit "更新" %>
-  </div>
-<% end %>
+<p class=" has-text-centered has-background-success is-size-3">ユーザー情報編集〜パスワード入力〜</p>
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-10-mobile is-8-desktop">
+          <form action="" class="box">
+            <div class="field">
+              <label for="" class="label"><%= f.label :password %> <br><i>(パスワードを入力して更新してください)</i></label>
+              <%= f.password_field :password, autocomplete: "new-password", placeholder: 'パスワードを入力', class: "input is-info" %>
+              <% if @minimum_password_length %>
+                <br />
+                <em><%= @minimum_password_length %> characters minimum</em>
+              <% end %>
+            </div>
+            <div class="field">
+              <label for="" class="label"><%= f.label :password_confirmation %><br><i>(パスワードをもう一度入力してください)<br /></label>
+                <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'パスワードを再入力', class: "input is-info" %>
+            </div>
+            <div class="field">
+              <%= f.submit "更新", class: "button is-primary" %>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<br>
 <%#= link_to "戻るjava", "javascript:history.back();" %>
 
 <%= form_with(model: @user, local: true, url: edit_step3_user_path, method: :post) do |f| %>
-  <%= f.submit "戻る", name: "back" %>
+  <%= f.submit "戻る", name: "back", class: "button is-outline" %>
 <% end %>

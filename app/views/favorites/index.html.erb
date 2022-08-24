@@ -1,22 +1,26 @@
-<h1>お気に入り記事・質問一覧</h1>
-
-<table>
-  <tr>
-    <th>記事種類</th>
-    <th>投稿者</th>
-    <th>写真</th>
-    <th>タイトル</th>
-    <th>内容</th>
-  </tr>
-
+<p class=" has-text-centered has-background-success is-size-3">【お気に入り記事・質問一覧】</p>
+<br>
 <% @favorites.each do |favorite| %>
-  <tr>
-    <td><%= favorite.type %></td>
-    <td><%= favorite.user.name %></td>
-    <td><%= image_tag(favorite.image.url) if favorite.image && favorite.image.url %></td>
-    <td><%= favorite.title %></td>
-    <td><%= favorite.content %></td>
-    <td><%= link_to '詳細', article_path(favorite.id) %></td>
-  </tr>
-<% end %>
-</table>
+<article class="box media">
+  <figure class="media-left">
+    <p class="image is-50x50">
+      <% if favorite.image? %>
+        <%= link_to article_path(favorite.id) do %><%= image_tag favorite.image.url %><% end %><br>
+      <% else %>
+        <%= link_to article_path(favorite.id) do %><%= image_tag (asset_path"no_image.png") %><% end %><br>
+      <% end %>
+    </p>
+  </figure>
+  <div class="media-content">
+    <div class="content">
+      <h4><%= favorite.type_i18n %>【<%= link_to article_path(favorite.id) do %><%= favorite.title %><% end %>】</h4><br>
+      <h6>投稿者：<%= link_to favorite.user.name, user_path(favorite.user_id) %></h6>
+        <%= link_to article_path(favorite.id) do %><%= favorite.content %><% end %><br>
+        <small><a><i class="fa-solid fa-eye"></i><%= favorite.impressions_count %></a> ・ <a><i class="fa-solid fa-heart"></i><%= favorite.likes.count %></a> ・ <a><i class="fa-solid fa-star"></i><%= favorite.favorites.count %></a></small>
+      </p>
+    </div>
+  </div>
+</article>
+    <% end %>
+
+<%= paginate @favorites %>

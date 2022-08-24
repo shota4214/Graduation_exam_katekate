@@ -1,4 +1,5 @@
 <%= form_with(model: @article, local: true, url: choose_new_or_edit ) do |f| %>
+  <p class=" has-text-centered has-background-success is-size-3">記事・質問 新規作成</p>
   <% if @article.errors.any? %>
     <div id="error_explanation">
       <h2><%= @article.errors.count %>件のエラーがあります。</h2>
@@ -10,27 +11,36 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="article_type">
-    <%= f.label :type %>
-    <%= f.select :type, Article.types_i18n.invert %>
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-5-tablet is-8-desktop">
+          <form action="" class="box">
+            <div class="field">
+              <label for="" class="label"><%= f.label :type %></label>
+                <%= f.select :type, Article.types_i18n.invert %>
+            </div>
+            <div class="field">
+              <label for="" class="label"><%= f.label :image %></label>
+                <%= image_tag(@article.image.url) if @article.image && @article.image.url %>
+                <%= f.file_field :image %>
+                <%= f.hidden_field :image_cache %>
+            </div>
+            <div class="field">
+              <label for="" class="label"><%= f.label :title %></label>
+                <%= f.text_field :title, placeholder: 'タイトルを入力', class: "input is-info" %>
+            </div>
+            <div class="field">
+              <label for="" class="label"><%= f.label :content %></label>
+                <%= f.text_area :content, size: '30x5', placeholder: '記事の内容を入力', class: "textarea is-info" %>
+            </div>
+            <div class="field">
+              <%= f.submit '記事投稿', class: "button is-primary" %>
+              <%= f.submit '下書き保存', name: 'draft', class: "button is-danger" %>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="article_image">
-    <%= f.label :image %>
-    <%= image_tag(@article.image.url) if @article.image && @article.image.url %>
-    <%= f.file_field :image %>
-    <%= f.hidden_field :image_cache %>
-  </div>
-  <div class="article_title">
-    <%= f.label :title %>
-    <%= f.text_field :title, placeholder: 'タイトルを入力' %>
-  </div>
-  <div class="article_content">
-    <%= f.label :content %>
-    <%= f.text_area :content, size: '30x5', placeholder: '記事の内容を入力' %>
-  </div>
-
-  <%= f.submit '記事投稿' %>
-  <%= f.submit '下書き保存', name: 'draft' %>
 <% end %>
-<%= link_to 'ブログ一覧画面に戻る', articles_path %>
