@@ -4,11 +4,11 @@ class UsersController < ApplicationController
   before_action :following_follower_users, only: %i[follow_index show]
 
   def index
-    @users = current_user.followings && current_user.followers if user_signed_in?
+    @users = current_user.followings & current_user.followers
   end
 
   def follow_index
-    @users = current_user.followings && current_user.followers if user_signed_in?
+    @users = current_user.followings && current_user.followers
   end
 
   def show
