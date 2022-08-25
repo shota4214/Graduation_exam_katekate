@@ -29,8 +29,9 @@ end
 
 # //article create//
 User.all.each do |user|
+  image = File.open("./public/seed_article_images/article#{user.id}.png")
   user.articles.create!(type: 0, title: "記事タイトル", content: "#{user.name}が書いた記事です")
-  user.articles.create!(type: 1, title: "質問タイトル", content: "#{user.name}が書いた質問です")
+  user.articles.create!(type: 1, title: "質問タイトル", content: "#{user.name}が書いた質問です", image: image)
 end
 
 # //favorite create//
