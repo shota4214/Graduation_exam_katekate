@@ -109,4 +109,15 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+  config.action_mailer.default_url_options = { host: 'http://www.katekate.blog' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_caching = true
+  ActionMailer::Base.smtp_settings = {
+    :user_name => ENV['AWS_ACCESS_KEY_ID'],
+    :password => ENV['AWS_SECRET_ACCESS_KEY'],
+    :domain => 'katekate.com',
+    :address => 'email-smtp.ap-northeast-1.amazonaws.com',
+    :port => 587,
+    :authentication => :login,
+  }
 end

@@ -26,6 +26,7 @@ gem "bulma-rails"
 gem 'fog-aws'
 gem 'dotenv-rails'
 gem 'unicorn'
+gem 'aws-sdk-rails', '~> 3.6', '>= 3.6.1'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
