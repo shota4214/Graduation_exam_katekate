@@ -33,4 +33,6 @@ Rails.application.routes.draw do
   resources :conversations do
     resources :messages
   end
+  get '*not_found', to: 'application#routing_error'
+  post '*not_found', to: 'application#routing_error'
 end
