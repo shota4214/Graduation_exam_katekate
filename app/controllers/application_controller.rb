@@ -8,8 +8,8 @@ class ApplicationController < ActionController::Base
     @search_articles = @search.result.order("created_at DESC").page(params[:page]).per(20)
   end
 
-  unless Rails.env.production?
-  # unless Rails.env.development?
+  # unless Rails.env.production? #ローカル環境で使用の場合はこちらを使用
+  unless Rails.env.development?
     rescue_from Exception, with: :_render_500
     rescue_from ActiveRecord::RecordNotFound,   with: :_render_404
     rescue_from ActionController::RoutingError, with: :_render_404
