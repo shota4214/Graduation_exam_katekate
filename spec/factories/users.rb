@@ -24,4 +24,16 @@ FactoryBot.define do
     password { "12345678" }
     password_confirmation { "12345678" }
   end
+  factory :sender_user, class: User do
+    name { "sender" }
+    email { "sender@test.com" }
+    password { "12345678" }
+    password_confirmation { "12345678" }
+  end
+  factory :recipient_user, class: User do
+    name { "recipient" }
+    email { "recipient@test.com" }
+    password { "12345678" }
+    password_confirmation { "12345678" }
+  end
 end
