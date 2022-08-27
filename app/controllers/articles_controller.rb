@@ -23,7 +23,7 @@ class ArticlesController < ApplicationController
     elsif @article.save
       redirect_to articles_path, notice: "記事を作成しました"
     else
-    render :new
+      render :new
     end
   end
 
