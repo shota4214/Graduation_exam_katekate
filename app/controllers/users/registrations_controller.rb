@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  before_action :ensure_normal_user, only: %i[destroy]
-  before_action :ensure_admin_user, only: %i[destroy]
+  # before_action :ensure_normal_user, only: %i[destroy] ゲストユーザーを削除できないようにする
+  # before_action :ensure_admin_user, only: %i[destroy] ゲストadminユーザーを削除できないようにする
   # before_action :configure_sign_up_params, only: [:create]
 
   # GET /resource/sign_up
@@ -59,17 +59,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(:account_update, keys: [:attribute, :name, :email, :prefectures, :birthday, :sex, :image, :image_cache, :introduction, :password, :password_confirmation, :current_password, :twitter_url, :instagram_url, :tiktok_url, :facebook_url, :youtube_url, :website_url])
   end
 
-  def ensure_normal_user
-    if resource.email == 'guest@guest.com'
-      redirect_to root_path, alert: 'ゲストユーザーは削除できません'
-    end
-  end
+  # def ensure_normal_user ゲストユーザーを削除できないようにする
+  #   if resource.email == 'guest@guest.com'
+  #     redirect_to root_path, alert: 'ゲストユーザーは削除できません'
+  #   end
+  # end
 
-  def ensure_admin_user
-    if resource.email == 'admin_guest@guest.com'
-      redirect_to root_path, alert: 'ゲスト管理者は削除できません'
-    end
-  end
+  # def ensure_admin_user ゲストadminユーザーを削除できないようにする
+  #   if resource.email == 'admin_guest@guest.com'
+  #     redirect_to root_path, alert: 'ゲスト管理者は削除できません'
+  #   end
+  # end
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
