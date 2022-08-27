@@ -1,14 +1,27 @@
 <p class=" has-text-centered has-background-success is-size-3">記事・質問詳細ページ</p>
 <br>
+<article class="message is-info">
+  <div class="message-header">
+    <p>記事・質問について</p>
+    <%# <button class="delete" aria-label="delete"></button> %>
+  </div>
+  <div class="message-body">
+    良いと思った記事には<i class="fa-solid fa-heart"></i>をつけることができます。
+    また見たい、保存したいと思った記事には<i class="fa-solid fa-star"></i>をつけることができます。
+    ページ下部より記事にコメントをすることができます。
+    ユーザー名をクリックするとそのユーザーのページにアクセスでき、ユーザーをフォローすることができます。
+  </div>
+</article>
 <div class="columns">
   <div class="column is-narrow">
     <div class="box" style="width: 200px;">
       <% if @article.user.image? %>
-        <%= image_tag @article.user.image.url %>
+        <%= link_to user_path(@article.user) do %><%= image_tag @article.user.image.url %><% end %>
       <% else %>
-        <%= image_tag (asset_path'no_image.png') %>
+        <%= link_to user_path(@article.user) do %><%= image_tag (asset_path'no_image.png') %><% end %>
       <% end %>
-      <p class="title is-5"><%= @article.user.name %></p>
+      <%= link_to user_path(@article.user) do %><p class="title is-5"><%= @article.user.name %></p><% end %>
+      <br>
       <P>
         <i class="fa-solid fa-eye fa-lg"></i><i class="fa-solid fa-p"></i><i class="fa-solid fa-v"></i>
         <%= @article.impressions_count %>
