@@ -20,9 +20,13 @@
 <body>
   <!-- This file lives in public/500.html -->
   <div class="error">
-    <%= image_tag(asset_path"500.png") %>
     <%# <img src="/500.png"> %>
+    <%= image_tag(asset_path"500.png")%>
     <p>Internal Server Error</p>
+    <p>サーバーエラー</p>
+    <%= link_to "トップページへ" root_path %>
+    <%# <a href="/">トップページへ</a> %>
+
   </div>
 </body>
 </html>
