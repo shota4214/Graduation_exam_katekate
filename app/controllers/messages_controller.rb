@@ -5,7 +5,6 @@ class MessagesController < ApplicationController
   end
 
   def index
-    @users = User.all
     @messages = @conversation.messages
     if @messages.length > 10
       @over_ten = true
@@ -28,9 +27,9 @@ class MessagesController < ApplicationController
     @message = @conversation.messages.build(message_params)
     if @message.save
       ContactMailer.message_mail(@recipient_user, current_user).deliver
-      redirect_to conversation_messages_path(@conversation)
+      redirect_to conversation_messages_path(@conversation), notice: "メッセージを送信しました。"
     else
-      render 'index'
+      redirect_to conversation_messages_path(@conversation), notice: "メッセージを入力してください。"
     end
   end
 

@@ -35,21 +35,21 @@ User.all.each do |user|
 end
 
 # //favorite create//
-3.times do |n|
+5.times do |n|
   User.all.ids.each do |user_id|
     Favorite.create(user_id: user_id, article_id: rand(1..20))
   end
 end
 
 # //like create//
-3.times do |n|
+5.times do |n|
   User.all.ids.each do |user_id|
     Like.create(user_id: user_id, article_id: rand(1..20))
   end
 end
 
 # //comment create//
-3.times do |n|
+5.times do |n|
   User.all.each do |user|
     Comment.create(user_id: user.id, article_id: rand(1..20), content: "#{user.name}さんの記事にコメントさせていただきます")
   end
