@@ -20,10 +20,12 @@
 <body>
   <!-- This file lives in public/404.html -->
   <div class="error">
-    <img src="/404.png">
+    <%# <img src="/404.png"> %>
+    <%= image_tag(asset_path"404.png")%>
     <p>Not Found</p>
     <p>お探しのページは見つかりません。</p>
-    <a href="/">トップページへ</a>
+    <%= link_to "トップページへ" root_path %>
+    <%# <a href="/">トップページへ</a> %>
   </div>
 </body>
 </html>
