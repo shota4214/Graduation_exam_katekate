@@ -3,6 +3,13 @@ ja:
     models:
       article: 記事
       user: ユーザー
+      comment: コメント
+      conversation: メッセージルーム
+      favorite: お気に入り
+      impression: ページビュー
+      like: イイね
+      message: メッセージ
+      relationship: リレーションシップ
     attributes:
       article:
         title: タイトル
@@ -29,5 +36,66 @@ ja:
         facebook_url: Facebook
         youtube_url: YouTube
         website_url: Website
+      article:
+        title: タイトル
+        content: 記事内容
+        image: 画像
+        type: 記事種類
+        draft: 下書き
+        impressions_count: PV数
+        user_id: ユーザー
+        created_at: 作成日時
       comment:
+        user: ユーザー
+        article: 記事
         content: コメント入力欄
+        article_id: 記事ID
+        user_id: ユーザーID
+        created_at: 作成日時
+        updated_at: 更新日時
+      conversation:
+        sender: 送信者
+        recipient: 受信者
+        messages: 総メッセージ
+        sender_id: 送信者ID
+        recipient_id: 受信者ID
+        created_at: 作成日時
+        updated_at: 更新日時
+      favorite:
+        user: ユーザー
+        article: 記事
+        user_id: ユーザーID
+        article_id: 記事ID
+        created_at: 作成日時
+      impression:
+        impressionable_type: インプレッションタイプ
+        impressionable_id: インプレッションID
+        user_id: ユーザーID
+        controller_name: コントローラー名
+        action_name: アクション名
+        view_name: ビュー名
+        ip_address: ipアドレス
+        session_hash: セッションハッシュ
+        referrer: リファラー
+        params: パラメータ
+        created_at: 作成日時
+        updated_at: 更新日時
+      like:
+        user: ユーザー
+        article: 記事
+        user_id: ユーザーID
+        article_id: 記事ID
+        created_at: 作成日時
+      message:
+        conversation: 会話ルーム
+        user: ユーザー
+        body: メッセージ内容
+        user_id: ユーザーID
+        conversation_id: 会話ルームID
+        read: 既読
+        created_at: 作成日時
+        updated_at: 更新日時
+      relationship:
+        following: フォロー
+        follower: フォロワー
+        created_at: 作成日時
