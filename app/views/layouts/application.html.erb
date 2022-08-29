@@ -13,23 +13,6 @@
 
   <body>
   <%# ページ最上部 %>
-      <%# <nav class="navbar is-link is-fixed" role="navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item is-expanded is-block has-text-centered">
-          <i class="fa fa-home"></i>
-          <p class="is-size-7">HOME</p>
-        </a>
-        <a class="navbar-item is-expanded is-block has-text-centered">
-          <i class="fa fa-search"></i>
-          <p class="is-size-7">Search</p>
-        </a>
-        <a class="navbar-item is-expanded is-block has-text-centered">
-          <i class="fa fa-user"></i>
-          <p class="is-size-7">Account</p>
-        </a>
-      </div>
-    </nav> %>
-
     <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item" href="/">
@@ -38,7 +21,7 @@
         <div class="navbar-item is-expanded is-block has-text-centered is-hidden-mobile">
           <div class="field has-addons">
             <%= search_form_for @search, url: search_articles_path do |f| %>
-              <%= f.search_field :title_or_content_or_user_name_cont, placeholder: 'キーワードを入力', class: "input is-info" %>
+              <%= f.search_field :title_or_content_or_user_name_cont, placeholder: 'キーワードを入力' %>
               <%= f.submit "検索", class: "button is-info is-small" %>
             <% end %>
           </div>
@@ -66,27 +49,6 @@
         <% end %>
       </div>
     </nav>
-        <%# ボトムナビゲーションバー %>
-    <%# <nav class="navbar is-link is-fixed-bottom" role="navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item is-expanded is-block has-text-centered">
-          <i class="fa fa-home"></i>
-          <p class="is-size-7">HOME</p>
-        </a>
-        <a class="navbar-item is-expanded is-block has-text-centered">
-          <i class="fa fa-search"></i>
-          <p class="is-size-7">Search</p>
-        </a>
-        <a class="navbar-item is-expanded is-block has-text-centered">
-          <i class="fa fa-user"></i>
-          <p class="is-size-7">Account</p>
-        </a>
-        <a class="navbar-item is-expanded is-block has-text-centered">
-          <i class="fa fa-user"></i>
-          <p class="is-size-7">Account</p>
-        </a>
-      </div>
-    </nav> %>
 
     <%# ヒーローバナー部分 %>
     <div class="hero is-medium has-background">
@@ -102,39 +64,31 @@
     <% end %>
 
     <%# ヘッダータブ部 %>
-    <section class="level">
-      <div class="level-left"></div>
-      <div class="level-right">
-        <div class="level-item tabs">
-          <ul>
-            <li class="is-active">
-            <% if user_signed_in? %>
-              <% if current_user.admin? %>
-                <%= link_to rails_admin_path do %><i class="fa-solid fa-key fa-lg"></i>管理者ページ</li><% end %>
-              <% end %>
-              <li><%= link_to articles_path do %><i class="fa-solid fa-house"></i>トップページ</li><% end %>
-              <li><%= link_to rank_articles_path do %><i class="fa-solid fa-crown fa-lg"></i>ランキング</li><% end %>
-              <li><%= link_to new_article_path, class: "article-new" do %><i class="fa-solid fa-square-pen fa-lg"></i>記事投稿</li><% end %>
-            <% else %>
-              <li><%= link_to articles_path do %><i class="fa-solid fa-house"></i>トップページ</li><% end %>
-              <li><%= link_to rank_articles_path do %><i class="fa-solid fa-crown fa-lg"></i>ランキング</li><% end %>
+    <section class="level-item">
+      <div class="level-item tabs">
+        <ul>
+          <li class="is-active">
+          <% if user_signed_in? %>
+            <% if current_user.admin? %>
+              <%= link_to rails_admin_path do %><i class="fa-solid fa-key fa-lg"></i>管理者ページ</li><% end %>
             <% end %>
-          </ul>
-        </div>
+            <li><%= link_to articles_path do %><i class="fa-solid fa-house"></i>トップページ</li><% end %>
+            <li><%= link_to rank_articles_path do %><i class="fa-solid fa-crown fa-lg"></i>ランキング</li><% end %>
+            <li><%= link_to new_article_path, class: "article-new" do %><i class="fa-solid fa-square-pen fa-lg"></i>記事投稿</li><% end %>
+          <% else %>
+            <li><%= link_to articles_path do %><i class="fa-solid fa-house"></i>トップページ</li><% end %>
+            <li><%= link_to rank_articles_path do %><i class="fa-solid fa-crown fa-lg"></i>ランキング</li><% end %>
+          <% end %>
+        </ul>
       </div>
-      <div class="level-right">
-        <div class="level-item">
-          <%# <a class="button is-greylight">フォロー</a> %>
-        </div>
-      </div>
-    </section>
+    </section><br>
 
     <%# メインコンテンツ左側 %>
     <main class="columns">
       <div class="submenu column is-3">
         <a class="is-expanded is-block has-text-centered is-hidden-tablet">
           <%= search_form_for @search, url: search_articles_path do |f| %>
-            <%= f.search_field :title_or_content_or_user_name_cont, placeholder: 'キーワードを入力', class: "input is-info" %>
+            <%= f.search_field :title_or_content_or_user_name_cont, placeholder: 'キーワードを入力' %>
             <%= f.submit "検索", class: "button is-info is-small" %>
           <% end %>
         </a><br>
