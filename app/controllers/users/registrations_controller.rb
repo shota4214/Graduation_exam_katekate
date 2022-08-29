@@ -62,7 +62,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:attribute, :name, :email, :prefectures, :birthday, :sex, :image, :image_cache, :introduction, :password, :password_confirmation, :current_password, :twitter_url, :instagram_url, :tiktok_url, :facebook_url, :youtube_url, :website_url])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[attribute name email prefectures birthday sex image image_cache introduction password password_confirmation current_password twitter_url instagram_url tiktok_url facebook_url youtube_url website_url])
   end
 
   # def ensure_normal_user ゲストユーザーを削除できないようにする
