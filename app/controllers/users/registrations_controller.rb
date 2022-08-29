@@ -13,8 +13,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    unless params[:user][:name].empty? || params[:user][:email].empty? || params[:user][:password].empty? || params[:user][:password_confirmation].empty?
-    ContactMailer.send_when_sign_up(params[:user][:email], params[:user][:name]).deliver
+    @name = params[:user][:name]
+    @email = params[:user][:email]
+    @password = params[:user][:password]
+    @password_confirmation = params[:user][:password_confirmation]
+    unless @name.empty? || @email.empty? || @password.empty? || @password_confirmation.empty?
+    ContactMailer.send_when_sign_up(@email, @name).deliver
     end
   end
 

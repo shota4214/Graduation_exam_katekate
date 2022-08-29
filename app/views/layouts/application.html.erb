@@ -35,7 +35,6 @@
             <%= image_tag (asset_path'no_image.png') %><p class="is-size-7">マイページ</p><% end %>
           <% end %>
         <% end %>
-
         <% if user_signed_in? %>
           <%= link_to users_path, class: "navbar-item is-expanded is-block has-text-centered" do %>
           <i class="fa fa-envelope fa-lg"></i><p class="is-size-7">メッセージ</p><% end %>
@@ -99,38 +98,36 @@
         </aside>
         <aside class="box menu is-hidden-mobile">
           <p class="menu-label">
-              おすすめサイト
+            おすすめサイト
           </p>
           <ul class="menu-list">
-              <li><a href="https://onl.bz/3wAUbyp">DIVE INTO CODE</a></li>
-              <li><a href="https://www.mhlw.go.jp/kokoro/parent/cons/text1.html">こころもメンテしよう<small>厚生労働省</small></a></li>
-              <li><a href="https://www.savechildren.or.jp/oyakonomikata/anata-no-mikata/soudan/">おやこのミカタ<small>Save the children</small></a></li>
-            </ul>
-            <p class="menu-label">
-                開発者紹介
-            </p>
-            <ul class="menu-list">
-              <li><a>Shota Suzuki</a>
-                  <ul>
-                    <li><a href="https://twitter.com/seshiruff4214"><i class="fab fa-twitter fa-lg"></i> Twitter</a></li>
-                    <li><a href="https://github.com/shota4214"><i class="fab fa-github fa-lg"></i> GitHub</a></li>
-                    <li><a href="https://qiita.com/seshiruff4214"><i class="fa fa-q fa-lg"></i> Qiita</a></li>
-                    </ul>
-                </li>
-            </ul>
+            <li><a href="https://onl.bz/3wAUbyp">DIVE INTO CODE</a></li>
+            <li><a href="https://www.mhlw.go.jp/kokoro/parent/cons/text1.html">こころもメンテしよう<small>厚生労働省</small></a></li>
+            <li><a href="https://www.savechildren.or.jp/oyakonomikata/anata-no-mikata/soudan/">おやこのミカタ<small>Save the children</small></a></li>
+          </ul>
+          <p class="menu-label">
+            開発者紹介
+          </p>
+          <ul class="menu-list">
+            <li><a>Shota Suzuki</a>
+              <ul>
+                <li><a href="https://twitter.com/seshiruff4214"><i class="fab fa-twitter fa-lg"></i> Twitter</a></li>
+                <li><a href="https://github.com/shota4214"><i class="fab fa-github fa-lg"></i> GitHub</a></li>
+                <li><a href="https://qiita.com/seshiruff4214"><i class="fa fa-q fa-lg"></i> Qiita</a></li>
+              </ul>
+            </li>
+          </ul>
         </aside>
       </div>
       <div class="column is-8">
-          <%= yield %>
+        <%= yield %>
       </div>
     </main>
 
     <%# フッター %>
     <footer class="footer">
       <div class="content has-text-centered">
-
-        <p>
-          ©️ 2022- <strong>katekate</strong> by <a href="https://twitter.com/seshiruff4214">Shota Suzuki</a>.<br>The source code is licensed
+          ©️ 2022- <strong>katekate</strong> by <a href="https://twitter.com/seshiruff4214">Shota Suzuki</a>.The source code is licensed
           <a href="https://github.com/shota4214/Graduation_exam_katekate.git">GitHub</a>.
       </div>
     </footer>
