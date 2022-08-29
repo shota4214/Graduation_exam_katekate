@@ -35,12 +35,14 @@
         <a class="navbar-item" href="/">
           <%= image_tag (asset_path'katekate.png') %>
         </a>
-        <a class="navbar-item is-expanded is-block has-text-centered is-hidden-mobile">
-          <%= search_form_for @search, url: search_articles_path do |f| %>
-            <%= f.search_field :title_or_content_or_user_name_cont, placeholder: 'キーワードを入力' %>
-            <%= f.submit "検索", class: "button is-info is-small" %>
-          <% end %>
-        </a>
+        <div class="navbar-item is-expanded is-block has-text-centered is-hidden-mobile">
+          <div class="field has-addons">
+            <%= search_form_for @search, url: search_articles_path do |f| %>
+              <%= f.search_field :title_or_content_or_user_name_cont, placeholder: 'キーワードを入力', class: "input is-info" %>
+              <%= f.submit "検索", class: "button is-info is-small" %>
+            <% end %>
+          </div>
+        </div>
         <% if user_signed_in? %>
           <% if current_user.image? %>
             <%= link_to user_path(current_user.id), class: "navbar-item is-expanded is-block has-text-centered" do %>
@@ -132,10 +134,10 @@
       <div class="submenu column is-3">
         <a class="is-expanded is-block has-text-centered is-hidden-tablet">
           <%= search_form_for @search, url: search_articles_path do |f| %>
-            <%= f.search_field :title_or_content_or_user_name_cont, placeholder: 'キーワードを入力' %>
+            <%= f.search_field :title_or_content_or_user_name_cont, placeholder: 'キーワードを入力', class: "input is-info" %>
             <%= f.submit "検索", class: "button is-info is-small" %>
           <% end %>
-        </a>
+        </a><br>
         <aside class="box">
         katekate〜家庭の過程〜<br>
         katekateは親や子供が抱える問題や知識を他者と共有しユーザー同士で繋がることができるアプリです。
@@ -172,14 +174,10 @@
     <%# フッター %>
     <footer class="footer">
       <div class="content has-text-centered">
-          <a class="navbar-item">
-            <%= image_tag (asset_path'katekate.png') %>
-          </a>
+
         <p>
-          <strong>katekate</strong> by <a href="https://jgthms.com">Shota Suzuki</a>. The source code is licensed
-          <a href="https://github.com/shota4214/Graduation_exam_katekate.git">GitHub</a>. The website content
-          is licensed <a href="">CC BY NC SA 4.0</a>.
-        </p>
+          ©️ 2022- <strong>katekate</strong> by <a href="https://twitter.com/seshiruff4214">Shota Suzuki</a>.<br>The source code is licensed
+          <a href="https://github.com/shota4214/Graduation_exam_katekate.git">GitHub</a>.
       </div>
     </footer>
   </body>
