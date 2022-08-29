@@ -35,7 +35,7 @@
         <a class="navbar-item" href="/">
           <%= image_tag (asset_path'katekate.png') %>
         </a>
-        <a class="navbar-item is-expanded is-block has-text-centered">
+        <a class="navbar-item is-expanded is-block has-text-centered is-hidden-mobile">
           <%= search_form_for @search, url: search_articles_path do |f| %>
             <%= f.search_field :title_or_content_or_user_name_cont, placeholder: 'キーワードを入力' %>
             <%= f.submit "検索", class: "button is-info is-small" %>
@@ -130,12 +130,18 @@
     <%# メインコンテンツ左側 %>
     <main class="columns">
       <div class="submenu column is-3">
+        <a class="is-expanded is-block has-text-centered is-hidden-tablet">
+          <%= search_form_for @search, url: search_articles_path do |f| %>
+            <%= f.search_field :title_or_content_or_user_name_cont, placeholder: 'キーワードを入力' %>
+            <%= f.submit "検索", class: "button is-info is-small" %>
+          <% end %>
+        </a>
         <aside class="box">
-        katekate〜家庭の過程〜
+        katekate〜家庭の過程〜<br>
         katekateは親や子供が抱える問題や知識を他者と共有しユーザー同士で繋がることができるアプリです。
         あなたの悩みは誰かの悩みでもあり、あなたの経験が誰かの希望になります。
         </aside>
-        <aside class="box menu">
+        <aside class="box menu is-hidden-mobile">
           <p class="menu-label">
               おすすめサイト
           </p>
