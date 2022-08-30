@@ -1,46 +1,51 @@
-<%= form_with(model: @article, local: true, url: articles_path ) do |f| %>
-  <p class=" has-text-centered has-background-success is-size-3">以下の内容で、投稿します</p>
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-5-tablet is-8-desktop">
-          <form action="" class="box">
-            <div class="field">
-              <label for="" class="label"><%= f.label :type %></label>
-              <p class="is-size-5 has-text-centered"><%= @article.type_i18n %></p>
-              <%= f.hidden_field :type %>
-            </div>
-            <div class="field">
-              <label for="" class="label"><%= f.label :image %></label>
-              <% if @article.image? %>
-                <div class="level-item"><%= image_tag(@article.image.url) if @article.image && @article.image.url %></div>
-              <% else %>
-                <p class="is-size-5 has-text-centered">※画像の添付はありません</p>
-              <% end %>
-                <%= f.hidden_field :image_cache %>
-            </div>
-            <div class="field">
-              <label for="" class="label"><%= f.label :title %></label>
-                <p class="is-size-5 has-text-centered"><%= @article.title %></p>
-                <%= f.hidden_field :title %>
-            </div>
-            <div class="field">
-              <label for="" class="label"><%= f.label :content %></label>
-                <p class="is-size-5 has-text-centered"><%= @article.content %></p>
-                <%= f.hidden_field :content %>
-            </div>
-            <div class="field">
-              <% if params[:draft] %>
-                <%= f.submit "下書き保存", name: "draft", class: "button is-danger" %>
-              <% else %>
-                <%= f.submit "投稿する", class: "button is-primary" %>
-              <% end %>
-              <br>
-            </div>
-          </form>
-        </div>
+<p class=" has-text-centered has-background-success is-size-3">以下の内容で、投稿します</p>
+<br>
+<div class="box">
+  <%= form_with(model: @article, local: true, url: articles_path ) do |f| %>
+    <div class="field">
+      <label class="label is-size-5"><%= f.label :type %></label>
+      <div class="control has-icons-left">
+        <p class=""><%= @article.type_i18n %></p>
+        <%= f.hidden_field :type %>
       </div>
     </div>
-    <%= f.submit "戻る", name: "back", class: "button is-outline" %>
-  </div>
-<% end %>
+    <br>
+    <div class="field">
+      <label class="label is-size-5"><%= f.label :image %></label>
+      <div class="field has-addons">
+        <% if @article.image? %>
+          <div class="level-item"><%= image_tag(@article.image.url) if @article.image && @article.image.url %></div>
+        <% else %>
+          <p class="">※画像の添付はありません</p>
+        <% end %>
+      </div>
+        <%= f.hidden_field :image_cache %>
+    </div>
+    <br>
+    <div class="field">
+      <label class="label is-size-5"><%= f.label :title %></label>
+      <div class="control">
+        <p class=""><%= @article.title %></p>
+        <%= f.hidden_field :title %>
+      </div>
+    </div>
+    <br>
+    <div class="field">
+      <label class="label is-size-5"><%= f.label :content %></label>
+      <div class="control has-icons-left">
+        <p class=""><%= @article.content %></p>
+        <%= f.hidden_field :content %>
+      </div>
+    </div>
+    <br>
+    <div class="field">
+      <% if params[:draft] %>
+        <%= f.submit "下書き保存", name: "draft", class: "button is-danger" %>
+      <% else %>
+        <%= f.submit "投稿する", class: "button is-primary" %>
+      <% end %>
+    </div>
+      <%= f.submit "戻る", name: "back", class: "button is-outline" %>
+    </div>
+  <% end %>
+</div>
