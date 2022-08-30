@@ -4,7 +4,6 @@
     <div id="error_explanation">
       <h2><%= @article.errors.count %>件のエラーがあります。</h2>
       <ul>
-
       <% @article.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
@@ -14,7 +13,7 @@
   <div class="hero-body">
     <div class="container">
       <div class="columns is-centered">
-        <div class="column is-5-tablet is-8-desktop">
+        <div class="column">
           <form action="" class="box">
             <div class="field">
               <label for="" class="label"><%= f.label :type %></label>

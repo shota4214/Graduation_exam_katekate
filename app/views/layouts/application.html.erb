@@ -13,34 +13,19 @@
 
   <body>
   <%# ページ最上部 %>
-      <%# <nav class="navbar is-link is-fixed" role="navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item is-expanded is-block has-text-centered">
-          <i class="fa fa-home"></i>
-          <p class="is-size-7">HOME</p>
-        </a>
-        <a class="navbar-item is-expanded is-block has-text-centered">
-          <i class="fa fa-search"></i>
-          <p class="is-size-7">Search</p>
-        </a>
-        <a class="navbar-item is-expanded is-block has-text-centered">
-          <i class="fa fa-user"></i>
-          <p class="is-size-7">Account</p>
-        </a>
-      </div>
-    </nav> %>
-
     <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item" href="/">
           <%= image_tag (asset_path'katekate.png') %>
         </a>
-        <a class="navbar-item is-expanded is-block has-text-centered">
-          <%= search_form_for @search, url: search_articles_path do |f| %>
-            <%= f.search_field :title_or_content_or_user_name_cont, placeholder: 'キーワードを入力' %>
-            <%= f.submit "検索", class: "button is-info is-small" %>
-          <% end %>
-        </a>
+        <div class="navbar-item is-expanded is-block has-text-centered is-hidden-mobile">
+          <div class="field has-addons">
+            <%= search_form_for @search, url: search_articles_path do |f| %>
+              <%= f.search_field :title_or_content_or_user_name_cont, placeholder: 'キーワードを入力' %>
+              <%= f.submit "検索", class: "button is-info is-small" %>
+            <% end %>
+          </div>
+        </div>
         <% if user_signed_in? %>
           <% if current_user.image? %>
             <%= link_to user_path(current_user.id), class: "navbar-item is-expanded is-block has-text-centered" do %>
@@ -50,7 +35,6 @@
             <%= image_tag (asset_path'no_image.png') %><p class="is-size-7">マイページ</p><% end %>
           <% end %>
         <% end %>
-
         <% if user_signed_in? %>
           <%= link_to users_path, class: "navbar-item is-expanded is-block has-text-centered" do %>
           <i class="fa fa-envelope fa-lg"></i><p class="is-size-7">メッセージ</p><% end %>
@@ -64,27 +48,6 @@
         <% end %>
       </div>
     </nav>
-        <%# ボトムナビゲーションバー %>
-    <%# <nav class="navbar is-link is-fixed-bottom" role="navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item is-expanded is-block has-text-centered">
-          <i class="fa fa-home"></i>
-          <p class="is-size-7">HOME</p>
-        </a>
-        <a class="navbar-item is-expanded is-block has-text-centered">
-          <i class="fa fa-search"></i>
-          <p class="is-size-7">Search</p>
-        </a>
-        <a class="navbar-item is-expanded is-block has-text-centered">
-          <i class="fa fa-user"></i>
-          <p class="is-size-7">Account</p>
-        </a>
-        <a class="navbar-item is-expanded is-block has-text-centered">
-          <i class="fa fa-user"></i>
-          <p class="is-size-7">Account</p>
-        </a>
-      </div>
-    </nav> %>
 
     <%# ヒーローバナー部分 %>
     <div class="hero is-medium has-background">
@@ -100,80 +63,72 @@
     <% end %>
 
     <%# ヘッダータブ部 %>
-    <section class="level">
-      <div class="level-left"></div>
-      <div class="level-right">
-        <div class="level-item tabs">
-          <ul>
-            <li class="is-active">
-            <% if user_signed_in? %>
-              <% if current_user.admin? %>
-                <%= link_to rails_admin_path do %><i class="fa-solid fa-key fa-lg"></i>管理者ページ</li><% end %>
-              <% end %>
-              <li><%= link_to articles_path do %><i class="fa-solid fa-house"></i>トップページ</li><% end %>
-              <li><%= link_to rank_articles_path do %><i class="fa-solid fa-crown fa-lg"></i>ランキング</li><% end %>
-              <li><%= link_to new_article_path, class: "article-new" do %><i class="fa-solid fa-square-pen fa-lg"></i>記事投稿</li><% end %>
-            <% else %>
-              <li><%= link_to articles_path do %><i class="fa-solid fa-house"></i>トップページ</li><% end %>
-              <li><%= link_to rank_articles_path do %><i class="fa-solid fa-crown fa-lg"></i>ランキング</li><% end %>
+    <section class="level-item">
+      <div class="level-item tabs">
+        <ul>
+          <li class="is-active">
+          <% if user_signed_in? %>
+            <% if current_user.admin? %>
+              <%= link_to rails_admin_path do %><i class="fa-solid fa-key fa-lg"></i>管理者ページ</li><% end %>
             <% end %>
-          </ul>
-        </div>
+            <li><%= link_to articles_path do %><i class="fa-solid fa-house"></i>トップページ</li><% end %>
+            <li><%= link_to rank_articles_path do %><i class="fa-solid fa-crown fa-lg"></i>ランキング</li><% end %>
+            <li><%= link_to new_article_path, class: "article-new" do %><i class="fa-solid fa-square-pen fa-lg"></i>記事投稿</li><% end %>
+          <% else %>
+            <li><%= link_to articles_path do %><i class="fa-solid fa-house"></i>トップページ</li><% end %>
+            <li><%= link_to rank_articles_path do %><i class="fa-solid fa-crown fa-lg"></i>ランキング</li><% end %>
+          <% end %>
+        </ul>
       </div>
-      <div class="level-right">
-        <div class="level-item">
-          <%# <a class="button is-greylight">フォロー</a> %>
-        </div>
-      </div>
-    </section>
+    </section><br>
 
     <%# メインコンテンツ左側 %>
     <main class="columns">
       <div class="submenu column is-3">
+        <a class="is-expanded is-block has-text-centered is-hidden-tablet">
+          <%= search_form_for @search, url: search_articles_path do |f| %>
+            <%= f.search_field :title_or_content_or_user_name_cont, placeholder: 'キーワードを入力' %>
+            <%= f.submit "検索", class: "button is-info is-small" %>
+          <% end %>
+        </a><br>
         <aside class="box">
-        katekate〜家庭の過程〜
+        katekate〜家庭の過程〜<br>
         katekateは親や子供が抱える問題や知識を他者と共有しユーザー同士で繋がることができるアプリです。
         あなたの悩みは誰かの悩みでもあり、あなたの経験が誰かの希望になります。
         </aside>
-        <aside class="box menu">
+        <aside class="box menu is-hidden-mobile">
           <p class="menu-label">
-              おすすめサイト
+            おすすめサイト
           </p>
           <ul class="menu-list">
-              <li><a href="https://onl.bz/3wAUbyp">DIVE INTO CODE</a></li>
-              <li><a href="https://www.mhlw.go.jp/kokoro/parent/cons/text1.html">こころもメンテしよう<small>厚生労働省</small></a></li>
-              <li><a href="https://www.savechildren.or.jp/oyakonomikata/anata-no-mikata/soudan/">おやこのミカタ<small>Save the children</small></a></li>
-            </ul>
-            <p class="menu-label">
-                開発者紹介
-            </p>
-            <ul class="menu-list">
-              <li><a>Shota Suzuki</a>
-                  <ul>
-                    <li><a href="https://twitter.com/seshiruff4214"><i class="fab fa-twitter fa-lg"></i> Twitter</a></li>
-                    <li><a href="https://github.com/shota4214"><i class="fab fa-github fa-lg"></i> GitHub</a></li>
-                    <li><a href="https://qiita.com/seshiruff4214"><i class="fa fa-q fa-lg"></i> Qiita</a></li>
-                    </ul>
-                </li>
-            </ul>
+            <li><a href="https://onl.bz/3wAUbyp">DIVE INTO CODE</a></li>
+            <li><a href="https://www.mhlw.go.jp/kokoro/parent/cons/text1.html">こころもメンテしよう<small>厚生労働省</small></a></li>
+            <li><a href="https://www.savechildren.or.jp/oyakonomikata/anata-no-mikata/soudan/">おやこのミカタ<small>Save the children</small></a></li>
+          </ul>
+          <p class="menu-label">
+            開発者紹介
+          </p>
+          <ul class="menu-list">
+            <li><a>Shota Suzuki</a>
+              <ul>
+                <li><a href="https://twitter.com/seshiruff4214"><i class="fab fa-twitter fa-lg"></i> Twitter</a></li>
+                <li><a href="https://github.com/shota4214"><i class="fab fa-github fa-lg"></i> GitHub</a></li>
+                <li><a href="https://qiita.com/seshiruff4214"><i class="fa fa-q fa-lg"></i> Qiita</a></li>
+              </ul>
+            </li>
+          </ul>
         </aside>
       </div>
       <div class="column is-8">
-          <%= yield %>
+        <%= yield %>
       </div>
     </main>
 
     <%# フッター %>
     <footer class="footer">
       <div class="content has-text-centered">
-          <a class="navbar-item">
-            <%= image_tag (asset_path'katekate.png') %>
-          </a>
-        <p>
-          <strong>katekate</strong> by <a href="https://jgthms.com">Shota Suzuki</a>. The source code is licensed
-          <a href="https://github.com/shota4214/Graduation_exam_katekate.git">GitHub</a>. The website content
-          is licensed <a href="">CC BY NC SA 4.0</a>.
-        </p>
+          ©️ 2022- <strong>katekate</strong> by <a href="https://twitter.com/seshiruff4214">Shota Suzuki</a>.The source code is licensed
+          <a href="https://github.com/shota4214/Graduation_exam_katekate.git">GitHub</a>.
       </div>
     </footer>
   </body>
