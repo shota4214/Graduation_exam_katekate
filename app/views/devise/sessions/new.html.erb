@@ -1,6 +1,6 @@
 <p class=" has-text-centered has-background-success is-size-3">ログイン</p>
 <br>
-<form class="box">
+<div class="box">
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <label class="label"><%= f.label :email %></label>
@@ -39,7 +39,7 @@
     </div>
   </div>
 <% end %>
-</form>
+</div>
 <br>
 <div class="buttons">
   <%= link_to users_guest_sign_in_path, method: :post do %><button class="button is-warning is-light">ゲストログイン</button><% end %>
