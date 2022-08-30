@@ -1,30 +1,35 @@
-<%= form_with(model: @user, local: true, url: user_path(@user), method: :put, html: { class: 'first-main_box' }) do |f| %>
-<p class=" has-text-centered has-background-success is-size-3">ユーザー情報編集〜パスワード入力〜</p>
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-10-mobile is-8-desktop">
-          <form action="" class="box">
-            <div class="field">
-              <label for="" class="label"><%= f.label :password %> <br><i>(パスワードを入力して更新してください)</i></label>
-              <%= f.password_field :password, autocomplete: "new-password", placeholder: 'パスワードを入力', class: "input is-info" %>
-              <% if @minimum_password_length %>
-                <br />
-                <em><%= @minimum_password_length %> characters minimum</em>
-              <% end %>
-            </div>
-            <div class="field">
-              <label for="" class="label"><%= f.label :password_confirmation %><br><i>(パスワードをもう一度入力してください)<br /></label>
-                <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'パスワードを再入力', class: "input is-info" %>
-            </div>
-            <div class="field">
-              <%= f.submit "更新", class: "button is-primary" %>
-            </div>
-          </form>
-        </div>
-      </div>
+<p class=" has-text-centered has-background-success is-size-3">ユーザー情報編集<br>〜パスワード入力〜</p>
+<br>
+<div class="box">
+  <%= form_with(model: @user, local: true, url: user_path(@user), method: :put, html: { class: 'first-main_box' }) do |f| %>
+  <div class="field">
+    <label class="label"><%= f.label :password %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> 文字以上)</em>
+      <% end %></label>
+    <div class="control has-icons-left has-icons-right">
+      <%= f.password_field :password, autocomplete: "current-password", placeholder: 'パスワードを入力', class: "input is-danger" %>
+      <span class="icon is-small is-left">
+        <i class="fas fa-key"></i>
+      </span>
     </div>
+  </div>
+  <br>
+  <div class="field">
+    <label class="label"><%= f.label :password_confirmation %></label>
+    <div class="control has-icons-left has-icons-right">
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'パスワードを再入力', class: "input is-danger" %>
+      <span class="icon is-small is-left">
+        <i class="fas fa-key"></i>
+      </span>
+    </div>
+  </div>
+  <br>
+  <div class="field">
+    <%= f.submit "更新", class: "button is-primary" %>
+  </div>
   <% end %>
+</div>
 <br>
 <%#= link_to "戻るjava", "javascript:history.back();" %>
 

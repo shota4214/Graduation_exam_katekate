@@ -1,43 +1,74 @@
-<%= form_with(model: @user, local: true, url: edit_step4_user_path, method: :post, html: { class: 'first-main_box' }) do |f| %>
-<p class=" has-text-centered has-background-success is-size-3">ユーザー情報編集〜SNS情報〜</p>
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-5-tablet is-5-desktop">
-          <form action="" class="box">
-            <div class="field">
-              <label for="" class="label"><%= f.label :Twitter %></label>
-                <%= f.text_field :twitter_url, placeholder: 'https://twitter.com/~', class: "input is-primary" %>
-            </div>
-            <div class="field">
-              <label for="" class="label"><%= f.label :Instagram %></label>
-                <%= f.text_field :instagram_url, placeholder: 'https://instagram.com/~', class: "input is-success" %>
-            </div>
-            <div class="field">
-              <label for="" class="label"><%= f.label :Tiktok %></label>
-                <%= f.text_field :tiktok_url, placeholder: 'https://tiktok.com/~', class: "input is-info" %>
-            </div>
-            <div class="field">
-              <label for="" class="label"><%= f.label :Facebook %></label>
-                <%= f.text_field :facebook_url, placeholder: 'https://facebook.com/~', class: "input is-link" %>
-            </div>
-            <div class="field">
-              <label for="" class="label"><%= f.label :YouTube %></label>
-                <%= f.text_field :youtube_url, placeholder: 'https://youtube.com/~', class: "input is-danger" %>
-            </div>
-            <div class="field">
-              <label for="" class="label"><%= f.label :Website %></label>
-                <%= f.text_field :website_url, placeholder: 'https://website.com/~', class: "input is-warning" %>
-            </div>
-            <div class="field">
-              <%= f.submit "次へ", class: "button is-primary" %>
-            </div>
-          </form>
-        </div>
+<p class=" has-text-centered has-background-success is-size-3">ユーザー情報編集<br>〜自己紹介〜</p>
+<br>
+<div class="box">
+  <%= form_with(model: @user, local: true, url: edit_step4_user_path, method: :post, html: { class: 'first-main_box' }) do |f| %>
+    <div class="field">
+      <label class="label"><%= f.label :Twitter %></label>
+      <div class="control has-icons-left">
+        <%= f.text_field :twitter_url, placeholder: 'https://twitter.com/~', class: "input is-primary" %>
+        <span class="icon is-small is-left">
+          <i class="fab fa-twitter"></i>
+        </span>
       </div>
     </div>
+  <br>
+    <div class="field">
+      <label class="label"><%= f.label :Instagram %></label>
+      <div class="control has-icons-left">
+        <%= f.text_field :instagram_url, placeholder: 'https://instagram.com/~', class: "input is-success" %>
+        <span class="icon is-small is-left">
+          <i class="fab fa-instagram"></i>
+        </span>
+      </div>
+    </div>
+  <br>
+    <div class="field">
+      <label class="label"><%= f.label :Tiktok %></label>
+      <div class="control has-icons-left">
+        <%= f.text_field :tiktok_url, placeholder: 'https://tiktok.com/~', class: "input is-info" %>
+        <span class="icon is-small is-left">
+          <i class="fab fa-tiktok"></i>
+        </span>
+      </div>
+    </div>
+  <br>
+    <div class="field">
+      <label class="label"><%= f.label :Facebook %></label>
+      <div class="control has-icons-left">
+        <%= f.text_field :facebook_url, placeholder: 'https://facebook.com/~', class: "input is-link" %>
+        <span class="icon is-small is-left">
+          <i class="fab fa-facebook"></i>
+        </span>
+      </div>
+    </div>
+  <br>
+    <div class="field">
+      <label class="label"><%= f.label :YouTube %></label>
+      <div class="control has-icons-left">
+        <%= f.text_field :youtube_url, placeholder: 'https://youtube.com/~', class: "input is-danger" %>
+        <span class="icon is-small is-left">
+          <i class="fab fa-youtube"></i>
+        </span>
+      </div>
+    </div>
+  <br>
+    <div class="field">
+      <label class="label"><%= f.label :Website %></label>
+      <div class="control has-icons-left">
+        <%= f.text_field :website_url, placeholder: 'https://website.com/~', class: "input is-warning" %>
+        <span class="icon is-small is-left">
+          <i class="fa-regular fa-window-maximize"></i>
+        </span>
+      </div>
+    </div>
+  <br>
+  <div class="field">
+    <%= f.submit "次へ", class: "button is-primary" %>
+  </div>
   <% end %>
+</div>
 <br>
+
 <%#= link_to "戻るjava", "javascript:history.back();" %>
 <%= form_with(model: @user, local: true, url: edit_step2_user_path, method: :post) do |f| %>
   <%= f.submit "戻る", name: "back", class: "button is-outline" %>

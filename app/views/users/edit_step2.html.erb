@@ -1,29 +1,29 @@
-<%= form_with(model: @user, local: true, url: edit_step3_user_path, method: :post, html: { class: 'first-main_box' }) do |f| %>
-<p class=" has-text-centered has-background-success is-size-3">ユーザー情報編集〜自己紹介〜</p>
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-10-mobile is-8-desktop">
-          <form action="" class="box">
-            <% if @user.image? %>
-            <div class="field">
-              <%= f.label :image %>画像確認<br />
-              <%= image_tag(@user.image.url) if @user.image && @user.image.url %>
-              <%= f.hidden_field :image_cache %>
-            </div>
-            <% end %>
-            <div class="field is-info">
-              <%= f.label :introduction %><br />
-              <%= f.text_area :introduction, placeholder: '自己紹介を記入してください', class: "textarea is-info" %>
-            </div>
-            <div class="actions">
-              <%= f.submit "次へ", class: "button is-primary" %>
-            </div>
-          </form>
-        </div>
+<p class=" has-text-centered has-background-success is-size-3">ユーザー情報編集<br>〜自己紹介〜</p>
+<br>
+<div class="box">
+  <%= form_with(model: @user, local: true, url: edit_step3_user_path, method: :post, html: { class: 'first-main_box' }) do |f| %>
+    <% if @user.image? %>
+    <div class="field">
+      <label class="label">変更<%= f.label :image %>確認</label>
+      <div class="field has-addons">
+        <%= image_tag(@user.image.url) if @user.image && @user.image.url %>
       </div>
+        <%= f.hidden_field :image_cache %>
     </div>
+    <% end %>
+  <br>
+  <div class="field">
+    <label class="label"><%= f.label :introduction %></label>
+    <div class="control has-icons-left">
+      <%= f.text_area :introduction, placeholder: '自己紹介を記入してください', class: "textarea is-info" %>
+    </div>
+  </div>
+  <br>
+  <div class="field">
+    <%= f.submit "次へ", class: "button is-primary" %>
+  </div>
   <% end %>
+</div>
 <br>
 <%#= link_to "戻るjava", "javascript:history.back();" %>
 
