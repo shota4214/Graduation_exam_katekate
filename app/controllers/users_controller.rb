@@ -56,31 +56,40 @@ class UsersController < ApplicationController
     session[:facebook_url] = user_params[:facebook_url]
     session[:youtube_url] = user_params[:youtube_url]
     session[:website_url] = user_params[:website_url]
+    if params[:back]
+      @user.image = session[:image_cache]
+      @user.introduction = session[:introduction]
+      render :edit_step2
+    end
   end
 
   def update
-    session[:password] = user_params[:password]
-    session[:password_confirmation] = user_params[:password_confirmation]
-    @user.image.retrieve_from_cache! session[:image_cache] unless session[:image_cache].nil?
-    if @user.update!(image: session[:image_cache],
-      name: session[:name],
-      email: session[:email],
-      birthday: session[:birthday],
-      sex: session[:sex], prefectures: session[:prefectures],
-      introduction: session[:introduction],
-      password: session[:password],
-      password_confirmation: session[:password_confirmation],
-      twitter_url: session[:twitter_url],
-      instagram_url: session[:instagram_url],
-      tiktok_url: session[:tiktok_url],
-      facebook_url: session[:facebook_url],
-      youtube_url: session[:youtube_url],
-      website_url: session[:website_url]
-    )
-      sign_in(@user, bypass: true) if current_user.id == @user.id
-      redirect_to articles_path, notice: 'ユーザー情報を更新しました'
+    if params[:back]
+      render :edit_step3
     else
-      redirect_to user_path, notice: '更新失敗しました'
+      session[:password] = user_params[:password]
+      session[:password_confirmation] = user_params[:password_confirmation]
+      @user.image.retrieve_from_cache! session[:image_cache] unless session[:image_cache].nil?
+      if @user.update!(image: session[:image_cache],
+        name: session[:name],
+        email: session[:email],
+        birthday: session[:birthday],
+        sex: session[:sex], prefectures: session[:prefectures],
+        introduction: session[:introduction],
+        password: session[:password],
+        password_confirmation: session[:password_confirmation],
+        twitter_url: session[:twitter_url],
+        instagram_url: session[:instagram_url],
+        tiktok_url: session[:tiktok_url],
+        facebook_url: session[:facebook_url],
+        youtube_url: session[:youtube_url],
+        website_url: session[:website_url]
+      )
+        sign_in(@user, bypass: true) if current_user.id == @user.id
+        redirect_to articles_path, notice: 'ユーザー情報を更新しました'
+      else
+        redirect_to user_path, notice: '更新失敗しました'
+      end
     end
   end
 
