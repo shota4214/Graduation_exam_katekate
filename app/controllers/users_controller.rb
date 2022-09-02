@@ -27,7 +27,6 @@ class UsersController < ApplicationController
   end
 
   def edit_step2
-    session[:image] = user_params[:image]
     session[:name] = user_params[:name]
     session[:email] = user_params[:email]
     session[:birthday] = Date.new(params[:user]["birthday(1i)"].to_i, params[:user]["birthday(2i)"].to_i, params[:user]["birthday(3i)"].to_i)
@@ -39,6 +38,15 @@ class UsersController < ApplicationController
   def edit_step3
     session[:image_cache] = user_params[:image_cache]
     session[:introduction] = user_params[:introduction]
+    if params[:back]
+      session[:image] = session[:image_cache]
+      @user.name = session[:name]
+      @user.email = session[:email]
+      @user.birthday  = session[:birthday]
+      @user.sex = session[:sex]
+      @user.prefectures = session[:prefectures]
+      render :edit_step1
+    end
   end
 
   def edit_step4
@@ -54,7 +62,21 @@ class UsersController < ApplicationController
     session[:password] = user_params[:password]
     session[:password_confirmation] = user_params[:password_confirmation]
     @user.image.retrieve_from_cache! session[:image_cache] unless session[:image_cache].nil?
-    if @user.update!(image: session[:image_cache], name: session[:name], email: session[:email], birthday: session[:birthday], sex: session[:sex], prefectures: session[:prefectures], introduction: session[:introduction], password: session[:password], password_confirmation: session[:password_confirmation], twitter_url: session[:twitter_url], instagram_url: session[:instagram_url], tiktok_url: session[:tiktok_url], facebook_url: session[:facebook_url], youtube_url: session[:youtube_url], website_url: session[:website_url])
+    if @user.update!(image: session[:image_cache],
+      name: session[:name],
+      email: session[:email],
+      birthday: session[:birthday],
+      sex: session[:sex], prefectures: session[:prefectures],
+      introduction: session[:introduction],
+      password: session[:password],
+      password_confirmation: session[:password_confirmation],
+      twitter_url: session[:twitter_url],
+      instagram_url: session[:instagram_url],
+      tiktok_url: session[:tiktok_url],
+      facebook_url: session[:facebook_url],
+      youtube_url: session[:youtube_url],
+      website_url: session[:website_url]
+    )
       sign_in(@user, bypass: true) if current_user.id == @user.id
       redirect_to articles_path, notice: 'ユーザー情報を更新しました'
     else
@@ -65,7 +87,25 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :prefectures, :birthday, :sex, :image, :image_cache, :introduction, :password, :password_confirmation, :current_password, :twitter_url, :instagram_url, :tiktok_url, :facebook_url, :youtube_url, :website_url)
+    params.require(:user).permit(
+      :name,
+      :email,
+      :prefectures,
+      :birthday,
+      :sex,
+      :image,
+      :image_cache,
+      :introduction,
+      :password,
+      :password_confirmation,
+      :current_password,
+      :twitter_url,
+      :instagram_url,
+      :tiktok_url,
+      :facebook_url,
+      :youtube_url,
+      :website_url
+    )
   end
 
   def user_find

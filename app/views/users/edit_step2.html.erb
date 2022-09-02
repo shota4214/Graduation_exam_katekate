@@ -21,12 +21,7 @@
   <br>
   <div class="field">
     <%= f.submit "次へ", class: "button is-primary" %>
+    <%= f.submit "戻る", name: "back", class: "button is-outline" %>
   </div>
   <% end %>
 </div>
-<br>
-<%#= link_to "戻るjava", "javascript:history.back();" %>
-
-<%= form_with(model: @user, local: true, url: edit_step1_user_path, method: :get) do |f| %>
-  <%= f.submit "戻る", name: "back", class: "button is-outline" %>
-<% end %>

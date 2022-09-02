@@ -13,6 +13,9 @@ Rails.application.routes.draw do
     member do
       get :follow_index
       get :edit_step1
+      get :edit_step2
+      get :edit_step3
+      get :edit_step4
       post :edit_step2
       post :edit_step3
       post :edit_step4
