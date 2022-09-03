@@ -15,9 +15,9 @@
   <div class="column is-narrow">
     <div class="box" style="width: 200px;">
       <% if @article.user.image? %>
-        <%= link_to user_path(@article.user) do %><%= image_tag @article.user.image.url %><% end %>
+        <%= link_to user_path(@article.user) do %><%= image_tag @article.user.image.url, class: 'img_wrap mx-auto d-block' %><% end %>
       <% else %>
-        <%= link_to user_path(@article.user) do %><%= image_tag (asset_path'no_image.png') %><% end %>
+        <%= link_to user_path(@article.user) do %><%= image_tag (asset_path'no_image.png'), class: 'img_wrap mx-auto d-block' %><% end %>
       <% end %>
       <%= link_to user_path(@article.user) do %><p class="title is-5"><%= @article.user.name %></p><% end %>
       <br>

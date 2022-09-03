@@ -3,11 +3,11 @@
 <% @articles.first(100).each do |article| %>
 <article class="box media">
   <figure class="media-left">
-    <p class="image is-50x50">
+    <p class="image is-50x50 image_wrap">
       <% if article.image? %>
-        <%= link_to article_path(article.id) do %><%= image_tag article.image.url %><% end %><br>
+        <%= link_to article_path(article.id) do %><%= image_tag article.image.url, class: 'img_wrap mx-auto d-block' %><% end %><br>
       <% else %>
-        <%= link_to article_path(article.id) do %><%= image_tag (asset_path"no_image.png") %><% end %><br>
+        <%= link_to article_path(article.id) do %><%= image_tag (asset_path"no_image.png"), class: 'img_wrap mx-auto d-block' %><% end %><br>
       <% end %>
     </p>
   </figure>

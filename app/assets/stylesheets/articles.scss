@@ -3,5 +3,18 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 .text-red {
-  color: red
+  color: red;
+}
+
+.img_wrap{
+  transition-duration: 0.5s;
+}
+.img_wrap img{
+  width: 100%;
+  cursor: pointer;
+}
+.img_wrap:hover{
+  box-shadow: 10px 10px 10px rgba(0,0,0,0.5);
+  transform: translateY(-10px);
+  transition-duration: 0.5s;
 }
