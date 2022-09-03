@@ -14,8 +14,8 @@
 
 ## カリキュラム外の技術
 * PV数カウントgem(impressionist)
-* ウィザード形式の入力フォームgem(wicked)
 * CSSフレームワーク(Bulma)
+* ドメインの取得(katekate.blog)
 
 ## 準備
 ```
