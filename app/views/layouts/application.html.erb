@@ -12,40 +12,62 @@
   </head>
 
   <body>
-  <%# ページ最上部 %>
-    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+    <%# ページ最上部ヘッダー %>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item" href="/">
           <%= image_tag (asset_path'katekate.png') %>
         </a>
-        <div class="navbar-item is-expanded is-block has-text-centered is-hidden-mobile">
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="targetMenu">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div class="navbar-menu">
+        <div class="navbar-end is-hidden-mobile">
           <div class="field has-addons">
-            <%= search_form_for @search, url: search_articles_path do |f| %>
+            <%= search_form_for @search, class: "navbar-item",url: search_articles_path do |f| %>
               <%= f.search_field :title_or_content_or_user_name_cont, placeholder: 'キーワードを入力' %>
               <%= f.submit "検索", class: "button is-info is-small" %>
             <% end %>
           </div>
         </div>
-        <% if user_signed_in? %>
-          <% if current_user.image? %>
-            <%= link_to user_path(current_user.id), class: "navbar-item is-expanded is-block has-text-centered" do %>
-            <%= image_tag current_user.image_url %><p class="is-size-7">マイページ</p><% end %>
-          <% else %>
-            <%= link_to user_path(current_user.id), class: "navbar-item is-expanded is-block has-text-centered" do %>
-            <%= image_tag (asset_path'no_image.png') %><p class="is-size-7">マイページ</p><% end %>
-          <% end %>
-        <% end %>
-        <% if user_signed_in? %>
-          <%= link_to users_path, class: "navbar-item is-expanded is-block has-text-centered" do %>
-          <i class="fa fa-envelope fa-lg"></i><p class="is-size-7">メッセージ</p><% end %>
-          <%= link_to destroy_user_session_path, method: :delete, class: "navbar-item is-expanded is-block has-text-centered" do %>
-          <i class="fa fa-user fa-lg"></i><p class="is-size-7">ログアウト</p><% end %>
-        <% else %>
-          <%= link_to new_user_session_path, class: "navbar-item is-expanded is-block has-text-centered" do %>
-          <i class="fa fa-user fa-lg"></i><p class="is-size-7">ログイン</p><% end %>
-          <%= link_to new_user_registration_path, class: "navbar-item is-expanded is-block has-text-centered" do %>
-          <i class="fa fa-user-pen fa-lg"></i><p class="is-size-7">新規登録</p><% end %>
-        <% end %>
+      </div>
+      <div id="targetMenu" class="navbar-menu">
+        <div class="navbar-end">
+          <a class="navbar-item">
+            <% if user_signed_in? %>
+              <% if current_user.image? %>
+                <%= link_to user_path(current_user.id), class: "navbar-item" do %>
+                <%= image_tag current_user.image_url %><p class="is-size-7">マイページ</p><% end %>
+              <% else %>
+                <%= link_to user_path(current_user.id), class: "navbar-item" do %>
+                <%= image_tag (asset_path'no_image.png') %><p class="is-size-7">マイページ</p><% end %>
+              <% end %>
+            <% end %>
+          </a>
+            <% if user_signed_in? %>
+            <a class="navbar-item">
+              <%= link_to users_path, class: "navbar-item" do %>
+              <i class="fa fa-envelope fa-lg"></i><p class="is-size-7">メッセージ</p><% end %>
+            </a>
+            <a class="navbar-item">
+              <%= link_to destroy_user_session_path, method: :delete, class: "navbar-item" do %>
+              <i class="fa fa-user fa-lg"></i><p class="is-size-7">ログアウト</p><% end %>
+            </a>
+            <% else %>
+            <a class="navbar-item">
+              <%= link_to new_user_session_path, class: "navbar-item" do %>
+              <i class="fa fa-user fa-lg"></i><p class="is-size-7">ログイン</p><% end %>
+            </a>
+            <a class="navbar-item">
+              <%= link_to new_user_registration_path, class: "navbar-item" do %>
+              <i class="fa fa-user-pen fa-lg"></i><p class="is-size-7">新規登録</p><% end %>
+            </a>
+            <% end %>
+          </a>
+        </div>
       </div>
     </nav>
 
@@ -81,16 +103,16 @@
         </ul>
       </div>
     </section><br>
+    <a class="is-expanded is-block has-text-centered is-hidden-desktop">
+      <%= search_form_for @search, url: search_articles_path do |f| %>
+        <%= f.search_field :title_or_content_or_user_name_cont, placeholder: 'キーワードを入力' %>
+        <%= f.submit "検索", class: "button is-info is-small" %>
+      <% end %>
+    </a><br>
 
     <%# メインコンテンツ左側 %>
     <main class="columns">
       <div class="submenu column is-3">
-        <a class="is-expanded is-block has-text-centered is-hidden-tablet">
-          <%= search_form_for @search, url: search_articles_path do |f| %>
-            <%= f.search_field :title_or_content_or_user_name_cont, placeholder: 'キーワードを入力' %>
-            <%= f.submit "検索", class: "button is-info is-small" %>
-          <% end %>
-        </a><br>
         <aside class="box">
         katekate〜家庭の過程〜<br>
         katekateは親や子供が抱える問題や知識を他者と共有しユーザー同士で繋がることができるアプリです。
