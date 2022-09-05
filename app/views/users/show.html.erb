@@ -21,73 +21,171 @@
   <div class="column">
     <div class="box">
       <div class="sns-link">
-        <div class="profile-links level-item">
-          <% if @user.twitter_url.present? %>
-            <a class="profile-link">
-              <%= link_to @user.twitter_url, target: :_blank do %>
-                <i class="fab fa-twitter fa-2x"></i>
-              <% end %>
-            </a>
-          <% else %>
-            <a class="profile-link">
-                <i style="color:gray" class="fab fa-twitter fa-2x"></i>
-            </a>
-          <% end %>
-          <% if @user.instagram_url.present? %>
-            <a class="profile-link">
-              <%= link_to @user.instagram_url, target: :_blank do %>
-                <i class="fab fa-instagram fa-2x"></i>
-              <% end %>
-            </a>
-          <% else %>
-            <a class="profile-link">
-              <i style="color:gray" class="fab fa-instagram fa-2x"></i>
-            </a>
-          <% end %>
+      <%# SNSリンクデスクトップ表示 %>
+        <div class="profile-links level is-hidden-mobile">
+          <div class="level-item has-text-centered">
+            <% if @user.twitter_url.present? %>
+              <a class="profile-link">
+                <%= link_to @user.twitter_url, target: :_blank do %>
+                  <i class="fab fa-twitter fa-2x"></i>
+                <% end %>
+              </a>
+            <% else %>
+              <a class="profile-link">
+                  <i style="color:gray" class="fab fa-twitter fa-2x"></i>
+              </a>
+            <% end %>
+          </div>
+          <div class="level-item has-text-centered">
+            <% if @user.instagram_url.present? %>
+              <a class="profile-link">
+                <%= link_to @user.instagram_url, target: :_blank do %>
+                  <i class="fab fa-instagram fa-2x"></i>
+                <% end %>
+              </a>
+            <% else %>
+              <a class="profile-link">
+                <i style="color:gray" class="fab fa-instagram fa-2x"></i>
+              </a>
+            <% end %>
+          </div>
+          <div class="level-item has-text-centered">
           <% if @user.tiktok_url.present? %>
-            <a class="profile-link">
-              <%= link_to @user.tiktok_url, target: :_blank do %>
-                <i class="fab fa-tiktok fa-2x"></i>
+              <a class="profile-link">
+                <%= link_to @user.tiktok_url, target: :_blank do %>
+                  <i class="fab fa-tiktok fa-2x"></i>
+                <% end %>
+              </a>
+            <% else %>
+              <a class="profile-link">
+                <i style="color:gray" class="fab fa-tiktok fa-2x"></i>
+              </a>
+            <% end %>
+          </div>
+          <div class="level-item has-text-centered">
+            <% if @user.facebook_url.present? %>
+              <a class="profile-link">
+                <%= link_to @user.facebook_url, target: :_blank do %>
+                  <i class="fab fa-facebook fa-2x"></i>
+                <% end %>
+              </a>
+            <% else %>
+              <a class="profile-link">
+                <i style="color:gray" class="fab fa-facebook fa-2x"></i>
+              </a>
+            <% end %>
+          </div>
+          <div class="level-item has-text-centered">
+            <% if @user.youtube_url.present? %>
+              <a class="profile-link">
+                <%= link_to @user.youtube_url, target: :_blank do %>
+                  <i class="fab fa-youtube fa-2x"></i>
+                <% end %>
+              </a>
+            <% else %>
+              <a class="profile-link">
+                <i style="color:gray" class="fab fa-youtube fa-2x"></i>
+              </a>
+            <% end %>
+          </div>
+          <div class="level-item has-text-centered">
+            <% if @user.website_url.present? %>
+              <a class="profile-link">
+                <%= link_to @user.website_url, target: :_blank do %>
+                  <i class="fa-regular fa-window-maximize fa-2x"></i>
+                <% end %>
+              </a>
+            <% else %>
+              <a class="profile-link">
+                <i style="color:gray" class="fa-regular fa-window-maximize fa-2x"></i>
+              </a>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <%# SNSリンクモバイル表示 %>
+      <div class="sns-link">
+        <div class="profile-links level is-hidden-tablet">
+          <div class="level is-mobile">
+            <div class="level-item">
+              <% if @user.twitter_url.present? %>
+                <a class="profile-link">
+                  <%= link_to @user.twitter_url, target: :_blank do %>
+                    <i class="fab fa-twitter fa-2x"></i>
+                  <% end %>
+                </a>
+              <% else %>
+                <a class="profile-link">
+                    <i style="color:gray" class="fab fa-twitter fa-2x"></i>
+                </a>
               <% end %>
-            </a>
-          <% else %>
-            <a class="profile-link">
-              <i style="color:gray" class="fab fa-tiktok fa-2x"></i>
-            </a>
-          <% end %>
-          <% if @user.facebook_url.present? %>
-            <a class="profile-link">
-              <%= link_to @user.facebook_url, target: :_blank do %>
-                <i class="fab fa-facebook fa-2x"></i>
+            </div>
+            <div class="level-item">
+              <% if @user.instagram_url.present? %>
+                <a class="profile-link">
+                  <%= link_to @user.instagram_url, target: :_blank do %>
+                    <i class="fab fa-instagram fa-2x"></i>
+                  <% end %>
+                </a>
+              <% else %>
+                <a class="profile-link">
+                  <i style="color:gray" class="fab fa-instagram fa-2x"></i>
+                </a>
               <% end %>
-            </a>
-          <% else %>
-            <a class="profile-link">
-              <i style="color:gray" class="fab fa-facebook fa-2x"></i>
-            </a>
-          <% end %>
-          <% if @user.youtube_url.present? %>
-            <a class="profile-link">
-              <%= link_to @user.youtube_url, target: :_blank do %>
-                <i class="fab fa-youtube fa-2x"></i>
+            </div>
+            <div class="level-item">
+              <% if @user.tiktok_url.present? %>
+                <a class="profile-link">
+                  <%= link_to @user.tiktok_url, target: :_blank do %>
+                    <i class="fab fa-tiktok fa-2x"></i>
+                  <% end %>
+                </a>
+              <% else %>
+                <a class="profile-link">
+                  <i style="color:gray" class="fab fa-tiktok fa-2x"></i>
+                </a>
               <% end %>
-            </a>
-          <% else %>
-            <a class="profile-link">
-              <i style="color:gray" class="fab fa-youtube fa-2x"></i>
-            </a>
-          <% end %>
-          <% if @user.website_url.present? %>
-            <a class="profile-link">
-              <%= link_to @user.website_url, target: :_blank do %>
-                <i class="fa-regular fa-window-maximize fa-2x"></i>
+            </div>
+            <div class="level-item">
+              <% if @user.facebook_url.present? %>
+                <a class="profile-link">
+                  <%= link_to @user.facebook_url, target: :_blank do %>
+                    <i class="fab fa-facebook fa-2x"></i>
+                  <% end %>
+                </a>
+              <% else %>
+                <a class="profile-link">
+                  <i style="color:gray" class="fab fa-facebook fa-2x"></i>
+                </a>
               <% end %>
-            </a>
-          <% else %>
-            <a class="profile-link">
-              <i style="color:gray" class="fa-regular fa-window-maximize fa-2x"></i>
-            </a>
-          <% end %>
+            </div>
+            <div class="level-item">
+              <% if @user.youtube_url.present? %>
+                <a class="profile-link">
+                  <%= link_to @user.youtube_url, target: :_blank do %>
+                    <i class="fab fa-youtube fa-2x"></i>
+                  <% end %>
+                </a>
+              <% else %>
+                <a class="profile-link">
+                  <i style="color:gray" class="fab fa-youtube fa-2x"></i>
+                </a>
+              <% end %>
+            </div>
+            <div class="level-item">
+              <% if @user.website_url.present? %>
+                <a class="profile-link">
+                  <%= link_to @user.website_url, target: :_blank do %>
+                    <i class="fa-regular fa-window-maximize fa-2x"></i>
+                  <% end %>
+                </a>
+              <% else %>
+                <a class="profile-link">
+                  <i style="color:gray" class="fa-regular fa-window-maximize fa-2x"></i>
+                </a>
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
       <br>
