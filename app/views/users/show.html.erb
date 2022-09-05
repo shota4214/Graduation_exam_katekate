@@ -277,14 +277,18 @@
     <p class=" has-text-centered is-size-3">投稿記事一覧</p>
     <% @articles.each do |article| %>
     <div class="card">
+      <% if article.draft? %>
+      <div class="card-content has-background-grey-lighter">
+      <% else %>
       <div class="card-content">
+      <% end %>
         <div class="media">
           <div class="media-left">
-            <figure class="image is-48x48">
+            <figure class="image is-50x50 image_wrap">
               <% if article.image? %>
-                <%= link_to article_path(article.id) do %><%= image_tag article.image.url %><% end %><br>
+                <%= link_to article_path(article.id) do %><%= image_tag article.image.url, class: 'img_wrap mx-auto d-block' %><% end %><br>
               <% else %>
-                <%= link_to article_path(article.id) do %><%= image_tag (asset_path"no_image.png") %><% end %><br>
+                <%= link_to article_path(article.id) do %><%= image_tag (asset_path"no_image.png"), class: 'img_wrap mx-auto d-block' %><% end %><br>
               <% end %>
             </figure>
           </div>
