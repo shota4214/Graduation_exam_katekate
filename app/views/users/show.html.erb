@@ -1,91 +1,196 @@
 <p class=" has-text-centered has-background-success is-size-3"><%= @user.name %>のページ</p>
 
-<div class="columns">
+<div class="columns is-mobile is-multiline is-centered">
   <div class="column is-narrow">
-    <div class="box" style="width: 200px;">
-      <% if @user.image? %>
-        <%= image_tag @user.image.url %>
-      <% else %>
-        <%= image_tag (asset_path'no_image.png') %>
-      <% end %>
-      <p class="title is-5"><%= @user.name %></p>
-      <p class="subtitle is-10"><%= @user.sex_i18n %>|<%= @user_age %>代|<%= @user.prefectures %></p>
+    <div class="box" style="width: 250px;">
+      <div class="level-item">
+        <% if @user.image? %>
+          <%= image_tag @user.image.url %>
+        <% else %>
+          <%= image_tag (asset_path'no_image.png') %>
+        <% end %>
+        </div>
+      <div class="level-item">
+        <p class="title is-5"><%= @user.name %></p>
+      </div>
+      <div class="level-item">
+        <p class="subtitle is-10"><%= @user.sex_i18n %>|<%= @user_age %>代|<%= @user.prefectures %></p>
+      </div>
     </div>
   </div>
   <div class="column">
     <div class="box">
       <div class="sns-link">
-        <div class="profile-links level">
-          <% if @user.twitter_url.present? %>
-            <a class="profile-link">
-              <%= link_to @user.twitter_url, target: :_blank do %>
-                <i class="fab fa-twitter fa-2x"></i>
-              <% end %>
-            </a>
-          <% else %>
-            <a class="profile-link">
-                <i style="color:gray" class="fab fa-twitter fa-2x"></i>
-            </a>
-          <% end %>
-          <% if @user.instagram_url.present? %>
-            <a class="profile-link">
-              <%= link_to @user.instagram_url, target: :_blank do %>
-                <i class="fab fa-instagram fa-2x"></i>
-              <% end %>
-            </a>
-          <% else %>
-            <a class="profile-link">
-              <i style="color:gray" class="fab fa-instagram fa-2x"></i>
-            </a>
-          <% end %>
+      <%# SNSリンクデスクトップ表示 %>
+        <div class="profile-links level is-hidden-mobile">
+          <div class="level-item">
+            <% if @user.twitter_url.present? %>
+              <a class="profile-link">
+                <%= link_to @user.twitter_url, target: :_blank do %>
+                  <i class="fab fa-twitter fa-2x"></i>
+                <% end %>
+              </a>
+            <% else %>
+              <a class="profile-link">
+                  <i style="color:gray" class="fab fa-twitter fa-2x"></i>
+              </a>
+            <% end %>
+          </div>
+          <div class="level-item">
+            <% if @user.instagram_url.present? %>
+              <a class="profile-link">
+                <%= link_to @user.instagram_url, target: :_blank do %>
+                  <i class="fab fa-instagram fa-2x"></i>
+                <% end %>
+              </a>
+            <% else %>
+              <a class="profile-link">
+                <i style="color:gray" class="fab fa-instagram fa-2x"></i>
+              </a>
+            <% end %>
+          </div>
+          <div class="level-item">
           <% if @user.tiktok_url.present? %>
-            <a class="profile-link">
-              <%= link_to @user.tiktok_url, target: :_blank do %>
-                <i class="fab fa-tiktok fa-2x"></i>
+              <a class="profile-link">
+                <%= link_to @user.tiktok_url, target: :_blank do %>
+                  <i class="fab fa-tiktok fa-2x"></i>
+                <% end %>
+              </a>
+            <% else %>
+              <a class="profile-link">
+                <i style="color:gray" class="fab fa-tiktok fa-2x"></i>
+              </a>
+            <% end %>
+          </div>
+          <div class="level-item">
+            <% if @user.facebook_url.present? %>
+              <a class="profile-link">
+                <%= link_to @user.facebook_url, target: :_blank do %>
+                  <i class="fab fa-facebook fa-2x"></i>
+                <% end %>
+              </a>
+            <% else %>
+              <a class="profile-link">
+                <i style="color:gray" class="fab fa-facebook fa-2x"></i>
+              </a>
+            <% end %>
+          </div>
+          <div class="level-item">
+            <% if @user.youtube_url.present? %>
+              <a class="profile-link">
+                <%= link_to @user.youtube_url, target: :_blank do %>
+                  <i class="fab fa-youtube fa-2x"></i>
+                <% end %>
+              </a>
+            <% else %>
+              <a class="profile-link">
+                <i style="color:gray" class="fab fa-youtube fa-2x"></i>
+              </a>
+            <% end %>
+          </div>
+          <div class="level-item">
+            <% if @user.website_url.present? %>
+              <a class="profile-link">
+                <%= link_to @user.website_url, target: :_blank do %>
+                  <i class="fa-regular fa-window-maximize fa-2x"></i>
+                <% end %>
+              </a>
+            <% else %>
+              <a class="profile-link">
+                <i style="color:gray" class="fa-regular fa-window-maximize fa-2x"></i>
+              </a>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <%# SNSリンクモバイル表示 %>
+      <div class="sns-link">
+        <div class="profile-links level is-hidden-tablet">
+          <div class="level is-mobile">
+            <div class="level-item">
+              <% if @user.twitter_url.present? %>
+                <a class="profile-link">
+                  <%= link_to @user.twitter_url, target: :_blank do %>
+                    <i class="fab fa-twitter fa-2x"></i>
+                  <% end %>
+                </a>
+              <% else %>
+                <a class="profile-link">
+                    <i style="color:gray" class="fab fa-twitter fa-2x"></i>
+                </a>
               <% end %>
-            </a>
-          <% else %>
-            <a class="profile-link">
-              <i style="color:gray" class="fab fa-tiktok fa-2x"></i>
-            </a>
-          <% end %>
-          <% if @user.facebook_url.present? %>
-            <a class="profile-link">
-              <%= link_to @user.facebook_url, target: :_blank do %>
-                <i class="fab fa-facebook fa-2x"></i>
+            </div>
+            <div class="level-item">
+              <% if @user.instagram_url.present? %>
+                <a class="profile-link">
+                  <%= link_to @user.instagram_url, target: :_blank do %>
+                    <i class="fab fa-instagram fa-2x"></i>
+                  <% end %>
+                </a>
+              <% else %>
+                <a class="profile-link">
+                  <i style="color:gray" class="fab fa-instagram fa-2x"></i>
+                </a>
               <% end %>
-            </a>
-          <% else %>
-            <a class="profile-link">
-              <i style="color:gray" class="fab fa-facebook fa-2x"></i>
-            </a>
-          <% end %>
-          <% if @user.youtube_url.present? %>
-            <a class="profile-link">
-              <%= link_to @user.youtube_url, target: :_blank do %>
-                <i class="fab fa-youtube fa-2x"></i>
+            </div>
+            <div class="level-item">
+              <% if @user.tiktok_url.present? %>
+                <a class="profile-link">
+                  <%= link_to @user.tiktok_url, target: :_blank do %>
+                    <i class="fab fa-tiktok fa-2x"></i>
+                  <% end %>
+                </a>
+              <% else %>
+                <a class="profile-link">
+                  <i style="color:gray" class="fab fa-tiktok fa-2x"></i>
+                </a>
               <% end %>
-            </a>
-          <% else %>
-            <a class="profile-link">
-              <i style="color:gray" class="fab fa-youtube fa-2x"></i>
-            </a>
-          <% end %>
-          <% if @user.website_url.present? %>
-            <a class="profile-link">
-              <%= link_to @user.website_url, target: :_blank do %>
-                <i class="fa-regular fa-window-maximize fa-2x"></i>
+            </div>
+            <div class="level-item">
+              <% if @user.facebook_url.present? %>
+                <a class="profile-link">
+                  <%= link_to @user.facebook_url, target: :_blank do %>
+                    <i class="fab fa-facebook fa-2x"></i>
+                  <% end %>
+                </a>
+              <% else %>
+                <a class="profile-link">
+                  <i style="color:gray" class="fab fa-facebook fa-2x"></i>
+                </a>
               <% end %>
-            </a>
-          <% else %>
-            <a class="profile-link">
-              <i style="color:gray" class="fa-regular fa-window-maximize fa-2x"></i>
-            </a>
-          <% end %>
+            </div>
+            <div class="level-item">
+              <% if @user.youtube_url.present? %>
+                <a class="profile-link">
+                  <%= link_to @user.youtube_url, target: :_blank do %>
+                    <i class="fab fa-youtube fa-2x"></i>
+                  <% end %>
+                </a>
+              <% else %>
+                <a class="profile-link">
+                  <i style="color:gray" class="fab fa-youtube fa-2x"></i>
+                </a>
+              <% end %>
+            </div>
+            <div class="level-item">
+              <% if @user.website_url.present? %>
+                <a class="profile-link">
+                  <%= link_to @user.website_url, target: :_blank do %>
+                    <i class="fa-regular fa-window-maximize fa-2x"></i>
+                  <% end %>
+                </a>
+              <% else %>
+                <a class="profile-link">
+                  <i style="color:gray" class="fa-regular fa-window-maximize fa-2x"></i>
+                </a>
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
       <br>
-      <div class="level">
+      <%# ALLカウントデスクトップ表示 %>
+      <div class="level is-hidden-mobile">
         <p>
           <i class="fa-solid fa-a"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-heart fa-lg"></i>
           <%= @like_count_all %>
@@ -99,25 +204,53 @@
           <%= @impression_count_all %>
         </p>
       </div>
+      <%# ALLカウントモバイル表示 %>
+      <div class="level is-mobile is-hidden-tablet">
+          <p>
+            <i class="fa-solid fa-a"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-heart fa-lg"></i>
+            <%= @like_count_all %>
+          </p>
+          <p>
+            <i class="fa-solid fa-a"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-star fa-lg"></i>
+            <%= @impression_count_all %>
+          </p>
+          <p>
+            <i class="fa-solid fa-a"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-eye fa-lg"></i>
+            <%= @impression_count_all %>
+          </p>
+      </div>
       <br>
-      <div class="level">
+      <%# フォロー数デスクトップ表示 %>
+      <div class="level is-hidden-mobile">
+        <p><i class="fa-solid fa-handshake"></i>フォロー<%= @following_users.count %>人</p>
+        <p><i class="fa-solid fa-handshake"></i>フォロワー<%= @follower_users.count %>人</p>
+      </div>
+      <%# フォロー数モバイル表示 %>
+      <div class="level is-mobile is-hidden-tablet">
         <p><i class="fa-solid fa-handshake"></i>フォロー<%= @following_users.count %>人</p>
         <p><i class="fa-solid fa-handshake"></i>フォロワー<%= @follower_users.count %>人</p>
       </div>
       <br>
+      <%# リンクボタン表示 %>
       <div class="level">
         <% if user_signed_in? %>
           <% if @user.id == current_user.id %>
-            <div class="field is-grouped">
-              <%# <p class="control"> deviseを使った編集へのパス%>
-                <%# <%= link_to edit_user_registration_path(@user) do %><%#<button class="button is-link">deviseプロフ編集</button><% end %>
+            <%# <div class="level-item"> deviseを使った編集へのパス %>
+              <%# <p class="control"> %>
+                <%#= link_to edit_user_registration_path(@user) do%><%#<button class="button is-link">deviseプロフ編集</button><% end %>
               <%# </p> %>
+            <%# </div> %>
+            <div class="level-item">
               <p class="control">
                 <%= link_to edit_step1_user_path(@user) do %><button class="button is-success">プロフィール編集</button><% end %>
               </p>
+            </div>
+            <div class="level-item">
               <p class="control">
                 <%= link_to favorites_path(@user) do %><button class="button is-warning">お気に入り記事</button><% end %>
               </p>
+            </div>
+            <div class="level-item">
               <p class="control">
                 <%= link_to follow_index_user_path(@user) do %><button class="button is-info">フォロー・フォロワー</button><% end %>
               </p>
@@ -144,14 +277,18 @@
     <p class=" has-text-centered is-size-3">投稿記事一覧</p>
     <% @articles.each do |article| %>
     <div class="card">
+      <% if article.draft? %>
+      <div class="card-content has-background-grey-lighter">
+      <% else %>
       <div class="card-content">
+      <% end %>
         <div class="media">
           <div class="media-left">
-            <figure class="image is-48x48">
+            <figure class="image is-50x50 image_wrap">
               <% if article.image? %>
-                <%= link_to article_path(article.id) do %><%= image_tag article.image.url %><% end %><br>
+                <%= link_to article_path(article.id) do %><%= image_tag article.image.url, class: 'img_wrap mx-auto d-block' %><% end %><br>
               <% else %>
-                <%= link_to article_path(article.id) do %><%= image_tag (asset_path"no_image.png") %><% end %><br>
+                <%= link_to article_path(article.id) do %><%= image_tag (asset_path"no_image.png"), class: 'img_wrap mx-auto d-block' %><% end %><br>
               <% end %>
             </figure>
           </div>
