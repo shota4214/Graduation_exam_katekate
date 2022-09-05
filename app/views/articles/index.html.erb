@@ -15,7 +15,7 @@
     <div class="content">
       <h4><%= article.type_i18n %>【<%= link_to article_path(article.id) do %><%= article.title %><% end %>】</h4><br>
       <h6>投稿者：<%= link_to article.user.name, user_path(article.user_id) %></h6>
-        <%= link_to article_path(article.id) do %><%= article.content %><% end %><br>
+        <%= link_to article_path(article.id) do %><%= article.content.truncate(45) %><% end %><br>
         <small><a><i class="fa-solid fa-eye"></i><%= article.impressions_count %></a> ・ <a><i class="fa-solid fa-heart"></i><%= article.likes.count %></a> ・ <a><i class="fa-solid fa-star"></i><%= article.favorites.count %></a></small>
       </p>
     </div>
