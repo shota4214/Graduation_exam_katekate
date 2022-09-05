@@ -297,7 +297,7 @@
           </div>
         </div>
         <div class="content">
-          <p><%= article.content %></p>
+          <p><%= article.content.truncate(60) %></p>
           <br>
           <small><a><i class="fa-solid fa-eye"></i><%= article.impressions_count %></a> ・ <a><i class="fa-solid fa-heart"></i><%= article.likes.count %></a> ・ <a><i class="fa-solid fa-star"></i><%= article.favorites.count %></a></small>
         </div>
