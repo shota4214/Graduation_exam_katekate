@@ -23,7 +23,7 @@
       <div class="sns-link">
       <%# SNSリンクデスクトップ表示 %>
         <div class="profile-links level is-hidden-mobile">
-          <div class="level-item has-text-centered">
+          <div class="level-item">
             <% if @user.twitter_url.present? %>
               <a class="profile-link">
                 <%= link_to @user.twitter_url, target: :_blank do %>
@@ -36,7 +36,7 @@
               </a>
             <% end %>
           </div>
-          <div class="level-item has-text-centered">
+          <div class="level-item">
             <% if @user.instagram_url.present? %>
               <a class="profile-link">
                 <%= link_to @user.instagram_url, target: :_blank do %>
@@ -49,7 +49,7 @@
               </a>
             <% end %>
           </div>
-          <div class="level-item has-text-centered">
+          <div class="level-item">
           <% if @user.tiktok_url.present? %>
               <a class="profile-link">
                 <%= link_to @user.tiktok_url, target: :_blank do %>
@@ -62,7 +62,7 @@
               </a>
             <% end %>
           </div>
-          <div class="level-item has-text-centered">
+          <div class="level-item">
             <% if @user.facebook_url.present? %>
               <a class="profile-link">
                 <%= link_to @user.facebook_url, target: :_blank do %>
@@ -75,7 +75,7 @@
               </a>
             <% end %>
           </div>
-          <div class="level-item has-text-centered">
+          <div class="level-item">
             <% if @user.youtube_url.present? %>
               <a class="profile-link">
                 <%= link_to @user.youtube_url, target: :_blank do %>
@@ -88,7 +88,7 @@
               </a>
             <% end %>
           </div>
-          <div class="level-item has-text-centered">
+          <div class="level-item">
             <% if @user.website_url.present? %>
               <a class="profile-link">
                 <%= link_to @user.website_url, target: :_blank do %>
@@ -189,7 +189,8 @@
         </div>
       </div>
       <br>
-      <div class="level">
+      <%# ALLカウントデスクトップ表示 %>
+      <div class="level is-hidden-mobile">
         <p>
           <i class="fa-solid fa-a"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-heart fa-lg"></i>
           <%= @like_count_all %>
@@ -203,25 +204,53 @@
           <%= @impression_count_all %>
         </p>
       </div>
+      <%# ALLカウントモバイル表示 %>
+      <div class="level is-mobile is-hidden-tablet">
+          <p>
+            <i class="fa-solid fa-a"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-heart fa-lg"></i>
+            <%= @like_count_all %>
+          </p>
+          <p>
+            <i class="fa-solid fa-a"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-star fa-lg"></i>
+            <%= @impression_count_all %>
+          </p>
+          <p>
+            <i class="fa-solid fa-a"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-l"></i><i class="fa-solid fa-eye fa-lg"></i>
+            <%= @impression_count_all %>
+          </p>
+      </div>
       <br>
-      <div class="level">
+      <%# フォロー数デスクトップ表示 %>
+      <div class="level is-hidden-mobile">
+        <p><i class="fa-solid fa-handshake"></i>フォロー<%= @following_users.count %>人</p>
+        <p><i class="fa-solid fa-handshake"></i>フォロワー<%= @follower_users.count %>人</p>
+      </div>
+      <%# フォロー数モバイル表示 %>
+      <div class="level is-mobile is-hidden-tablet">
         <p><i class="fa-solid fa-handshake"></i>フォロー<%= @following_users.count %>人</p>
         <p><i class="fa-solid fa-handshake"></i>フォロワー<%= @follower_users.count %>人</p>
       </div>
       <br>
+      <%# リンクボタン表示 %>
       <div class="level">
         <% if user_signed_in? %>
           <% if @user.id == current_user.id %>
-            <div class="field is-grouped">
-              <%# <p class="control"> deviseを使った編集へのパス%>
-                <%# <%= link_to edit_user_registration_path(@user) do %><%#<button class="button is-link">deviseプロフ編集</button><% end %>
+            <%# <div class="level-item"> deviseを使った編集へのパス %>
+              <%# <p class="control"> %>
+                <%#= link_to edit_user_registration_path(@user) do%><%#<button class="button is-link">deviseプロフ編集</button><% end %>
               <%# </p> %>
+            <%# </div> %>
+            <div class="level-item">
               <p class="control">
                 <%= link_to edit_step1_user_path(@user) do %><button class="button is-success">プロフィール編集</button><% end %>
               </p>
+            </div>
+            <div class="level-item">
               <p class="control">
                 <%= link_to favorites_path(@user) do %><button class="button is-warning">お気に入り記事</button><% end %>
               </p>
+            </div>
+            <div class="level-item">
               <p class="control">
                 <%= link_to follow_index_user_path(@user) do %><button class="button is-info">フォロー・フォロワー</button><% end %>
               </p>
