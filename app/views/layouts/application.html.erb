@@ -25,7 +25,7 @@
         </a>
       </div>
       <div class="navbar-menu">
-        <div class="navbar-end is-hidden-mobile">
+        <div class="navbar-end is-hidden-touch">
           <div class="field has-addons">
             <%= search_form_for @search, class: "navbar-item",url: search_articles_path do |f| %>
               <%= f.search_field :title_or_content_or_user_name_cont, placeholder: 'キーワードを入力' %>
