@@ -9,6 +9,7 @@ class Article < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :like_users, through: :likes, source: :user
   has_many :comments, dependent: :destroy
+  has_many :notifications, dependent: :destroy
   is_impressionable counter_cache: true
   enum type: {article: 0, question: 1}
 end
