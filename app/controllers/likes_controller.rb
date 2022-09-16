@@ -4,6 +4,7 @@ class LikesController < ApplicationController
 
   def create
     Like.create(user_id: current_user.id, article_id: params[:article_id])
+    @article.create_notification_like!(current_user)
   end
 
   def destroy

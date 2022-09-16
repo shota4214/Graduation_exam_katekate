@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
     @article_user = User.find(@comment.article.user.id)
     respond_to do |format|
       if @comment.save
+        @article.create_notification_comment!(current_user, @comment.id)
         unless @comment.article.user.id == current_user.id
           ContactMailer.comment_mail(@article_user, current_user).deliver
         end
