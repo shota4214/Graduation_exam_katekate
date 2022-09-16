@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.build(comment_params)
     @comment.article_id = @article.id
     @article_user = User.find(@comment.article.user.id)
+    @article = @comment.article
     respond_to do |format|
       if @comment.save
         @article.create_notification_comment!(current_user, @comment.id)
