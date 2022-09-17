@@ -14,4 +14,7 @@
   <% if !@comment.nil? %>
     <p class="moderate-font text-center" style="color: #C0C0C0;"><%= @comment %></p>
   <% end %>
+    <% if !@message.nil? %>
+    <p class="moderate-font text-center" style="color: #C0C0C0;"><%= truncate(@message.body, length: 20, omission: "...（一部表示）") %></p>
+  <% end %>
 </div>
