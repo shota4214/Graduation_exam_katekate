@@ -1,0 +1,19 @@
+<p class=" has-text-centered has-background-success is-size-4">通知内容</p>
+<br>
+<article class="message is-danger">
+  <div class="message-body">
+    下記全削除ボタンで通知を全て削除します。<br>削除したものは戻りません。<br>
+    <%= link_to notification_path(@notifications),class: "button is-danger", method: :delete, data: { confirm: "本当に削除しても良いですか？" } do %>
+    <i class="fa-solid fa-trash-can fa-lg" style="color: withe;"></i><p class="is-size-7 has-text-weight-bold">通知全削除</p>
+  <% end %>
+  </div>
+</article>
+  <hr>
+<% if @notifications.exists? %>
+  <div class="users-index">
+    <%= render @notifications %>
+    <%= paginate @notifications %>
+  </div>
+<% else %>
+  <p>通知はありません</p>
+<% end %>

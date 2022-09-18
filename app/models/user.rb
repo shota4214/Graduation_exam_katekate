@@ -13,6 +13,8 @@ class User < ApplicationRecord
   has_many :passive_relationships, foreign_key: :following_id, class_name: "Relationship", dependent: :destroy
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :comments, dependent: :destroy
+  has_many :active_notifications, class_name: "Notification", foreign_key: "visitor_id", dependent: :destroy
+  has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
   validates :name, presence: true
   enum sex: {unanswered: 0, male: 1, female: 2}
   enum prefectures: {
@@ -64,6 +66,17 @@ class User < ApplicationRecord
       user.password = SecureRandom.urlsafe_base64
       user.name = "ゲスト管理者"
       user.admin = true
+    end
+  end
+
+  def create_notification_follow!(current_user)
+    temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ?", current_user.id, id, "follow"])
+    if temp.blank?
+      notification = current_user.active_notifications.new(
+        visited_id: id,
+        action: "follow"
+      )
+      notification.save if notification.valid?
     end
   end
 end

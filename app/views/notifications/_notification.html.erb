@@ -1,0 +1,26 @@
+<% visitor = notification.visitor %>
+<% article = notification.article %>
+
+<div class="card">
+  <div class="card-content">
+    <div class="content">
+      <div class="user-view clearfix ">
+        <%= link_to user_path(visitor) do %>
+          <% if visitor.image? %>
+            <%= image_tag visitor.image.url, size: "50x50" %>
+          <% else %>
+            <%= image_tag (asset_path'no_image.png'), size: "50x50" %>
+          <% end %>
+        <% end %>
+        <%= notification_form(notification) %><span class="moderate-font"><%= " (#{time_ago_in_words(notification.created_at)} 前)" %></span>
+        <br>
+        <% if !@comment.nil? %>
+          <p class="moderate-font text-center" style="color: #C0C0C0;"><%= @comment %></p>
+        <% end %>
+          <% if !@message.nil? %>
+          <p class="moderate-font text-center" style="color: #C0C0C0;"><%= truncate(@message.body, length: 20, omission: "...（一部表示）") %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

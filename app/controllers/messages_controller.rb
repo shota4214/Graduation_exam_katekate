@@ -25,8 +25,10 @@ class MessagesController < ApplicationController
     @recipient_user_id = @conversation.message_recipient_id(current_user)
     @recipient_user = User.find(@recipient_user_id)
     @message = @conversation.messages.build(message_params)
+    @message_conversation = @message.conversation 
     if @message.save
       ContactMailer.message_mail(@recipient_user, current_user).deliver
+      @message_conversation.create_notification_dm(current_user, @message.id)
       redirect_to conversation_messages_path(@conversation), notice: "メッセージを送信しました。"
     else
       redirect_to conversation_messages_path(@conversation), notice: "メッセージを入力してください。"

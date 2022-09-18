@@ -7,21 +7,39 @@
 <div class="ui segment">
   <% @messages.each do |message| %>
     <% if message.body.present? %>
-      <div class="item">
-        <div class="content">
-          <div class="header"><strong><%= message.user.name %></strong> <%= message.message_time %></div>
-          <div class="list">
-            <div class="item">
-              <i class="right triangle icon"></i>
-              <%= message.body %> /
-              <% if message.user == current_user %>
-                <small><%= message.read ? '既読' : '未読' %></small>
-              <% end %>
+      <% if message.user_id == current_user.id %>
+        <div class="item">
+          <div class="content">
+            <div class="header has-text-right "><strong><%= message.user.name %></strong> <%= message.message_time %></div>
+            <div class="list">
+              <div class="my-message item has-text-right has-background-primary">
+                <i class="fa-solid fa-caret-right"></i>
+                <%= message.body %> /
+                <% if message.user == current_user %>
+                  <small><%= message.read ? '既読' : '未読' %></small>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <br>
+        <br>
+      <% else %>
+        <div class="item">
+          <div class="content">
+            <div class="header"><strong><%= message.user.name %></strong> <%= message.message_time %></div>
+            <div class="list">
+              <div class="item has-background-light">
+                <i class="fa-solid fa-caret-right"></i>
+                <%= message.body %>
+                <% if message.user == current_user %>
+                  <small><%= message.read ? '既読' : '未読' %></small>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+      <% end %>
     <% end %>
   <% end %>
 </div>

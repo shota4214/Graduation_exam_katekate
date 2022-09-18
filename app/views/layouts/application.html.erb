@@ -48,6 +48,17 @@
             <% end %>
           </a>
             <% if user_signed_in? %>
+            <a class="navbar-item fa-stack">
+              <% if unchecked_notifications.any? %>
+                <%= link_to notifications_path, class: "navbar-item" do %>
+                <i class="fa fa-circle" style="color: gold;"></i>
+                <i class="fa fa-bell fa-lg"></i>
+                <p class="is-size-7">通知</p><% end %>
+              <% else %>
+                <%= link_to notifications_path, class: "navbar-item" do %>
+                <i class="fa fa-bell fa-lg"></i><p class="is-size-7">通知</p><% end %>
+              <% end %>
+            </a>
             <a class="navbar-item">
               <%= link_to users_path, class: "navbar-item" do %>
               <i class="fa fa-envelope fa-lg"></i><p class="is-size-7">メッセージ</p><% end %>
