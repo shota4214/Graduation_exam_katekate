@@ -74,14 +74,6 @@
       <%= image_tag(asset_path"top.png") %>
     </div>
 
-    <%# ヘッダー部分 %>
-    <% if notice %>
-      <p class="alert alert-notice"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-error"><%= alert %></p>
-    <% end %>
-
     <%# ヘッダータブ部 %>
     <section class="level-item">
       <div class="level-item tabs">
@@ -105,8 +97,38 @@
       <%= search_form_for @search, url: search_articles_path do |f| %>
         <%= f.search_field :title_or_content_or_user_name_cont, placeholder: 'キーワードを入力' %>
         <%= f.submit "検索", class: "button is-info is-small" %>
-      <% end %>
-    </a><br>
+      <% end %><br>
+    </a>
+
+<%# notice/alert部分 %>
+    <% if notice %>
+      <div class="columns">
+        <div class="column is-8 is-offset-3">
+          <article class="message is-info">
+            <div class="message-header">
+              <strong class="alert alert-notice">お知らせ</strong>
+            </div>
+            <div class="message-body">
+              <p class="alert alert-notice"><%= notice %></p>
+            </div>
+          </article>
+        </div>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="columns">
+        <div class="column is-8 is-offset-3">
+          <article class="message is-danger">
+            <div class="message-header">
+              <strong class="alert alert-notice">アラート</strong>
+            </div>
+            <div class="message-body">
+              <p class="alert alert-notice"><%= alert %></p>
+            </div>
+          </article>
+        </div>
+      </div>
+    <% end %>
 
     <%# メインコンテンツ左側 %>
     <main class="columns">
