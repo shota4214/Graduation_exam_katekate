@@ -10,9 +10,9 @@
       <% if message.user_id == current_user.id %>
         <div class="item">
           <div class="content">
-            <div class="header has-text-right"><strong><%= message.user.name %></strong> <%= message.message_time %></div>
+            <div class="header has-text-right "><strong><%= message.user.name %></strong> <%= message.message_time %></div>
             <div class="list">
-              <div class="item has-text-right">
+              <div class="my-message item has-text-right has-background-primary">
                 <i class="fa-solid fa-caret-right"></i>
                 <%= message.body %> /
                 <% if message.user == current_user %>
@@ -28,7 +28,7 @@
           <div class="content">
             <div class="header"><strong><%= message.user.name %></strong> <%= message.message_time %></div>
             <div class="list">
-              <div class="item">
+              <div class="item has-background-light">
                 <i class="fa-solid fa-caret-right"></i>
                 <%= message.body %>
                 <% if message.user == current_user %>
