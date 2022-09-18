@@ -36,48 +36,35 @@
       </div>
       <div id="targetMenu" class="navbar-menu">
         <div class="navbar-end">
-          <a class="navbar-item">
-            <% if user_signed_in? %>
-              <% if current_user.image? %>
-                <%= link_to user_path(current_user.id), class: "navbar-item" do %>
-                <%= image_tag current_user.image_url %><p class="is-size-7">マイページ</p><% end %>
-              <% else %>
-                <%= link_to user_path(current_user.id), class: "navbar-item" do %>
-                <%= image_tag (asset_path'no_image.png') %><p class="is-size-7">マイページ</p><% end %>
-              <% end %>
-            <% end %>
-          </a>
-            <% if user_signed_in? %>
-            <a class="navbar-item fa-stack">
-              <% if unchecked_notifications.any? %>
-                <%= link_to notifications_path, class: "navbar-item" do %>
-                <i class="fa fa-circle" style="color: gold;"></i>
-                <i class="fa fa-bell fa-lg"></i>
-                <p class="is-size-7">通知</p><% end %>
-              <% else %>
-                <%= link_to notifications_path, class: "navbar-item" do %>
-                <i class="fa fa-bell fa-lg"></i><p class="is-size-7">通知</p><% end %>
-              <% end %>
-            </a>
-            <a class="navbar-item">
-              <%= link_to users_path, class: "navbar-item" do %>
-              <i class="fa fa-envelope fa-lg"></i><p class="is-size-7">メッセージ</p><% end %>
-            </a>
-            <a class="navbar-item">
-              <%= link_to destroy_user_session_path, method: :delete, class: "navbar-item" do %>
-              <i class="fa fa-user fa-lg"></i><p class="is-size-7">ログアウト</p><% end %>
-            </a>
+          <% if user_signed_in? %>
+            <% if current_user.image? %>
+              <%= link_to user_path(current_user.id), class: "navbar-item" do %>
+              <%= image_tag current_user.image_url %><p class="is-size-7">マイページ</p><% end %>
             <% else %>
-            <a class="navbar-item">
-              <%= link_to new_user_session_path, class: "navbar-item" do %>
-              <i class="fa fa-user fa-lg"></i><p class="is-size-7">ログイン</p><% end %>
-            </a>
-            <a class="navbar-item">
-              <%= link_to new_user_registration_path, class: "navbar-item" do %>
-              <i class="fa fa-user-pen fa-lg"></i><p class="is-size-7">新規登録</p><% end %>
-            </a>
+              <%= link_to user_path(current_user.id), class: "navbar-item" do %>
+              <%= image_tag (asset_path'no_image.png') %><p class="is-size-7">マイページ</p><% end %>
             <% end %>
-          </a>
+          <% end %>
+          <% if user_signed_in? %>
+            <% if unchecked_notifications.any? %>
+              <%= link_to notifications_path, class: "navbar-item" do %>
+              <i class="fa fa-circle" style="color: gold;"></i>
+              <i class="fa fa-bell fa-lg"></i>
+              <p class="is-size-7">通知</p><% end %>
+            <% else %>
+              <%= link_to notifications_path, class: "navbar-item" do %>
+              <i class="fa fa-bell fa-lg"></i><p class="is-size-7">通知</p><% end %>
+            <% end %>
+            <%= link_to users_path, class: "navbar-item" do %>
+            <i class="fa fa-envelope fa-lg"></i><p class="is-size-7">メッセージ</p><% end %>
+            <%= link_to destroy_user_session_path, method: :delete, class: "navbar-item" do %>
+            <i class="fa fa-user fa-lg"></i><p class="is-size-7">ログアウト</p><% end %>
+          <% else %>
+            <%= link_to new_user_session_path, class: "navbar-item" do %>
+            <i class="fa fa-user fa-lg"></i><p class="is-size-7">ログイン</p><% end %>
+            <%= link_to new_user_registration_path, class: "navbar-item" do %>
+            <i class="fa fa-user-pen fa-lg"></i><p class="is-size-7">新規登録</p><% end %>
+          <% end %>
         </div>
       </div>
     </nav>
@@ -86,14 +73,6 @@
     <div class="hero is-medium has-background">
       <%= image_tag(asset_path"top.png") %>
     </div>
-
-    <%# ヘッダー部分 %>
-    <% if notice %>
-      <p class="alert alert-notice"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-error"><%= alert %></p>
-    <% end %>
 
     <%# ヘッダータブ部 %>
     <section class="level-item">
@@ -118,8 +97,38 @@
       <%= search_form_for @search, url: search_articles_path do |f| %>
         <%= f.search_field :title_or_content_or_user_name_cont, placeholder: 'キーワードを入力' %>
         <%= f.submit "検索", class: "button is-info is-small" %>
-      <% end %>
-    </a><br>
+      <% end %><br>
+    </a>
+
+<%# notice/alert部分 %>
+    <% if notice %>
+      <div class="columns">
+        <div class="column is-8 is-offset-3">
+          <article class="message is-info">
+            <div class="message-header">
+              <strong class="alert alert-notice">お知らせ</strong>
+            </div>
+            <div class="message-body">
+              <p class="alert alert-notice"><%= notice %></p>
+            </div>
+          </article>
+        </div>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="columns">
+        <div class="column is-8 is-offset-3">
+          <article class="message is-danger">
+            <div class="message-header">
+              <strong class="alert alert-notice">アラート</strong>
+            </div>
+            <div class="message-body">
+              <p class="alert alert-notice"><%= alert %></p>
+            </div>
+          </article>
+        </div>
+      </div>
+    <% end %>
 
     <%# メインコンテンツ左側 %>
     <main class="columns">
