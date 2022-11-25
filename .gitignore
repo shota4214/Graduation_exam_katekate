@@ -37,3 +37,5 @@ yarn-debug.log*
 
 #dotenv-rails
 .env
+
+.DS_Store
